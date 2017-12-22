@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "target": "es6",
+    "allowJs": false,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "lib": ["es2016", "dom"],
+    "sourceMap": true,
+    "baseUrl": "./src"
+  }
+}

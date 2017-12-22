@@ -1,0 +1,21 @@
+{
+  "name": "lampix",
+  "version": "1.0.0",
+  "description": "Lampix application development library",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "lampix"
+  ],
+  "author": "Lampix",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "7.0.0-beta.35",
+    "babel-register": "6.26.0",
+    "ts-loader": "3.2.0",
+    "tslint": "5.8.0",
+    "tslint-config-airbnb": "5.4.2",
+    "typescript": "2.6.2",
+    "webpack": "3.10.0"
+  }
+}
