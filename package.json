@@ -3,18 +3,30 @@
   "version": "1.0.0",
   "description": "Lampix application development library",
   "main": "index.js",
-  "scripts": {},
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
+    "clean": "shx rm -rf ./lib",
+    "build:es5": "tsc -m commonjs --outDir lib/es5",
+    "build:es6": "tsc -m es6 --outDir lib/es6",
+    "build:umd": "webpack --config webpack.config.umd.babel.js --progress --colors",
+    "build": "npm run clean && npm run build:es5 && npm run build:es6 && npm run build:umd",
+    "prepublish": "npm run build"
+  },
   "keywords": [
     "lampix"
   ],
   "author": "Lampix",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "7.0.0-beta.35",
     "@babel/preset-env": "7.0.0-beta.35",
-    "babel-register": "6.26.0",
+    "@babel/register": "7.0.0-beta.35",
+    "shx": "0.2.2",
     "ts-loader": "3.2.0",
     "tslint": "5.8.0",
     "tslint-config-airbnb": "5.4.2",
+    "typedoc": "0.9.0",
     "typescript": "2.6.2",
     "webpack": "3.10.0"
   }
