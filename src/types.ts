@@ -1,3 +1,15 @@
+declare global {
+  interface Window {
+    _lampix_internal: object;
+    onMovement: movementCallback;
+    onSimpleClassifier: simpleClassifierCallback;
+    onPositionClassifier: positionClassifierCallback;
+    onPrePositionClassifier: prePositionClassifierCallback;
+    onDrawingDetector: drawingDetectorCallback;
+    onLampixInfo: lampixInfoCallback;
+  }
+}
+
 export type Rect = {
   /** X coordinate of the rectangle's top left corner. */
   posX: number,
@@ -28,7 +40,7 @@ export type LampixInfo = {
 };
 
 /**
- * Callback to be invoked when Lampix information is available.
+ * Callback invoked when Lampix information is available.
  *
  * @param lampixInfo Object containing relevant Lampix information. See {@link LampixInfo}.
  */
@@ -45,7 +57,7 @@ export type Outline = {
 };
 
 /**
- * Callback to be invoked when movement is detected.
+ * Callback invoked when movement is detected.
  *
  * @param rectIndex Index of the rectangle handling the movement event.
  * @param outlines Array of outlines detected in the rectangle. See {@link Outline}.
@@ -53,7 +65,7 @@ export type Outline = {
 export type movementCallback = (rectIndex: number, outlines: Outline[]) => void;
 
 /**
- * Callback to be invoked when an object is detected an classified.
+ * Callback invoked when an object is detected an classified.
  *
  * @param rectIndex Index of the rectangle handling the classification event.
  * @param classTag Class returned by the classifier.
@@ -69,9 +81,29 @@ export type ClassifiedObject = {
 };
 
 /**
- * Callback to be invoked when an object is detected an classified.
+ * Callback invoked when an object is detected and classified.
  *
  * @param rectIndex Index of the rectangle handling the classification event.
- * @param detectedObjects Array of detected objects. See {@link ClassifiedObject}.
+ * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
  */
-export type positionClassifierCallback = (rectIndex: number, detectedObjects: ClassifiedObject[]) => void;
+export type positionClassifierCallback = (rectIndex: number, classifiedObjects: ClassifiedObject[]) => void;
+
+/**
+ * Callback invoked when an object is detected, but before it is classified.
+ *
+ * @param rectIndex Index of the rectangle handling the classification event.
+ * @param detectedObjects Array of objects describing the shape of the detected objects
+ */
+export type prePositionClassifierCallback = (rectIndex: number, detectedObjects: any[]) => void;
+
+export type drawingDetectorCallback = (rectIndex: number, objects: any[]) => void;
+
+
+export type Callbacks = {
+  movementCallback: movementCallback,
+  simpleClassifierCallback: simpleClassifierCallback,
+  positionClassifierCallback: positionClassifierCallback,
+  prePositionClassifierCallback: prePositionClassifierCallback,
+  lampixInfoCallback: lampixInfoCallback,
+  drawingDetectorCallback: drawingDetectorCallback
+};
