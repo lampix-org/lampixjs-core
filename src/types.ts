@@ -107,3 +107,7 @@ export type Callbacks = {
   lampixInfoCallback: lampixInfoCallback,
   drawingDetectorCallback: drawingDetectorCallback
 };
+
+export type Cache = {
+  lampixInfo: LampixInfo
+};
