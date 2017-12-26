@@ -16,7 +16,6 @@ export default (env = {}) => ({
   resolve: {
     extensions: [".ts", ".js"],
     modules: [
-      'src',
       'node_modules'
     ]
   },
