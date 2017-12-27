@@ -6,7 +6,7 @@ export default (env = {}) => ({
     'lampix': './src/index.ts'
   },
   output: {
-    filename: 'lampix.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, 'lib/umd'),
     library: 'lampix',
     libraryTarget: 'umd',
