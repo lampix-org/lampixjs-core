@@ -1,8 +1,3 @@
-/**
- * The events bound here are strictly called by the backend of the Lampix stack
- */
-
-
 // Types
 import {
   LampixInfo
@@ -15,6 +10,10 @@ import cache from './cache';
 // Utils
 import noop from '../utils/noop';
 
+/**
+ * Creates the functions called by the Lampix backend.
+ * These provides the main form of communication between a Lampix and the running app.
+ */
 let bindEvents = () => {
   // Prevent multiple calls
   bindEvents = noop;
