@@ -64,10 +64,21 @@ const lampix = {
     cb: positionClassifierCallback,
     preCb: prePositionClassifierCallback
   ) => {
-    // Logging these to avoid unused errors
-    console.log(classRectArray, cb, preCb);
+    // To be changed after clarifying its purpose
+    const classifier = classRectArray[classRectArray.length - 1].classifier;
 
-    // Will need some clarification before implementing this
+    if (classifier === 'finger') {
+      throw new Error('registerPositionClassifier: finger classifier is not supported');
+    }
+
+    callbacks.positionClassifierCallback = cb || noop;
+    callbacks.prePositionClassifierCallback = preCb || noop;
+
+    if (!cb) {
+      classRectArray = [];
+    }
+
+    internal.registerPositionClassifier(JSON.stringify(classRectArray));
   },
   /**
    * Register handler for drawing inside specified rectangles.
