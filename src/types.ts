@@ -29,13 +29,7 @@ export type Rect = {
   height: number
 };
 
-export type ClassifierRect = {
-  /** X coordinate of the rectangle's top left corner. */
-  posX: number,
-  /** Y coordinate of the rectangle's top left corner. */
-  posY: number,
-  width: number,
-  height: number,
+export type ClassifierRect = Rect & {
   /** Classifier to run inside the rectangle. */
   classifier: string
 };
