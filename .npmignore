@@ -1,9 +1,11 @@
 .*
 **/tsconfig.json
 **/tslint.json
-**/webpack.config.babel.js
-**/webpack.config.js
+*.tgz
+
+webpack.config.umd.babel.js
 
 node_modules
 src
 docs
+internals
