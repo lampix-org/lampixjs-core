@@ -1,6 +1,16 @@
+export type LampixInternal = {
+  getLampixInfo: () => void;
+  registerMovement: (rectArrayJSON: string) => void;
+  registerSimpleClassifier: (classRectArrayJSON: string) => void;
+  registerDrawingDetector: (classRectArrayJSON: string) => void;
+  playFullScreenVideo: (filename: string) => void;
+  registerPositionClassifier: (classRectArrayJSON: string) => void;
+  setIgnoredRects: (rectArrayJSON: string) => void;
+};
+
 declare global {
   interface Window {
-    _lampix_internal: object;
+    _lampix_internal: LampixInternal;
     onMovement: movementCallback;
     onSimpleClassifier: simpleClassifierCallback;
     onPositionClassifier: positionClassifierCallback;
