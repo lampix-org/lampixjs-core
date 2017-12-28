@@ -10,6 +10,7 @@ export default (env = {}) => ({
     path: path.resolve(__dirname, 'lib/umd'),
     library: 'lampix',
     libraryTarget: 'umd',
+    libraryExport: 'default',
     umdNamedDefine: true
   },
   devtool: 'source-map',
