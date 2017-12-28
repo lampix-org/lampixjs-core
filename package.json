@@ -7,7 +7,7 @@
   "scripts": {
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
     "clean": "shx rm -rf ./lib",
-    "build:es5": "tsc --target es5 -m commonjs --outDir lib/es5",
+    "build:es5": "webpack --config webpack.config.es5.babel.js --progress --colors",
     "build:es6": "tsc --target es6 -m es6 --outDir lib/es6",
     "build:umd": "webpack --config webpack.config.umd.babel.js --progress --colors",
     "build": "npm run clean && npm run build:es5 && npm run build:es6 && npm run build:umd",
