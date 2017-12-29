@@ -3,7 +3,8 @@
 **/tslint.json
 *.tgz
 
-webpack.config.umd.babel.js
+webpack.config.*.js
+rollup.*.js
 
 node_modules
 src
