@@ -64,12 +64,12 @@ const lampix = {
     cb: positionClassifierCallback,
     preCb: prePositionClassifierCallback
   ) => {
-    // To be changed after clarifying its purpose
-    const classifier = classRectArray[classRectArray.length - 1].classifier;
-
-    if (classifier === 'finger') {
-      throw new Error('registerPositionClassifier: finger classifier is not supported');
-    }
+    classRectArray.forEach((rect: ClassifierRect) => {
+      // Position classifier can't be finger
+      if (rect.classifier === 'finger') {
+        throw new Error('registerPositionClassifier: finger classifier is not supported');
+      }
+    });
 
     callbacks.positionClassifierCallback = cb || noop;
     callbacks.prePositionClassifierCallback = preCb || noop;
