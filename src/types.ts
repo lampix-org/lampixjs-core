@@ -98,9 +98,9 @@ export type positionClassifierCallback = (rectIndex: number, classifiedObjects: 
  * @param rectIndex Index of the rectangle handling the classification event.
  * @param detectedObjects Array of objects describing the shape of the detected objects
  */
-export type prePositionClassifierCallback = (rectIndex: number, detectedObjects: any[]) => void;
+export type prePositionClassifierCallback = (rectIndex: number, detectedObjects: Outline[]) => void;
 
-export type drawingDetectorCallback = (rectIndex: number, objects: any[]) => void;
+export type drawingDetectorCallback = (rectIndex: number, objects: Outline[]) => void;
 
 
 export type Callbacks = {
