@@ -1,5 +1,5 @@
 {
-  "name": "lampix",
+  "name": "@lampix/core",
   "version": "1.0.0",
   "description": "Lampix application development library",
   "main": "lib/index.js",
