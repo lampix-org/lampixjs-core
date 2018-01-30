@@ -9,7 +9,7 @@
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
     "clean": "shx rm -rf ./lib",
     "build": "npm run clean && rollup --c",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "precommit": "lint-staged"
   },
   "keywords": [
