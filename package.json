@@ -2,13 +2,15 @@
   "name": "@lampix/core",
   "version": "1.0.0",
   "description": "Lampix application development library",
-  "main": "lib/index.js",
+  "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
-  "types": "lib/types.d.ts",
+  "types": "lib/cjs/index.d.ts",
   "scripts": {
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
-    "clean": "shx rm -rf ./lib",
-    "build": "npm run clean && rollup --c",
+    "build:umd": "shx rm -rf ./lib/umd && rollup --c",
+    "build:esm": "shx rm -rf ./lib/esm && tsc --outDir lib/esm",
+    "build:cjs": "shx rm -rf ./lib/cjs && tsc -m commonjs  --outDir lib/cjs",
+    "build": "npm run build:umd && npm run build:cjs && npm run build:esm",
     "prepare": "npm run build",
     "precommit": "lint-staged"
   },
@@ -36,5 +38,6 @@
       "tsc --noEmit",
       "tslint"
     ]
-  }
+  },
+  "dependencies": {}
 }

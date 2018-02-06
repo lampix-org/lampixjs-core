@@ -26,20 +26,5 @@ export default [
       resolve(),
       commonjs()
     ]
-  },
-  // CommonJS and ES2015 - bundler friendly
-  {
-    input: defaults.input,
-    output: [
-      { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'es' }
-    ],
-    plugins: [
-      typescript({
-        typescript: ts2
-      }),
-      resolve(),
-      commonjs()
-    ]
   }
 ]

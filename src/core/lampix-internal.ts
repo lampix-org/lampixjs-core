@@ -7,15 +7,18 @@ import {
   prePositionClassifierCallback,
   drawingDetectorCallback,
   Rect,
-  ClassifierRect,
+  ClassifierRect
 } from '../types';
 
 // Core
 import callbacks from './callbacks';
 import cache from './cache';
+import bindEvents from './bind-events';
 
 // Utils
 import noop from '../utils/noop';
+
+bindEvents();
 
 const internal = window._lampix_internal;
 
@@ -104,4 +107,4 @@ const lampix = {
   }
 };
 
-export default lampix;
+export { lampix };

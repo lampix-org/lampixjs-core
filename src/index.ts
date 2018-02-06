@@ -1,7 +1,3 @@
 // Core
-import bindLampixCoreEvents from './core/bind-events';
-import lampix from './core/lampix-internal';
-
-bindLampixCoreEvents();
-
+import { lampix } from './core/lampix-internal';
 export default lampix;
