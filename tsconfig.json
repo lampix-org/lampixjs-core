@@ -7,6 +7,7 @@
     "allowJs": false,
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "moduleResolution": "node"
   }
 }
