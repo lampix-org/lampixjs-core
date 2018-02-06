@@ -5,6 +5,7 @@
     "target": "ES2017",
     "declaration": true,
     "allowJs": false,
+    "strictNullChecks": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
