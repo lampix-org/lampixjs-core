@@ -44,6 +44,13 @@ const lampix = {
     internal.registerMovement(JSON.stringify(rectArray));
   },
   /**
+   * Helper function to clear movement event handler
+   */
+  unregisterMovementHandlers: () => {
+    callbacks.movementCallback = noop;
+    internal.registerMovement('[]');
+  },
+  /**
    * Register handler for simple classifier events inside specified rectangles.
    * These events are useful for simple UI elements such as buttons.
    * Simple classifiers do not provide outline or position information.
@@ -57,6 +64,13 @@ const lampix = {
     }
 
     internal.registerSimpleClassifier(JSON.stringify(classRectArray));
+  },
+  /**
+   * Helper function to clear simple classifier event handler
+   */
+  unregisterSimpleClassifier: () => {
+    callbacks.simpleClassifierCallback = noop;
+    internal.registerSimpleClassifier('[]');
   },
   /**
    * Register handler for position classifier events inside specified rectangles.
@@ -82,6 +96,14 @@ const lampix = {
     }
 
     internal.registerPositionClassifier(JSON.stringify(classRectArray));
+  },
+  /**
+   * Helper function to clear position classifier event handler
+   */
+  unregisterPositionClassifier: () => {
+    callbacks.positionClassifierCallback = noop;
+    callbacks.prePositionClassifierCallback = noop;
+    internal.registerPositionClassifier('[]');
   },
   /**
    * Register handler for drawing inside specified rectangles.
