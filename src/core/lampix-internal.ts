@@ -46,7 +46,7 @@ const lampix = {
   /**
    * Helper function to clear movement event handler
    */
-  unregisterMovementHandlers: () => {
+  unregisterMovementHandler: () => {
     callbacks.movementCallback = noop;
     internal.registerMovement('[]');
   },
