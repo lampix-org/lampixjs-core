@@ -1,4 +1,4 @@
-# Lampix.js &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lampix/lampix/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/@lampix/core)
+# Lampix.js &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lampix/lampix/blob/master/LICENSE)
 
 Lampix.js is the official JavaScript library for creating [Lampix](https://github.com/facebook/react/blob/master/LICENSE) applications.
 
