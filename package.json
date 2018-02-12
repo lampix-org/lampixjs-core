@@ -11,7 +11,7 @@
     "build:esm": "shx rm -rf ./lib/esm && tsc --outDir lib/esm",
     "build:cjs": "shx rm -rf ./lib/cjs && tsc -m commonjs  --outDir lib/cjs",
     "build": "npm run build:umd && npm run build:cjs && npm run build:esm",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "precommit": "lint-staged"
   },
   "keywords": [
