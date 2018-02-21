@@ -26,7 +26,8 @@ export type Rect = {
   /** Y coordinate of the rectangle's top left corner. */
   posY: number,
   width: number,
-  height: number
+  height: number,
+  [key: string]: any
 };
 
 export type ClassifierRect = Rect & {
