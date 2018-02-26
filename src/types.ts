@@ -70,12 +70,13 @@ export type Outline = {
 export type movementCallback = (rectIndex: number, outlines: Outline[]) => void;
 
 /**
- * Callback invoked when an object is detected an classified.
+ * Callback invoked when an object is detected and classified.
  *
  * @param rectIndex Index of the rectangle handling the classification event.
  * @param classTag Class returned by the classifier.
+ * @param metadata Field for extra information regarding classified objects.
  */
-export type simpleClassifierCallback = (rectIndex: number, classTag: string) => void;
+export type simpleClassifierCallback = (rectIndex: number, classTag: string, metadata: string) => void;
 
 export type ClassifiedObject = {
   /** Used to track same object over multiple frames. */
@@ -90,14 +91,16 @@ export type ClassifiedObject = {
  *
  * @param rectIndex Index of the rectangle handling the classification event.
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
+ * @param metadata Field for extra information regarding classified objects
  */
-export type positionClassifierCallback = (rectIndex: number, classifiedObjects: ClassifiedObject[]) => void;
+export type positionClassifierCallback =
+  (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string) => void;
 
 /**
  * Callback invoked when an object is detected, but before it is classified.
  *
  * @param rectIndex Index of the rectangle handling the classification event.
- * @param detectedObjects Array of objects describing the shape of the detected objects
+ * @param detectedObjects Array of objects describing the shape of the detected objects.
  */
 export type prePositionClassifierCallback = (rectIndex: number, detectedObjects: Outline[]) => void;
 

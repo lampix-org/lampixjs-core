@@ -1,6 +1,7 @@
 // Types
 import {
-  LampixInfo
+  LampixInfo,
+  ClassifiedObject
 } from '../types';
 
 // Core
@@ -24,15 +25,15 @@ let bindEvents = () => {
     }
   };
 
-  window.onSimpleClassifier = (rectIndex, classTag) => {
+  window.onSimpleClassifier = (rectIndex: number, classTag: string, metadata: string) => {
     if (callbacks.simpleClassifierCallback) {
-      callbacks.simpleClassifierCallback(rectIndex, classTag);
+      callbacks.simpleClassifierCallback(rectIndex, classTag, metadata);
     }
   };
 
-  window.onPositionClassifier = (rectIndex, classifiedObjects) => {
+  window.onPositionClassifier = (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string) => {
     if (callbacks.positionClassifierCallback) {
-      callbacks.positionClassifierCallback(rectIndex, classifiedObjects);
+      callbacks.positionClassifierCallback(rectIndex, classifiedObjects, metadata);
     }
   };
 
