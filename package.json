@@ -2,6 +2,10 @@
   "name": "@lampix/core",
   "version": "0.2.0",
   "description": "Lampix application development library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lampix-org/lampixjs-core"
+  },
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/cjs/index.d.ts",
