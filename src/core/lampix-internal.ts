@@ -6,8 +6,9 @@ import {
   positionClassifierCallback,
   prePositionClassifierCallback,
   drawingDetectorCallback,
+  getAppsCallback,
   Rect,
-  ClassifierRect
+  ClassifierRect,
 } from '../types';
 
 // Core
@@ -126,6 +127,21 @@ const lampix = {
    */
   setIgnoredRects: (rectArray: Rect[]) => {
     internal.setIgnoredRects(JSON.stringify(rectArray));
+  },
+  getApps: (cb: getAppsCallback) => {
+    callbacks.getAppsCallback = cb;
+
+    if (cache.apps && callbacks.getAppsCallback) {
+      callbacks.getAppsCallback(cache.apps);
+    } else {
+      internal.getApps();
+    }
+  },
+  switchToApp: function(appName: string) {
+    internal.switchToApp(appName);
+  },
+  exit: function() {
+    this.switchToApp('App Switcher');
   }
 };
 

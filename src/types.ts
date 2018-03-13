@@ -6,6 +6,9 @@ export type LampixInternal = {
   playFullScreenVideo: (filename: string) => void;
   registerPositionClassifier: (classRectArrayJSON: string) => void;
   setIgnoredRects: (rectArrayJSON: string) => void;
+  getApps: () => void;
+  switchToApp: (appName: string) => void;
+  exit: () => void; // TODO: beforeExit
 };
 
 declare global {
@@ -17,6 +20,7 @@ declare global {
     onPrePositionClassifier: prePositionClassifierCallback;
     onDrawingDetector: drawingDetectorCallback;
     onLampixInfo: lampixInfoCallback;
+    onGetApps: getAppsCallback;
   }
 }
 
@@ -106,6 +110,8 @@ export type prePositionClassifierCallback = (rectIndex: number, detectedObjects:
 
 export type drawingDetectorCallback = (rectIndex: number, objects: Outline[]) => void;
 
+export type AppInfo = { [name: string]: string };
+export type getAppsCallback = (apps: AppInfo[]) => void;
 
 export type Callbacks = {
   movementCallback: movementCallback,
@@ -113,9 +119,11 @@ export type Callbacks = {
   positionClassifierCallback: positionClassifierCallback,
   prePositionClassifierCallback: prePositionClassifierCallback,
   lampixInfoCallback: lampixInfoCallback,
-  drawingDetectorCallback: drawingDetectorCallback
+  drawingDetectorCallback: drawingDetectorCallback,
+  getAppsCallback: getAppsCallback
 };
 
 export type Cache = {
-  lampixInfo: LampixInfo
+  lampixInfo: LampixInfo,
+  apps: AppInfo[]
 };

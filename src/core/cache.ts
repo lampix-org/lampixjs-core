@@ -1,7 +1,8 @@
 import { Cache } from '../types';
 
 const cache: Cache = {
-  lampixInfo: null
+  lampixInfo: null,
+  apps: null
 };
 
 export default cache;

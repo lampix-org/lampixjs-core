@@ -7,7 +7,8 @@ const callbacks: Callbacks = {
   movementCallback: noop,
   positionClassifierCallback: noop,
   prePositionClassifierCallback: noop,
-  simpleClassifierCallback: noop
+  simpleClassifierCallback: noop,
+  getAppsCallback: noop
 };
 
 export default callbacks;

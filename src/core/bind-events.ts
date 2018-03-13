@@ -1,7 +1,8 @@
 // Types
 import {
   LampixInfo,
-  ClassifiedObject
+  ClassifiedObject,
+  AppInfo
 } from '../types';
 
 // Core
@@ -54,6 +55,14 @@ let bindEvents = () => {
 
     if (callbacks.lampixInfoCallback) {
       callbacks.lampixInfoCallback(cache.lampixInfo);
+    }
+  };
+
+  window.onGetApps = (apps: AppInfo[]) => {
+    cache.apps = apps;
+
+    if (callbacks.getAppsCallback) {
+      callbacks.getAppsCallback(cache.apps);
     }
   };
 };
