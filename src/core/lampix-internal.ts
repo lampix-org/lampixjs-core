@@ -18,6 +18,8 @@ import bindEvents from './bind-events';
 
 // Utils
 import noop from '../utils/noop';
+import displayLoader from '../utils/dom/display-loader';
+import generateExitBtn from '../utils/dom/generate-exit-btn';
 
 bindEvents();
 
@@ -138,10 +140,22 @@ const lampix = {
     }
   },
   switchToApp: function(appName: string) {
-    internal.switchToApp(appName);
+    this.unregisterMovementHandler();
+    this.unregisterPositionClassifier();
+    this.unregisterSimpleClassifier();
+
+    // TODO: This should be properly implemented on the backend
+    // With loading info and everything
+    displayLoader();
+    setTimeout(() => internal.switchToApp(appName), 2000);
   },
   exit: function() {
     this.switchToApp('App Switcher');
+  },
+  // TODO: Move dom utils to @lampix/dom
+  dom: {
+    displayLoader,
+    generateExitBtn
   }
 };
 

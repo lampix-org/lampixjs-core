@@ -20,6 +20,7 @@ const displayLoader = (): void => {
 
     font-size: 24px;
     background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
   }
 
   .${loaderClass} {

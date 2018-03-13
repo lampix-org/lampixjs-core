@@ -8,7 +8,6 @@ export type LampixInternal = {
   setIgnoredRects: (rectArrayJSON: string) => void;
   getApps: () => void;
   switchToApp: (appName: string) => void;
-  exit: () => void; // TODO: beforeExit
 };
 
 declare global {
