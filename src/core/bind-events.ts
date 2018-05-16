@@ -2,7 +2,8 @@
 import {
   LampixInfo,
   ClassifiedObject,
-  AppInfo
+  AppInfo,
+  Rect
 } from '../types';
 
 // Core
@@ -63,6 +64,12 @@ let bindEvents = () => {
 
     if (callbacks.getAppsCallback) {
       callbacks.getAppsCallback(cache.apps);
+    }
+  };
+
+  window.onTransformCoordinates = (transformedRect: Rect) => {
+    if (callbacks.transformCoordinatesCallback) {
+      callbacks.transformCoordinatesCallback(transformedRect);
     }
   };
 };

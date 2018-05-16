@@ -9,6 +9,7 @@ import {
   getAppsCallback,
   Rect,
   ClassifierRect,
+  CoordinatesToTransform
 } from '../types';
 
 // Core
@@ -151,6 +152,9 @@ const lampix = {
   },
   exit: function() {
     this.switchToApp('App Switcher');
+  },
+  transformCoordinates: function(toTransform: CoordinatesToTransform) {
+    internal.transformCoordinates(JSON.stringify(toTransform));
   },
   // TODO: Move dom utils to @lampix/dom
   dom: {

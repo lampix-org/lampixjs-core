@@ -8,6 +8,7 @@ export type LampixInternal = {
   setIgnoredRects: (rectArrayJSON: string) => void;
   getApps: () => void;
   switchToApp: (appName: string) => void;
+  transformCoordinates: (toTransform: string) => void;
 };
 
 declare global {
@@ -20,6 +21,7 @@ declare global {
     onDrawingDetector: drawingDetectorCallback;
     onLampixInfo: lampixInfoCallback;
     onGetApps: getAppsCallback;
+    onTransformCoordinates: transformCoordinatesCallback;
   }
 }
 
@@ -112,6 +114,13 @@ export type drawingDetectorCallback = (rectIndex: number, objects: Outline[]) =>
 export type AppInfo = { [name: string]: string };
 export type getAppsCallback = (apps: AppInfo[]) => void;
 
+/**
+ * Callback invoked when converting camera coordinates to projector, or vice versa
+ *
+ * @param toTransform Object specifying the rectangle to transform and what direction the conversion should take
+ */
+export type transformCoordinatesCallback = (transformedRect: Rect) => void;
+
 export type Callbacks = {
   movementCallback: movementCallback,
   simpleClassifierCallback: simpleClassifierCallback,
@@ -119,10 +128,19 @@ export type Callbacks = {
   prePositionClassifierCallback: prePositionClassifierCallback,
   lampixInfoCallback: lampixInfoCallback,
   drawingDetectorCallback: drawingDetectorCallback,
-  getAppsCallback: getAppsCallback
+  getAppsCallback: getAppsCallback,
+  transformCoordinatesCallback: transformCoordinatesCallback
 };
 
 export type Cache = {
   lampixInfo: LampixInfo,
   apps: AppInfo[]
+};
+
+export type CoordinatesToTransform = {
+  posX: number,
+  posY: number,
+  width: number,
+  height: number,
+  camera: boolean
 };

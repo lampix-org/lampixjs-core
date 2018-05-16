@@ -8,7 +8,8 @@ const callbacks: Callbacks = {
   positionClassifierCallback: noop,
   prePositionClassifierCallback: noop,
   simpleClassifierCallback: noop,
-  getAppsCallback: noop
+  getAppsCallback: noop,
+  transformCoordinatesCallback: noop
 };
 
 export default callbacks;
