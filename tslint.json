@@ -11,7 +11,8 @@
         "max-line-length": [true, 120],
         "ter-arrow-parens": false,
         "no-parameter-reassignment": false,
-        "object-literal-shorthand": false
+        "object-literal-shorthand": false,
+        "no-param-reassign": [2, { "props": false }]
     },
     "rulesDirectory": []
 }
