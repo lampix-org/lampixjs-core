@@ -7,6 +7,7 @@ import {
   prePositionClassifierCallback,
   drawingDetectorCallback,
   getAppsCallback,
+  transformCoordinatesCallback,
   Rect,
   ClassifierRect,
   CoordinatesToTransform
@@ -153,7 +154,8 @@ const lampix = {
   exit: function() {
     this.switchToApp('App Switcher');
   },
-  transformCoordinates: function(toTransform: CoordinatesToTransform) {
+  transformCoordinates: function(toTransform: CoordinatesToTransform, callback: transformCoordinatesCallback) {
+    callbacks.transformCoordinatesCallback = callback || noop;
     internal.transformCoordinates(JSON.stringify(toTransform));
   },
   // TODO: Move dom utils to @lampix/dom
