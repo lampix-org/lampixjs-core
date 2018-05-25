@@ -1,6 +1,6 @@
 {
   "name": "@lampix/core",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Lampix application development library",
   "repository": {
     "type": "git",
