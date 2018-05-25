@@ -154,7 +154,7 @@ const lampix = {
   exit: function() {
     this.switchToApp('App Switcher');
   },
-  transformCoordinates: function(toTransform: CoordinatesToTransform, callback: transformCoordinatesCallback) {
+  transformCoordinates: function(toTransform: CoordinatesToTransform[], callback: transformCoordinatesCallback) {
     callbacks.transformCoordinatesCallback = callback || noop;
     internal.transformCoordinates(JSON.stringify(toTransform));
   },

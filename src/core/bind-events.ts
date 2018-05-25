@@ -3,7 +3,7 @@ import {
   LampixInfo,
   ClassifiedObject,
   AppInfo,
-  Rect
+  CoordinatesToTransform
 } from '../types';
 
 // Core
@@ -67,7 +67,7 @@ let bindEvents = () => {
     }
   };
 
-  window.onTransformCoordinates = (transformedRect: Rect) => {
+  window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
     if (callbacks.transformCoordinatesCallback) {
       callbacks.transformCoordinatesCallback(transformedRect);
     }

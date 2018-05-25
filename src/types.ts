@@ -119,7 +119,7 @@ export type getAppsCallback = (apps: AppInfo[]) => void;
  *
  * @param toTransform Object specifying the rectangle to transform and what direction the conversion should take
  */
-export type transformCoordinatesCallback = (transformedRect: Rect) => void;
+export type transformCoordinatesCallback = (transformedRect: CoordinatesToTransform[]) => void;
 
 export type Callbacks = {
   movementCallback: movementCallback,
@@ -137,10 +137,6 @@ export type Cache = {
   apps: AppInfo[]
 };
 
-export type CoordinatesToTransform = {
-  posX: number,
-  posY: number,
-  width: number,
-  height: number,
-  camera: boolean
+export type CoordinatesToTransform = Rect & {
+  type: 'camera' | 'projector'
 };
