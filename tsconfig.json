@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "module": "es2015",
-    "target": "ES2017",
+    "target": "ES5",
     "declaration": true,
     "allowJs": false,
     "noImplicitAny": true,
