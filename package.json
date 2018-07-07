@@ -9,6 +9,9 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/cjs/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
     "build:umd": "shx rm -rf ./lib/umd && rollup --c",
