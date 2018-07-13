@@ -4,12 +4,11 @@ deploy:
   provider: npm
   email: dbalaban@lampix.co
   api_key:
-    secure: FyVt4HzjSrGYC27RnTIirNZzVs/cE+UzaBEK2petPiz6DHfoDexIQOgWNJcWw392UKnQfmkVOf/A865f1+tAiZQsdtVfq7bUZVMopVSe428MeMcJ6Hb76RAvJ3nA0l+yQfegiDxmgQhbsQC09heI+OHIZlaHKW7ijb/eP4+LcXL6jq9mbRfvINtUrhdpUAuw4lg0cd/R04kxylkf/yWMPIrZZ+ZyXsGnSsIHVvhQted3P321rkxO3byUn5g2nBbbX3ndikCPitlCFvQwwF2kMZS5K4KXBSx6zEWxxs9tzHkyhjYEGu1NrLR0jOkPDaCer3bfnLX+rZ/tsTBmsuvBx6VRCirPQ6Q1n7gb4ojRRWK38LQ8GD/959/Pd78p36qAF/8TiQQGWWpzH2tWUQNeOjAJ7fEGJoL1jDvy6J9j5hDsqlDuJWNzqxzjD7QTyeRfqynLIuXsi72FzsU1W5giEZCdYAETUPb98SJeU5NvtDc953APQnRSUZ+qDT4Y2RmDLi+yVpKtp2cjzwfOu2zButBDwjeNiaZvGlry/nIfhlDYfqLS4uLw2tU2f0zxg8Ue9AoXHX9ke/3rsYzvItMsDpJiai5HdjxukD9X2CMTijAZFF23ijmrpc1xcvDuJgun+NP+vHIMGctjqtDJjt2yNvfoeGHc4SkFCbug9XTrNYM=
+    secure: kgzzRZQ2i019rrbIpjonFw4sMS/vpl8zWNb9ibow6iJVpDf473jZgNC8/uCAiLrioaEFgO9q4fi/VsZPgozXdqWy8xH4xtMJmm1S3a99rQKLPLH5dYQ+stFKTAFYeHzMPsujkh+qauJOc18/E4Z9YlqHmCc0FFBkFMkoO362u/Xh5toicKD5hiERmWpLL+sHFYgtpDZoxW5nhEhBEq64LVI0CWAZZoI+hmIpvcZNkqRa2umEd0xZw+2zEZZ9+nM1RdezqvnqLczi9g2vjDt0U/jhaUKnjIUer/0+xeuJUZKADSHoM6jODnPGu7YTVd0aNmbIEJ7WGwKArR+YDhpxel/optfNm3AAAPT27MCxPQRzMO55fiTynhD66BjScjCV2xdM5SW0ZfXvZDx3Sn70INGfjh42ImiTH9gzKmaz0o7/va397XmuBboQYLKCrs+w7NY/MiUkbbxKDymD2PgzMGM1Zrwu/2qZ4y4h5lZcD3U5fILrqudCKq+P6Q/Pn8glnaLriEJyQfxscV2mVzLzn3wYl5OlpJ/YjY4y2WGglMSWncmme18VE8AyEy5BW+WiBYcOkjWGq14Ah9lBHIkkquNUbZi/HPp2pMbK59Y98AP6yHObO9teB00/oN9dFOKALC5P1DfPN18NY2WzMBzkA9e436iALkcwB0tmuFk+9m0=
   skip_cleanup: true
   on:
     repo: lampix-org/lampixjs-core
     all_branches: true
-
 branches:
   only:
-    - /^release\/\d+\.\d+\.\d+$/
+  - "/^release\\/\\d+\\.\\d+\\.\\d+$/"
