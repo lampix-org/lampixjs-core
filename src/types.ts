@@ -32,12 +32,8 @@ export type Rect = {
   posY: number,
   width: number,
   height: number,
+  classifier?: string,
   [key: string]: any
-};
-
-export type ClassifierRect = Rect & {
-  /** Classifier to run inside the rectangle. */
-  classifier: string
 };
 
 export type LampixInfo = {

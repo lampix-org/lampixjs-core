@@ -1,7 +1,7 @@
 // Types
-import { ClassifierRect } from '../../types';
+import { Rect } from '../../types';
 
-const generateExitBtn = (top: number = 20, left: number = 20): ClassifierRect => {
+const generateExitBtn = (top: number = 20, left: number = 20): Rect => {
   // Avoid CSS class name collision
   const id = Math.random().toString(36).substring(2);
   let pressed = true;
@@ -147,8 +147,6 @@ points="26.2,24.2 21.9,20 26.1,15.7 24.2,13.8 20,18.1 15.7,13.9 13.8,15.8 18.1,2
       }
     }
   };
-
-
 
   return lxRect;
 };

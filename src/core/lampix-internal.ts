@@ -9,7 +9,6 @@ import {
   getAppsCallback,
   transformCoordinatesCallback,
   Rect,
-  ClassifierRect,
   CoordinatesToTransform
 } from '../types';
 
@@ -22,6 +21,7 @@ import bindEvents from './bind-events';
 import noop from '../utils/noop';
 import displayLoader from '../utils/dom/display-loader';
 import generateExitBtn from '../utils/dom/generate-exit-btn';
+import roundRectValues from '../utils/roundRectValues';
 
 bindEvents();
 
@@ -46,6 +46,7 @@ const lampix = {
       rectArray = [];
     }
 
+    rectArray = roundRectValues(rectArray);
     internal.registerMovement(JSON.stringify(rectArray));
   },
   /**
@@ -61,13 +62,14 @@ const lampix = {
    * Simple classifiers do not provide outline or position information.
    * Faster than registerPositionClassifier.
    */
-  registerSimpleClassifier: (classRectArray: ClassifierRect[], cb: simpleClassifierCallback) => {
+  registerSimpleClassifier: (classRectArray: Rect[], cb: simpleClassifierCallback) => {
     callbacks.simpleClassifierCallback = cb || noop;
 
     if (!cb) {
       classRectArray = [];
     }
 
+    classRectArray = roundRectValues(classRectArray);
     internal.registerSimpleClassifier(JSON.stringify(classRectArray));
   },
   /**
@@ -82,11 +84,11 @@ const lampix = {
    * Position classifiers provide outline and position information per object.
    */
   registerPositionClassifier: (
-    classRectArray: ClassifierRect[],
+    classRectArray: Rect[],
     cb: positionClassifierCallback,
     preCb: prePositionClassifierCallback
   ) => {
-    classRectArray.forEach((rect: ClassifierRect) => {
+    classRectArray.forEach((rect: Rect) => {
       // Position classifier can't be finger
       if (rect.classifier === 'finger') {
         throw new Error('registerPositionClassifier: finger classifier is not supported');
@@ -100,6 +102,7 @@ const lampix = {
       classRectArray = [];
     }
 
+    classRectArray = roundRectValues(classRectArray);
     internal.registerPositionClassifier(JSON.stringify(classRectArray));
   },
   /**
@@ -113,7 +116,7 @@ const lampix = {
   /**
    * Register handler for drawing inside specified rectangles.
    */
-  registerDrawingDetector: (classRectArray: ClassifierRect[], cb: drawingDetectorCallback) => {
+  registerDrawingDetector: (classRectArray: Rect[], cb: drawingDetectorCallback) => {
     callbacks.drawingDetectorCallback = cb || noop;
 
     if (!cb) {
