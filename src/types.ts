@@ -1,4 +1,4 @@
-export type LampixInternal = {
+export interface LampixInternal {
   getLampixInfo: () => void;
   registerMovement: (rectArrayJSON: string) => void;
   registerSimpleClassifier: (classRectArrayJSON: string) => void;
@@ -9,7 +9,7 @@ export type LampixInternal = {
   getApps: () => void;
   switchToApp: (appName: string) => void;
   transformCoordinates: (toTransform: string) => void;
-};
+}
 
 declare global {
   interface Window {
@@ -25,42 +25,44 @@ declare global {
   }
 }
 
-export type Rect = {
+export interface Rect {
   /** X coordinate of the rectangle's top left corner. */
-  posX: number,
+  posX: number;
   /** Y coordinate of the rectangle's top left corner. */
-  posY: number,
-  width: number,
-  height: number,
-  classifier?: string,
-  [key: string]: any
-};
+  posY: number;
+  width: number;
+  height: number;
+  classifier?: string;
+  [key: string]: any;
+}
 
-export type LampixInfo = {
+export interface LampixInfo {
   /** Lampix unique hardware ID. */
-  id: string,
+  id: string;
   /** Lampix OS version. */
-  version: string,
+  version: string;
   /** True if the application is run within a simulator. */
-  isSimulator: boolean
-};
+  isSimulator: boolean;
+}
 
 /**
  * Callback invoked when Lampix information is available.
  *
  * @param lampixInfo Object containing relevant Lampix information. See {@link LampixInfo}.
  */
-export type lampixInfoCallback = (lampixInfo: LampixInfo) => void;
+export interface lampixInfoCallback {
+  (lampixInfo: LampixInfo): void;
+}
 
-export type Point = {
-  posX: number,
-  posY: number
-};
+export interface Point {
+  posX: number;
+  posY: number;
+}
 
-export type Outline = {
+export interface Outline {
   /** Array of points that define the outline. See {@link Point}. */
-  points: Point[]
-};
+  points: Point[];
+}
 
 /**
  * Callback invoked when movement is detected.
@@ -68,7 +70,9 @@ export type Outline = {
  * @param rectIndex Index of the rectangle handling the movement event.
  * @param outlines Array of outlines detected in the rectangle. See {@link Outline}.
  */
-export type movementCallback = (rectIndex: number, outlines: Outline[]) => void;
+export interface movementCallback {
+  (rectIndex: number, outlines: Outline[]): void;
+}
 
 /**
  * Callback invoked when an object is detected and classified.
@@ -77,15 +81,17 @@ export type movementCallback = (rectIndex: number, outlines: Outline[]) => void;
  * @param classTag Class returned by the classifier.
  * @param metadata Field for extra information regarding classified objects.
  */
-export type simpleClassifierCallback = (rectIndex: number, classTag: string, metadata: string) => void;
+export interface simpleClassifierCallback {
+  (rectIndex: number, classTag: string, metadata: string): void;
+}
 
-export type ClassifiedObject = {
+export interface ClassifiedObject {
   /** Used to track same object over multiple frames. */
-  objectId: string,
+  objectId: string;
   /** Class returned by classifier. */
-  classTag: string,
-  outline: Outline
-};
+  classTag: string;
+  outline: Outline;
+}
 
 /**
  * Callback invoked when an object is detected and classified.
@@ -94,8 +100,9 @@ export type ClassifiedObject = {
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
  * @param metadata Field for extra information regarding classified objects
  */
-export type positionClassifierCallback =
-  (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string) => void;
+export interface positionClassifierCallback {
+  (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string): void;
+}
 
 /**
  * Callback invoked when an object is detected, but before it is classified.
@@ -103,36 +110,47 @@ export type positionClassifierCallback =
  * @param rectIndex Index of the rectangle handling the classification event.
  * @param detectedObjects Array of objects describing the shape of the detected objects.
  */
-export type prePositionClassifierCallback = (rectIndex: number, detectedObjects: Outline[]) => void;
+export interface prePositionClassifierCallback {
+  (rectIndex: number, detectedObjects: Outline[]): void;
+}
 
-export type drawingDetectorCallback = (rectIndex: number, objects: Outline[]) => void;
+export interface drawingDetectorCallback {
+  (rectIndex: number, objects: Outline[]): void;
+}
 
-export type AppInfo = { [name: string]: string };
-export type getAppsCallback = (apps: AppInfo[]) => void;
+export interface AppInfo {
+  [name: string]: string;
+}
+
+export interface getAppsCallback {
+  (apps: AppInfo[]): void;
+}
 
 /**
  * Callback invoked when converting camera coordinates to projector, or vice versa
  *
  * @param toTransform Object specifying the rectangle to transform and what direction the conversion should take
  */
-export type transformCoordinatesCallback = (transformedRect: CoordinatesToTransform[]) => void;
+export interface transformCoordinatesCallback {
+  (transformedRect: CoordinatesToTransform[]): void;
+}
 
-export type Callbacks = {
-  movementCallback: movementCallback,
-  simpleClassifierCallback: simpleClassifierCallback,
-  positionClassifierCallback: positionClassifierCallback,
-  prePositionClassifierCallback: prePositionClassifierCallback,
-  lampixInfoCallback: lampixInfoCallback,
-  drawingDetectorCallback: drawingDetectorCallback,
-  getAppsCallback: getAppsCallback,
-  transformCoordinatesCallback: transformCoordinatesCallback
-};
+export interface Callbacks {
+  movementCallback: movementCallback;
+  simpleClassifierCallback: simpleClassifierCallback;
+  positionClassifierCallback: positionClassifierCallback;
+  prePositionClassifierCallback: prePositionClassifierCallback;
+  lampixInfoCallback: lampixInfoCallback;
+  drawingDetectorCallback: drawingDetectorCallback;
+  getAppsCallback: getAppsCallback;
+  transformCoordinatesCallback: transformCoordinatesCallback;
+}
 
-export type Cache = {
-  lampixInfo: LampixInfo,
-  apps: AppInfo[]
-};
+export interface Cache {
+  lampixInfo: LampixInfo;
+  apps: AppInfo[];
+}
 
-export type CoordinatesToTransform = Rect & {
-  type: 'camera' | 'projector'
-};
+export interface CoordinatesToTransform extends Rect {
+  type: 'camera' | 'projector';
+}
