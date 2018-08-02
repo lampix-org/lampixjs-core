@@ -4,6 +4,10 @@
 *.tgz
 
 rollup.config.js
+webpack.config.js
+
+.editorconfig
+.gitignore
 
 node_modules/
 src/

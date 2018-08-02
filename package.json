@@ -6,18 +6,18 @@
     "type": "git",
     "url": "https://github.com/lampix-org/lampixjs-core"
   },
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/cjs/index.d.ts",
+  "main": "lib/lampix.js",
+  "module": "lib/lampix.js",
+  "types": "lib/src/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "assets"
+  ],
   "scripts": {
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
-    "build:umd": "shx rm -rf ./lib/umd && rollup --c",
-    "build:esm": "shx rm -rf ./lib/esm && tsc --outDir lib/esm",
-    "build:cjs": "shx rm -rf ./lib/cjs && tsc -m commonjs  --outDir lib/cjs",
-    "build": "npm run build:umd && npm run build:cjs && npm run build:esm",
+    "build": "shx rm -rf ./lib && webpack",
     "prepublishOnly": "npm run build",
     "precommit": "lint-staged"
   },
@@ -34,11 +34,13 @@
     "rollup-plugin-node-resolve": "3.0.0",
     "rollup-plugin-typescript": "0.8.1",
     "shx": "0.2.2",
-    "ts-loader": "3.2.0",
+    "ts-loader": "4.4.2",
     "tslint": "5.8.0",
     "tslint-config-airbnb": "5.4.2",
     "typedoc": "0.9.0",
-    "typescript": "2.6.2"
+    "typescript": "2.6.2",
+    "webpack": "4.16.3",
+    "webpack-cli": "3.1.0"
   },
   "lint-staged": {
     "*.ts": [
