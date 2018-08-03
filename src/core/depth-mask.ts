@@ -80,8 +80,7 @@ const depthMask = {
   },
   getCanvasZIndex: function() {
     const maxZIndex = this.maxZIndex();
-    const zIndex = Math.ceil(maxZIndex / 100) * 100;
-    return (zIndex > maxZIndex) ? zIndex : maxZIndex + 100;
+    let zIndex = Math.ceil(maxZIndex / 100) * 100;    return (zIndex > maxZIndex) ? zIndex : maxZIndex + 100;
   },
   maxZIndex: function() {
     const arr = Array.from(window.document.querySelectorAll('body *'))

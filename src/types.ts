@@ -1,6 +1,6 @@
 export type Opts<T> = {
   [key: string]: T
-};
+}
 
 export type LampixInternal = {
   isDepthClassifierActivated: boolean;
