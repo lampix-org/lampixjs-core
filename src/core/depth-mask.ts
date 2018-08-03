@@ -80,14 +80,14 @@ const depthMask = {
   },
   getCanvasZIndex: function() {
     const maxZIndex = this.maxZIndex();
-    let zIndex = Math.ceil(maxZIndex / 100) * 100;
+    const zIndex = Math.ceil(maxZIndex / 100) * 100;
     return (zIndex > maxZIndex) ? zIndex : maxZIndex + 100;
   },
   maxZIndex: function() {
     const arr = Array.from(window.document.querySelectorAll('body *'))
-     .map(o => parseFloat(window.getComputedStyle(o).zIndex))
-     .filter(o => !isNaN(o));
-   return arr.length ? arr.sort().pop() : 0;
+      .map(o => parseFloat(window.getComputedStyle(o).zIndex))
+      .filter(o => !isNaN(o));
+    return arr.length ? arr.sort().pop() : 0;
   }
 };
 
