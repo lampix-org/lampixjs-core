@@ -9,13 +9,16 @@ import {
   getAppsCallback,
   transformCoordinatesCallback,
   Rect,
-  CoordinatesToTransform
+  CoordinatesToTransform,
+  ClassifiedObject,
+  Opts
 } from '../types';
 
 // Core
 import callbacks from './callbacks';
 import cache from './cache';
 import bindEvents from './bind-events';
+import { DEPTH_CLASSIFIER, depthMask } from './depth-mask';
 
 // Utils
 import noop from '../utils/noop';
@@ -27,7 +30,46 @@ bindEvents();
 
 const internal = window._lampix_internal;
 
+// reference to position classifier areas
+let posClassRectArray: Rect[] = [];
+
+const positionCallbackWrapper = (cb: positionClassifierCallback) => {
+  return (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string) => {
+    const areas = lampix.getPositionClassifierRectArray();
+    // special handling for the depth classifier area
+    // area for depth classifier is always appended at the end of the array
+    if (lampix.isDepthMaskActivated && rectIndex === areas.length - 1) {
+      // object detected by the depth classifier
+      depthMask.positionClassifierCallback(rectIndex, classifiedObjects, metadata);
+      return;
+    }
+    cb(rectIndex, classifiedObjects, metadata);
+  };
+};
+
 const lampix = {
+  isDepthMaskActivated: false,
+  activateDepthClassifier: function(opts: Opts<string>) {
+    this.isDepthMaskActivated = true;
+    // add canvas element
+    depthMask.create(opts);
+    // append depth mask area, if activated
+    let computedRectArray = lampix.getPositionClassifierRectArray();
+    computedRectArray = roundRectValues(computedRectArray);
+    // register the depth classifier
+    internal.registerPositionClassifier(JSON.stringify(computedRectArray));
+  },
+  deactivateDepthClassifier: function() {
+    this.isDepthMaskActivated = false;
+    depthMask.remove();
+  },
+  /** Appends the depth classifier area to the list of position classifier areas */
+  getPositionClassifierRectArray: function() {
+    if (this.isDepthMaskActivated === true) {
+      return [...posClassRectArray, depthMask.getRectArea()];
+    }
+    return posClassRectArray;
+  },
   /** Provides Lampix info. See {@link LampixInfo}. */
   getLampixInfo: (cb: lampixInfoCallback = noop) => {
     callbacks.lampixInfoCallback = cb;
@@ -95,15 +137,20 @@ const lampix = {
       }
     });
 
-    callbacks.positionClassifierCallback = cb || noop;
+    callbacks.positionClassifierCallback = positionCallbackWrapper(cb || noop);
+    // TODO: same handling for prePositionClassifierCallback
     callbacks.prePositionClassifierCallback = preCb || noop;
 
     if (!cb) {
       classRectArray = [];
     }
 
-    classRectArray = roundRectValues(classRectArray);
-    internal.registerPositionClassifier(JSON.stringify(classRectArray));
+    // keep a reference to the position classifier areas
+    posClassRectArray = classRectArray;
+    // append depth mask area, if activated
+    let computedRectArray = lampix.getPositionClassifierRectArray();
+    computedRectArray = roundRectValues(computedRectArray);
+    internal.registerPositionClassifier(JSON.stringify(computedRectArray));
   },
   /**
    * Helper function to clear position classifier event handler
@@ -112,6 +159,7 @@ const lampix = {
     callbacks.positionClassifierCallback = noop;
     callbacks.prePositionClassifierCallback = noop;
     internal.registerPositionClassifier('[]');
+    posClassRectArray = [];
   },
   /**
    * Register handler for drawing inside specified rectangles.

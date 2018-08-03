@@ -1,4 +1,11 @@
-export interface LampixInternal {
+export type Opts<T> = {
+  [key: string]: T
+}
+
+export type LampixInternal = {
+  isDepthClassifierActivated: boolean;
+  activateDepthClassifier: (opts: Opts<string>) => void;
+  deactivateDepthClassifier: () => void;
   getLampixInfo: () => void;
   registerMovement: (rectArrayJSON: string) => void;
   registerSimpleClassifier: (classRectArrayJSON: string) => void;
