@@ -131,12 +131,9 @@ const lampix = {
     preCb: prePositionClassifierCallback
   ) => {
     classRectArray.forEach((rect: Rect) => {
-      // Position classifier can't be finger or depth
+      // Position classifier can't be finger
       if (rect.classifier === 'finger') {
         throw new Error('registerPositionClassifier: finger classifier is not supported');
-      }
-      if (rect.classifier === DEPTH_CLASSIFIER) {
-        throw new Error('registerPositionClassifier: depth classifier is not supported');
       }
     });
 
