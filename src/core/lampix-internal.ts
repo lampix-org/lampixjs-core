@@ -18,7 +18,7 @@ import {
 import callbacks from './callbacks';
 import cache from './cache';
 import bindEvents from './bind-events';
-import { DEPTH_CLASSIFIER, depthMask } from './depth-mask';
+import { depthMask } from './depth-mask';
 
 // Utils
 import noop from '../utils/noop';
