@@ -9,13 +9,13 @@
   "main": "lib/lampix.js",
   "module": "lib/lampix.js",
   "types": "lib/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "assets",
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
     "build": "shx rm -rf ./lib && webpack",
