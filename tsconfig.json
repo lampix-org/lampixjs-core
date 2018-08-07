@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "module": "es2015",
     "target": "ES5",
+    "module": "commonjs",
     "lib": ["es2015", "dom"],
     "sourceMap": true,
     "declaration": true,
@@ -12,7 +12,8 @@
     "noUnusedParameters": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "outDir": "./"
+    "outDir": "./",
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",
