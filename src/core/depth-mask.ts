@@ -11,6 +11,8 @@ const defaultOpts = {
   color: 'black'
 };
 
+const MAX_Z_INDEX = 2147483647;
+
 const internalClassifiedObjectsState: ClassifiedObject[] = [];
 
 const depthMask = {
@@ -26,7 +28,7 @@ const depthMask = {
     canvas.id = this.canvasId;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    canvas.style.zIndex = this.getCanvasZIndex();
+    canvas.style.zIndex = MAX_Z_INDEX.toString();
     canvas.style.position = 'absolute';
     canvas.style.top = '0px';
     canvas.style.left = '0px';
@@ -41,7 +43,6 @@ const depthMask = {
     }
   },
   positionClassifierCallback: function({}, classifiedObjects: ClassifiedObject[], {}) {
-    console.log(classifiedObjects);
     this.saveDetectedObjectsState(classifiedObjects);
     internalClassifiedObjectsState.forEach(o => this.drawShape(o.outline));
   },
@@ -108,17 +109,6 @@ const depthMask = {
       height: window.innerHeight,
       classifier: DEPTH_CLASSIFIER
     };
-  },
-  getCanvasZIndex: function() {
-    const maxZIndex = this.maxZIndex();
-    const zIndex = Math.ceil(maxZIndex / 100) * 100;
-    return (zIndex > maxZIndex) ? zIndex : maxZIndex + 100;
-  },
-  maxZIndex: function() {
-    const arr = Array.from(window.document.querySelectorAll('body *'))
-      .map(o => parseFloat(window.getComputedStyle(o).zIndex))
-      .filter(o => !isNaN(o));
-    return arr.length ? arr.sort().pop() : 0;
   }
 };
 
