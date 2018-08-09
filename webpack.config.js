@@ -4,7 +4,7 @@ module.exports = {
   context: __dirname,
   devtool: 'source-map',
   mode: 'production',
-  entry: './src/index.ts',
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: 'lampix.js',
@@ -20,6 +20,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.ts', 'js']
+    extensions: ['.ts', '.js']
   }
 };
