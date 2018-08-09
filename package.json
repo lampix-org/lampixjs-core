@@ -1,6 +1,6 @@
 {
   "name": "@lampix/core",
-  "version": "0.7.7",
+  "version": "0.7.12",
   "description": "Lampix application development library",
   "repository": {
     "type": "git",
@@ -9,16 +9,17 @@
   "main": "lib/lampix.js",
   "module": "lib/lampix.js",
   "types": "lib/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "assets",
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "docs": "typedoc --out docs src/index.ts --name Lampix.js --theme minimal --readme README.md",
     "build": "shx rm -rf ./lib && webpack",
+    "build:docker": "docker run -it --rm --name lampixjs-lib -v $(shx pwd):/usr/lampixjs-sdk -w /usr/lampixjs-sdk node:8 npm run build",
     "prepublishOnly": "npm run build",
     "precommit": "lint-staged"
   },
