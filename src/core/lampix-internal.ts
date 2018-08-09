@@ -30,8 +30,9 @@ bindEvents();
 
 const internal = window._lampix_internal;
 
-// reference to position classifier areas
+// reference to position classifier areas and callback
 let posClassRectArray: Rect[] = [];
+let posClassCb: positionClassifierCallback = noop;
 
 const positionCallbackWrapper = (cb: positionClassifierCallback) => {
   return (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string) => {
@@ -57,11 +58,12 @@ const lampix = {
     let computedRectArray = lampix.getPositionClassifierRectArray();
     computedRectArray = roundRectValues(computedRectArray);
     // register the depth classifier
-    internal.registerPositionClassifier(JSON.stringify(computedRectArray));
+    this.registerPositionClassifier(null, noop);
   },
   deactivateDepthClassifier: function() {
     this.isDepthMaskActivated = false;
     depthMask.remove();
+    this.registerPositionClassifier(null, noop);
   },
   /** Appends the depth classifier area to the list of position classifier areas */
   getPositionClassifierRectArray: function() {
@@ -130,13 +132,25 @@ const lampix = {
     cb: positionClassifierCallback,
     preCb: prePositionClassifierCallback
   ) => {
-    classRectArray.forEach((rect: Rect) => {
-      // Position classifier can't be finger
-      if (rect.classifier === 'finger') {
-        throw new Error('registerPositionClassifier: finger classifier is not supported');
-      }
-    });
-
+    if (Array.isArray(classRectArray)) {
+      classRectArray.forEach((rect: Rect) => {
+        // Position classifier can't be finger
+        if (rect.classifier === 'finger') {
+          throw new Error('registerPositionClassifier: finger classifier is not supported');
+        }
+      });
+    }
+    // wether it's call that (de)activates the depth mask
+    const toggleDepthMask = (classRectArray === null);
+    if (toggleDepthMask) {
+      // use the position callback specified from the app
+      cb = posClassCb;
+    } else {
+      // save a reference to the callback
+      posClassCb = cb;
+      // keep a reference to the position classifier areas
+      posClassRectArray = classRectArray;
+    }
     callbacks.positionClassifierCallback = positionCallbackWrapper(cb || noop);
     // TODO: same handling for prePositionClassifierCallback
     callbacks.prePositionClassifierCallback = preCb || noop;
@@ -145,11 +159,10 @@ const lampix = {
       classRectArray = [];
     }
 
-    // keep a reference to the position classifier areas
-    posClassRectArray = classRectArray;
     // append depth mask area, if activated
     let computedRectArray = lampix.getPositionClassifierRectArray();
     computedRectArray = roundRectValues(computedRectArray);
+
     internal.registerPositionClassifier(JSON.stringify(computedRectArray));
   },
   /**
@@ -160,6 +173,7 @@ const lampix = {
     callbacks.prePositionClassifierCallback = noop;
     internal.registerPositionClassifier('[]');
     posClassRectArray = [];
+    posClassCb = noop;
   },
   /**
    * Register handler for drawing inside specified rectangles.
