@@ -11,12 +11,16 @@ const defaultOpts = {
   color: 'black'
 };
 
+const internalClassifiedObjectsState: ClassifiedObject[] = [];
+
 const depthMask = {
   canvasId: 'lx-depth-cls',
   create: function(opts: Opts<string>) {
     this.opts = Object.assign({}, defaultOpts, opts);
     // remove previous canvas element
     this.remove();
+    // reset classified objects state
+    internalClassifiedObjectsState.splice(0, internalClassifiedObjectsState.length);
     // create the canvas element
     const canvas = window.document.createElement('canvas');
     canvas.id = this.canvasId;
@@ -37,7 +41,34 @@ const depthMask = {
     }
   },
   positionClassifierCallback: function({}, classifiedObjects: ClassifiedObject[], {}) {
-    classifiedObjects.forEach(o => this.drawShape(o.outline));
+    console.log(classifiedObjects);
+    this.saveDetectedObjectsState(classifiedObjects);
+    internalClassifiedObjectsState.forEach(o => this.drawShape(o.outline));
+  },
+  /** If objects don't have a valid outline, that means they were removed. */
+  saveDetectedObjectsState: function(classifiedObjects: ClassifiedObject[]) {
+    if (!Array.isArray(classifiedObjects)) {
+      return;
+    }
+    classifiedObjects.forEach(o => {
+      const isObjectRemoved = (typeof o.outline !== 'object')
+        || (typeof o.outline.points === 'undefined')
+        || (!Array.isArray(o.outline.points))
+        || (!o.outline.points.length);
+
+      if (isObjectRemoved) {
+        const foundIndex = internalClassifiedObjectsState.findIndex(compare => {
+          return compare.objectId === o.objectId;
+        });
+        if (foundIndex !== -1) {
+          // remove object from array
+          internalClassifiedObjectsState.splice(foundIndex, 1);
+        }
+      } else {
+        // save to hash
+        internalClassifiedObjectsState.push(o);
+      }
+    });
   },
   drawShape: function(outline: Outline) {
     const ctx = this.getContext();
