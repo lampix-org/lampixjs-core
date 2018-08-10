@@ -44,6 +44,7 @@ const depthMask = {
   },
   positionClassifierCallback: function({}, classifiedObjects: ClassifiedObject[], {}) {
     this.saveDetectedObjectsState(classifiedObjects);
+    this.clearCanvas();
     internalClassifiedObjectsState.forEach(o => this.drawShape(o.outline));
   },
   /** If objects don't have a valid outline, that means they were removed. */
@@ -66,8 +67,12 @@ const depthMask = {
           internalClassifiedObjectsState.splice(foundIndex, 1);
         }
       } else {
-        // save to hash
-        internalClassifiedObjectsState.push(o);
+        const foundIndex = internalClassifiedObjectsState.findIndex(compare => {
+          return compare.objectId === o.objectId;
+        });
+        if (foundIndex === -1) {
+          internalClassifiedObjectsState.push(o);
+        }
       }
     });
   },
@@ -76,7 +81,6 @@ const depthMask = {
     if (!ctx) {
       return;
     }
-    this.clearCanvas();
     ctx.fillStyle = this.opts.color;
     if (!outline.points || !outline.points.length) {
       return;
