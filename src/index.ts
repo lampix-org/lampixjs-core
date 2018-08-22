@@ -1,4 +1,3 @@
-// Core
-import { lampix } from './core/lampix-internal';
+import { LampixBridge } from './LampixBridge';
 
-export = lampix;
+export = new LampixBridge();
