@@ -12,11 +12,12 @@
     "noUnusedParameters": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "outDir": "./",
-    "esModuleInterop": true
+    "outDir": "./"
   },
   "exclude": [
     "node_modules",
-    "lib"
+    "lib",
+    "etc",
+    "temp"
   ]
 }
