@@ -4,6 +4,8 @@
 node_modules/
 
 lib/
-docs/
+temp/
+dist/
+
 *.tgz
 .rpt2_cache
