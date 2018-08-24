@@ -12,7 +12,11 @@
         "ter-arrow-parens": false,
         "no-parameter-reassignment": false,
         "object-literal-shorthand": false,
-        "no-param-reassign": [2, { "props": false }]
+        "no-param-reassign": [2, { "props": false }],
+        "variable-name": [
+            true,
+            "allow-leading-underscore"
+        ]
     },
     "rulesDirectory": []
 }
