@@ -1,3 +1,3 @@
-import Events from './events';
+import eventsFactory from './events';
 
-export default new Events();
+export default eventsFactory();

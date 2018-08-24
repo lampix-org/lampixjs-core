@@ -1,24 +1,24 @@
+interface EventListeners {
+  [functionId: string]: Function;
+}
+
+interface Topics {
+  [topic: string]: {
+    listeners: EventListeners,
+    queue: string[]
+  };
+}
+
 /**
  * @internal
  */
-class Events {
-  private topics: {
-    [topic: string]: {
-      listeners: {
-        [functionId: string]: Function
-      },
-      queue: string[]
-    }
-  };
+function eventsFactory() {
+  const topics: Topics = {};
 
-  constructor() {
-    this.topics = {};
-  }
-
-  subscribe(topic: string, listener: Function, context: any = listener) {
+  function subscribe(topic: string, listener: Function, context: any = listener) {
     // Create topic queue if new
-    if (!Object.prototype.hasOwnProperty.call(this.topics, topic)) {
-      this.topics[topic] = {
+    if (!Object.prototype.hasOwnProperty.call(topics, topic)) {
+      topics[topic] = {
         listeners: {},
         queue: []
       };
@@ -30,22 +30,22 @@ class Events {
     // Bind context to function
     const handler = listener.bind(context);
 
-    this.topics[topic].listeners[id] = handler;
-    this.topics[topic].queue.push(id);
+    topics[topic].listeners[id] = handler;
+    topics[topic].queue.push(id);
 
     return function unsubscribe() {
       // Remove from listeners and queue
-      delete this.topics[topic].listeners[id];
-      this.topics[topic].queue.splice(this.topics[topic].queue.indexOf(id), 1);
+      delete topics[topic].listeners[id];
+      topics[topic].queue.splice(topics[topic].queue.indexOf(id), 1);
     };
   }
 
-  publish(topicName: string, info?: any) {
-    if (!Object.prototype.hasOwnProperty.call(this.topics, topicName)) {
+  function publish(topicName: string, info?: any) {
+    if (!Object.prototype.hasOwnProperty.call(topics, topicName)) {
       return;
     }
 
-    const topic = this.topics[topicName];
+    const topic = topics[topicName];
 
     /**
      * Iterate over a copy of the queue to handle cases when
@@ -70,6 +70,11 @@ class Events {
       });
     });
   }
+
+  return {
+    subscribe,
+    publish
+  };
 }
 
-export default Events;
+export default eventsFactory;
