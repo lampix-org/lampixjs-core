@@ -85,18 +85,18 @@ export interface movementCallback {
  * Callback invoked when an object is detected and classified.
  *
  * @param rectIndex Index of the rectangle handling the classification event.
- * @param classTag Class returned by the classifier.
+ * @param recognizedClass Class returned by the classifier.
  * @param metadata Field for extra information regarding classified objects.
  */
 export interface simpleClassifierCallback {
-  (rectIndex: number, classTag: string, metadata: string): void;
+  (rectIndex: number, recognizedClass: string, metadata: string): void;
 }
 
 export interface ClassifiedObject {
   /** Used to track same object over multiple frames. */
   objectId: string;
   /** Class returned by classifier. */
-  classTag: string;
+  recognizedClass: string;
   outline: Outline;
 }
 
@@ -143,19 +143,14 @@ export interface transformCoordinatesCallback {
 }
 
 export interface Callbacks {
-  movementCallback: movementCallback;
-  simpleClassifierCallback: simpleClassifierCallback;
-  positionClassifierCallback: positionClassifierCallback;
-  prePositionClassifierCallback: prePositionClassifierCallback;
-  lampixInfoCallback: lampixInfoCallback;
-  drawingDetectorCallback: drawingDetectorCallback;
-  getAppsCallback: getAppsCallback;
-  transformCoordinatesCallback: transformCoordinatesCallback;
-}
-
-export interface Cache {
-  lampixInfo: LampixInfo;
-  apps: AppInfo[];
+  movementCb: movementCallback;
+  simpleClassifierCb: simpleClassifierCallback;
+  positionClassifierCb: positionClassifierCallback;
+  prePositionClassifierCb: prePositionClassifierCallback;
+  lampixInfoCb: lampixInfoCallback;
+  drawingDetectorCb: drawingDetectorCallback;
+  getAppsCb: getAppsCallback;
+  transformCoordinatesCb: transformCoordinatesCallback;
 }
 
 export interface CoordinatesToTransform extends Rect {
