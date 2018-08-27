@@ -12,7 +12,8 @@
     "noUnusedParameters": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "outDir": "./"
+    "outDir": "./",
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",
