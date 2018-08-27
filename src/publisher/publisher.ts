@@ -12,9 +12,7 @@ interface Topics {
 /**
  * @internal
  */
-function eventsFactory() {
-  const topics: Topics = {};
-
+function publisherFactory(topics: Topics = {}) {
   function subscribe(topic: string, listener: Function, context: any = listener) {
     // Create topic queue if new
     if (!Object.prototype.hasOwnProperty.call(topics, topic)) {
@@ -77,4 +75,4 @@ function eventsFactory() {
   };
 }
 
-export default eventsFactory;
+export default publisherFactory;
