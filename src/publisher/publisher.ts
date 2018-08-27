@@ -1,25 +1,21 @@
-interface EventListeners {
-  [functionId: string]: Function;
-}
+import {
+  PublisherTopics,
+  PublisherTopicContent
+} from '../types';
 
-interface Topics {
-  [topic: string]: {
-    listeners: EventListeners,
-    queue: string[]
-  };
-}
+const createTopicContent = (): PublisherTopicContent => ({
+  listeners: {},
+  queue: []
+});
 
 /**
  * @internal
  */
-function publisherFactory(topics: Topics = {}) {
+function publisherFactory(topics: PublisherTopics = {}) {
   function subscribe(topic: string, listener: Function, context: any = listener) {
     // Create topic queue if new
     if (!Object.prototype.hasOwnProperty.call(topics, topic)) {
-      topics[topic] = {
-        listeners: {},
-        queue: []
-      };
+      topics[topic] = createTopicContent();
     }
 
     // Generate ID for listener

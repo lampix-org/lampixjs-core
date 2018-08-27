@@ -1,6 +1,6 @@
 export type Opts<T> = {
   [key: string]: T
-}
+};
 
 export type LampixInternal = {
   isDepthClassifierActivated: boolean;
@@ -16,7 +16,7 @@ export type LampixInternal = {
   getApps: () => void;
   switchToApp: (appName: string) => void;
   transformCoordinates: (toTransform: string) => void;
-}
+};
 
 declare global {
   interface Window {
@@ -160,4 +160,17 @@ export interface Cache {
 
 export interface CoordinatesToTransform extends Rect {
   type: 'camera' | 'projector';
+}
+
+export interface PublisherEventListeners {
+  [functionId: string]: Function;
+}
+
+export interface PublisherTopicContent {
+  listeners: PublisherEventListeners;
+  queue: string[];
+}
+
+export interface PublisherTopics {
+  [topic: string]: PublisherTopicContent;
 }
