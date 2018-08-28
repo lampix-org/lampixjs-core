@@ -2,10 +2,33 @@
   "$schema": "https://dev.office.com/json-schemas/api-extractor/api-extractor.schema.json",
   "compiler" : {
     "configType": "tsconfig",
-    "rootFolder": "."
+    "rootFolder": ".",
+    "overrideTsconfig": {
+      "compilerOptions": {
+        "baseUrl": "src",
+        "target": "ES5",
+        "module": "commonjs",
+        "lib": ["es2015", "dom"],
+        "sourceMap": true,
+        "declaration": true,
+        "allowJs": false,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "outDir": "./"
+      },
+      "exclude": [
+        "node_modules",
+        "lib",
+        "etc",
+        "temp"
+      ]
+    }
   },
   "project": {
-    "entryPointSourceFile": "lib/LampixBridge.d.ts"
+    "entryPointSourceFile": "lib/index.d.ts"
   },
   "apiJsonFile": {
     "enabled": true,
