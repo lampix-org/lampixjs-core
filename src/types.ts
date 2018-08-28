@@ -43,6 +43,9 @@ export interface Rect {
   [key: string]: any;
 }
 
+/**
+ * @public
+ */
 export interface LampixInfo {
   /** Lampix unique hardware ID. */
   id: string;
@@ -168,4 +171,12 @@ export interface PublisherTopicContent {
 
 export interface PublisherTopics {
   [topic: string]: PublisherTopicContent;
+}
+
+export namespace API {
+  export interface getLampixInfo { (): Promise<LampixInfo>; }
+}
+
+export interface ILampixBridge {
+  getLampixInfo: API.getLampixInfo;
 }

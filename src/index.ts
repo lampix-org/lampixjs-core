@@ -1,3 +1,6 @@
 import { LampixBridge } from './LampixBridge';
 
-export = new LampixBridge();
+export { LampixInfo } from './types';
+export { LampixBridge };
+
+export const lampix = new LampixBridge();

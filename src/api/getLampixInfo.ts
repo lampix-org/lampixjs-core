@@ -1,13 +1,21 @@
 import { listeners } from '../adapters/communication/listeners';
 
 import {
-  LampixInfo,
-  LampixInternal
+  LampixInternal,
+  lampixInfoCallback
 } from '../types';
 
-export function getLampixInfo(internalLampixAPI: LampixInternal): Promise<LampixInfo> {
-  return new Promise((resolve) => {
-    listeners.lampixInfoCb = resolve;
-    internalLampixAPI.getLampixInfo();
-  });
-}
+/**
+ * Business logic for the retrieval of the Lampix description object
+ *
+ * @param internalLampixAPI API provided by CEF (simulator or device)
+ * @param resolve Promise resolving function assigned to window.onGetLampixInfo to be
+ * called by CEF with relevant data
+ * @internal
+ */
+const _getLampixInfo = (internalLampixAPI: LampixInternal, resolve: lampixInfoCallback): void => {
+  listeners.lampixInfoCb = resolve;
+  internalLampixAPI.getLampixInfo();
+};
+
+export { _getLampixInfo };
