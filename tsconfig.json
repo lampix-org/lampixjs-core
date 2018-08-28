@@ -13,6 +13,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "outDir": "./",
+    "rootDir": "src",
     "resolveJsonModule": true
   },
   "exclude": [
@@ -20,5 +21,8 @@
     "lib",
     "etc",
     "temp"
+  ],
+  "files": [
+    "package.json"
   ]
 }
