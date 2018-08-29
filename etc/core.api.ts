@@ -3,7 +3,7 @@ class LampixBridge implements ILampixBridge {
   getLampixInfo(): Promise<LampixInfo>;
 }
 
-// @public (undocumented)
+// @public
 interface LampixInfo {
   id: string;
   isSimulator: boolean;

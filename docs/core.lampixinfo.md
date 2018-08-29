@@ -2,6 +2,8 @@
 
 # LampixInfo interface
 
+Object providing information about the Lampix environment
+
 ## Properties
 
 |  Property | Type | Description |

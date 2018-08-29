@@ -12,5 +12,5 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [`LampixInfo`](./core.lampixinfo.md) |  |
+|  [`LampixInfo`](./core.lampixinfo.md) | Object providing information about the Lampix environment |
 
