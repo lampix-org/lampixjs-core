@@ -44,6 +44,8 @@ export interface Rect {
 }
 
 /**
+ * Object providing information about the Lampix environment
+ *
  * @public
  */
 export interface LampixInfo {
