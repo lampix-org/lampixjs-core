@@ -197,7 +197,7 @@ export interface RegisteredArea {
 /**
  * @public
  */
-export namespace API {
+export namespace PublicAPI {
   /**
    * @public
   */
@@ -212,7 +212,7 @@ export namespace API {
 }
 
 export interface ILampixBridge {
-  getLampixInfo: API.getLampixInfo;
+  getLampixInfo: PublicAPI.getLampixInfo;
 }
 
 export interface RegisterFn {
