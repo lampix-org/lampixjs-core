@@ -2,16 +2,20 @@ export type Opts<T> = {
   [key: string]: T
 };
 
+export namespace InternalAPI {
+  export interface RegisterFn { (rectArray: string): void; }
+}
+
 export type LampixInternal = {
+  registerSimpleClassifier: RegisterFn;
+  registerDrawingDetector: RegisterFn;
+  registerPositionClassifier: RegisterFn;
+  registerMovement: RegisterFn;
   isDepthClassifierActivated: boolean;
+  getLampixInfo: () => void;
   activateDepthClassifier: (opts: Opts<string>) => void;
   deactivateDepthClassifier: () => void;
-  getLampixInfo: () => void;
-  registerMovement: (rectArrayJSON: string) => void;
-  registerSimpleClassifier: (classRectArrayJSON: string) => void;
-  registerDrawingDetector: (classRectArrayJSON: string) => void;
   playFullScreenVideo: (filename: string) => void;
-  registerPositionClassifier: (classRectArrayJSON: string) => void;
   setIgnoredRects: (rectArrayJSON: string) => void;
   getApps: () => void;
   switchToApp: (appName: string) => void;
@@ -32,6 +36,9 @@ declare global {
   }
 }
 
+/**
+ * @public
+ */
 export interface Rect {
   /** X coordinate of the rectangle's top left corner. */
   posX: number;
@@ -175,10 +182,39 @@ export interface PublisherTopics {
   [topic: string]: PublisherTopicContent;
 }
 
+/**
+ * @public
+ */
+export interface RegisteredArea {
+  _id: string;
+  source: Rect;
+  remove(): void;
+  update(opts: Rect): void;
+  pause(time: number): void;
+  resume(): void;
+}
+
+/**
+ * @public
+ */
 export namespace API {
+  /**
+   * @public
+  */
+  export interface AreaRegistrar {
+    add(...rectangles: Rect[]): RegisteredArea[];
+    remove(...registeredAreas: RegisteredArea[]): void;
+  }
+  /**
+   * @public
+  */
   export interface getLampixInfo { (): Promise<LampixInfo>; }
 }
 
 export interface ILampixBridge {
   getLampixInfo: API.getLampixInfo;
+}
+
+export interface RegisterFn {
+  (rectArray: string): void;
 }
