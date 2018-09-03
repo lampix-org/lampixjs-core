@@ -13,9 +13,9 @@ import {
  * called by CEF with relevant data
  * @internal
  */
-const _getLampixInfo = (internalLampixAPI: LampixInternal, resolve: lampixInfoCallback): void => {
+const getLampixInfo = (internalLampixAPI: LampixInternal, resolve: lampixInfoCallback): void => {
   listeners.lampixInfoCb = resolve;
   internalLampixAPI.getLampixInfo();
 };
 
-export { _getLampixInfo };
+export { getLampixInfo };
