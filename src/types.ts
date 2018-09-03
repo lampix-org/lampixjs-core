@@ -222,7 +222,15 @@ export namespace PublicAPI {
    * @public
    */
   export interface WatcherRegistrar {
+    /**
+     * Add one or more comma separated watchers
+     * @param rectangles - List of {@link Watcher} objects to register
+     */
     add(...rectangles: Watcher[]): Promise<RegisteredWatcher[]>;
+    /**
+     * Remove one or more comma separated registered watchers
+     * @param registeredWatchers - List of {@link RegisteredWatcher} objects to remove
+     */
     remove(...registeredWatchers: RegisteredWatcher[]): Promise<void>;
   }
   /**
