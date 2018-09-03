@@ -39,7 +39,7 @@ declare global {
 /**
  * @public
  */
-export interface Rect {
+export interface Watcher {
   /** X coordinate of the rectangle's top left corner. */
   posX: number;
   /** Y coordinate of the rectangle's top left corner. */
@@ -165,7 +165,7 @@ export interface Callbacks {
   transformCoordinatesCb: transformCoordinatesCallback;
 }
 
-export interface CoordinatesToTransform extends Rect {
+export interface CoordinatesToTransform extends Watcher {
   type: 'camera' | 'projector';
 }
 
@@ -182,16 +182,36 @@ export interface PublisherTopics {
   [topic: string]: PublisherTopicContent;
 }
 
+export interface RegisteredWatcherState {
+  _id: string;
+  active: boolean;
+}
+
 /**
  * @public
  */
-export interface RegisteredArea {
+export interface RegisteredWatcher {
   _id: string;
-  source: Rect;
+  source: Watcher;
   remove(): void;
-  update(opts: Rect): void;
+  /**
+   * In-place update of area
+   * @param opts - {@link Watcher} object describing new area
+   */
+  update(opts: Partial<Watcher>): void;
+  /**
+   * Makes the area inactive indefinitely or for a specified time
+   * @param time - Time (in milliseconds) area should be inactive
+   */
   pause(time: number): void;
+  /**
+   * Makes the area active
+   */
   resume(): void;
+  /**
+   * Active status of the area
+   */
+  active: boolean;
 }
 
 /**
@@ -200,14 +220,14 @@ export interface RegisteredArea {
 export namespace PublicAPI {
   /**
    * @public
-  */
-  export interface AreaRegistrar {
-    add(...rectangles: Rect[]): RegisteredArea[];
-    remove(...registeredAreas: RegisteredArea[]): void;
+   */
+  export interface WatcherRegistrar {
+    add(...rectangles: Watcher[]): Promise<RegisteredWatcher[]>;
+    remove(...registeredWatchers: RegisteredWatcher[]): Promise<void>;
   }
   /**
    * @public
-  */
+   */
   export interface getLampixInfo { (): Promise<LampixInfo>; }
 }
 
@@ -217,4 +237,11 @@ export interface ILampixBridge {
 
 export interface RegisterFn {
   (rectArray: string): void;
+}
+
+export namespace Manager {
+  export interface Watchers {
+    classifiers: RegisteredWatcher[];
+    segmenters: RegisteredWatcher[];
+  }
 }
