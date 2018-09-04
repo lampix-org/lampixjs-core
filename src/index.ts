@@ -6,4 +6,5 @@ export {
 } from './types';
 export { LampixBridge };
 
+export * from './constants';
 export const lampix = new LampixBridge();
