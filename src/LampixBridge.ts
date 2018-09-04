@@ -33,8 +33,8 @@ class LampixBridge implements ILampixBridge {
    * {@link RegisteredWatcher.remove | watcher's remove() function}
    */
   public watchers: PublicAPI.WatcherRegistrar = {
-    add(...rectangles) {
-      const watchers = rectangles.map(createRegisteredWatcher);
+    add(...watcherList) {
+      const watchers = watcherList.map(createRegisteredWatcher);
       WatcherManager.addWatchers(...watchers);
 
       // Impose async to allow the development of proper communication between
