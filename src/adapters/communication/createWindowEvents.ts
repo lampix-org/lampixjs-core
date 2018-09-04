@@ -48,15 +48,14 @@ let bindEvents = () => {
 
   window.onPositionClassifier = (
     rectIndex: number,
-    classifiedObjects: ClassifiedObject[],
-    metadata: string
+    classifiedObjects: ClassifiedObject[]
   ) => {
     invariant(
       isFunction(listeners.positionClassifierCb),
       internalError('callbacks.positionClassifierCb must be a function.')
     );
 
-    listeners.positionClassifierCb(rectIndex, classifiedObjects, metadata);
+    listeners.positionClassifierCb(rectIndex, classifiedObjects);
   };
 
   window.onPrePositionClassifier = (rectIndex, detectedObjects) => {
