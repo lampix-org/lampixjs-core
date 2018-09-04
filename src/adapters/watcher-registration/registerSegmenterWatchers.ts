@@ -3,7 +3,11 @@ import {
   LampixInternal
 } from '../../types';
 
+import { debounceRegisterCall } from './debounceRegisterCall';
 import { lampixReadableArray } from '../../utils/lampixReadableArray';
+
+const register = (api, state) => api.registerPositionClassifier(lampixReadableArray(state.segmenters));
+const debouncedRegister = debounceRegisterCall(register);
 
 /**
  * Sends segmenter watchers to Lampix device
@@ -17,7 +21,7 @@ function registerSegmenterWatchers(
   api: LampixInternal,
   state: Manager.Watchers
 ) {
-  api.registerPositionClassifier(lampixReadableArray(state.segmenters));
+  debouncedRegister(api, state);
 }
 
 export { registerSegmenterWatchers };
