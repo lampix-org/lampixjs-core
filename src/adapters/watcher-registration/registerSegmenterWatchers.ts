@@ -1,5 +1,4 @@
 import {
-  RegisteredWatcher,
   Manager,
   LampixInternal
 } from '../../types';
