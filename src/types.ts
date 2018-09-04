@@ -68,12 +68,12 @@ export namespace Watcher {
 
   export interface Watcher {
     shape: {
-      type: 'rectangle' | 'polygon' | 'circle',
-      data: Watcher.Shape.Rectangle | Watcher.Shape.Polygon | Watcher.Shape.Circle
+      type: 'rectangle' | 'polygon' | 'circle';
+      data: Watcher.Shape.Rectangle | Watcher.Shape.Polygon | Watcher.Shape.Circle;
     };
     type: Watcher.Types.Classifier | Watcher.Types.Segmenter;
     name: string;
-    params?: { [key: string]: Serializable };
+    params?: { [key: string]: Serializable; };
     [key: string]: Serializable;
   }
 }
