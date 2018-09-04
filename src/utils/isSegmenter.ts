@@ -1,5 +1,4 @@
-import { RegisteredWatcher } from '../types';
-import { WatcherTypes } from '../constants';
+import { RegisteredWatcher, WatcherTypes } from '../types';
 
 const isSegmenter = (w: RegisteredWatcher) => w.source.type === WatcherTypes.Segmenter;
 

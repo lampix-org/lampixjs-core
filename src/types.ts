@@ -36,6 +36,11 @@ declare global {
   }
 }
 
+export enum WatcherTypes {
+  Classifier = 'classifier',
+  Segmenter = 'segmenter'
+}
+
 /**
  * @public
  */
