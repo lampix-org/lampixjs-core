@@ -1,5 +1,5 @@
-import { RegisteredWatcher, WatcherTypes } from '../types';
+import { RegisteredWatcher, Watcher } from '../types';
 
-const isClassifier = (w: RegisteredWatcher) => w.source.type === WatcherTypes.Classifier;
+const isClassifier = (w: RegisteredWatcher) => w.source.type === Watcher.Types.Classifier;
 
 export { isClassifier };

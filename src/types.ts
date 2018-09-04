@@ -2,6 +2,8 @@ export type Opts<T> = {
   [key: string]: T
 };
 
+export type Serializable = Exclude<any, Function | Symbol | undefined>;
+
 export namespace InternalAPI {
   export interface RegisterFn { (rectArray: string): void; }
 }
@@ -36,23 +38,48 @@ declare global {
   }
 }
 
-export enum WatcherTypes {
-  Classifier = 'classifier',
-  Segmenter = 'segmenter'
-}
-
 /**
  * @public
  */
-export interface Watcher {
-  /** X coordinate of the rectangle's top left corner. */
-  posX: number;
-  /** Y coordinate of the rectangle's top left corner. */
-  posY: number;
-  width: number;
-  height: number;
-  classifier?: string;
-  [key: string]: any;
+export namespace Watcher {
+  export enum Types {
+    Classifier = 'classifier',
+    Segmenter = 'segmenter'
+  }
+
+  export namespace Shape {
+    export interface Rectangle {
+      posX: number;
+      posY: number;
+      width: number;
+      height: number;
+    }
+
+    export interface Polygon {
+      [index: number]: number;
+    }
+
+    export interface Circle {
+      cx: number;
+      cy: number;
+      r: number;
+    }
+  }
+
+  export interface Watcher {
+    shape: {
+      type: 'rectangle' | 'polygon' | 'circle',
+      data: Watcher.Shape.Rectangle | Watcher.Shape.Polygon | Watcher.Shape.Circle
+    };
+    type: Watcher.Types.Classifier | Watcher.Types.Segmenter;
+    name: string;
+    params?: { [key: string]: Serializable };
+    [key: string]: Serializable;
+  }
+}
+
+export interface CoordinatesToTransform extends Watcher.Watcher {
+  coordinatesType: 'camera' | 'projector';
 }
 
 /**
@@ -170,10 +197,6 @@ export interface Callbacks {
   transformCoordinatesCb: transformCoordinatesCallback;
 }
 
-export interface CoordinatesToTransform extends Watcher {
-  type: 'camera' | 'projector';
-}
-
 export interface PublisherEventListeners {
   [functionId: string]: Function;
 }
@@ -197,13 +220,8 @@ export interface RegisteredWatcherState {
  */
 export interface RegisteredWatcher {
   _id: string;
-  source: Watcher;
+  source: Watcher.Watcher;
   remove(): void;
-  /**
-   * In-place update of area
-   * @param opts - {@link Watcher} object describing new area
-   */
-  update(opts: Partial<Watcher>): void;
   /**
    * Makes the area inactive indefinitely or for a specified time
    * @param time - Time (in milliseconds) area should be inactive
@@ -231,7 +249,7 @@ export namespace PublicAPI {
      * Add one or more comma separated watchers
      * @param rectangles - List of {@link Watcher} objects to register
      */
-    add(...rectangles: Watcher[]): Promise<RegisteredWatcher[]>;
+    add(...rectangles: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
     /**
      * Remove one or more comma separated registered watchers
      * @param registeredWatchers - List of {@link RegisteredWatcher} objects to remove
