@@ -35,7 +35,7 @@ class LampixBridge implements ILampixBridge {
   public watchers: PublicAPI.WatcherRegistrar = {
     add(...rectangles) {
       const watchers = rectangles.map(createRegisteredWatcher);
-      WatcherManager.addWatchers(watchers);
+      WatcherManager.addWatchers(...watchers);
 
       // Impose async to allow the development of proper communication between
       // device API and JS SDK without prompting a major semver bump in the near future

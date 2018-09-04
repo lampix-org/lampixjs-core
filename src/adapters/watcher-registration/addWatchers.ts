@@ -25,7 +25,7 @@ function addWatchersInitializer(api: LampixInternal, state: Manager.Watchers) {
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
-  function addWatchers(watchers: RegisteredWatcher[]) {
+  function addWatchers(...watchers: RegisteredWatcher[]) {
     const classifiers = watchers.filter(isClassifier);
     const segmenters = watchers.filter(isSegmenter);
 

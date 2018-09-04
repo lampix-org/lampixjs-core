@@ -23,7 +23,7 @@ function removeWatchersInitializer(api: LampixInternal, state: Manager.Watchers)
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
-  function removeWatchers(watchers: RegisteredWatcher[]) {
+  function removeWatchers(...watchers: RegisteredWatcher[]) {
     const classifiers = watchers.filter(isClassifier);
     const segmenters = watchers.filter(isSegmenter);
 
