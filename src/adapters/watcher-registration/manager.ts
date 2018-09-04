@@ -3,6 +3,7 @@ import {
 } from '../../types';
 
 import { addWatchersInitializer } from './addWatchers';
+import { removeWatchersInitializer } from './removeWatchers';
 
 const internalLampixAPI = window._lampix_internal;
 
@@ -12,7 +13,9 @@ const watchers: Manager.Watchers = {
 };
 
 const addWatchers = addWatchersInitializer(internalLampixAPI, watchers);
+const removeWatchers = removeWatchersInitializer(internalLampixAPI, watchers);
 
 export {
-  addWatchers
+  addWatchers,
+  removeWatchers
 };
