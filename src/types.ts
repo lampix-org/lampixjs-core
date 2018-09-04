@@ -118,22 +118,22 @@ export interface Outline {
 /**
  * Callback invoked when movement is detected.
  *
- * @param rectIndex Index of the rectangle handling the movement event.
+ * @param watcherIndex Index of the rectangle handling the movement event.
  * @param outlines Array of outlines detected in the rectangle. See {@link Outline}.
  */
 export interface movementCallback {
-  (rectIndex: number, outlines: Outline[]): void;
+  (watcherIndex: number, outlines: Outline[]): void;
 }
 
 /**
  * Callback invoked when an object is detected and classified.
  *
- * @param rectIndex Index of the rectangle handling the classification event.
+ * @param watcherIndex Index of the rectangle handling the classification event.
  * @param recognizedClass Class returned by the classifier.
  * @param metadata Field for extra information regarding classified objects.
  */
 export interface simpleClassifierCallback {
-  (rectIndex: number, recognizedClass: string, metadata: string): void;
+  (watcherIndex: number, recognizedClass: string, metadata: string): void;
 }
 
 export interface ClassifiedObject {
@@ -147,26 +147,25 @@ export interface ClassifiedObject {
 /**
  * Callback invoked when an object is detected and classified.
  *
- * @param rectIndex Index of the rectangle handling the classification event.
+ * @param watcherIndex Index of the rectangle handling the classification event.
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
- * @param metadata Field for extra information regarding classified objects
  */
 export interface positionClassifierCallback {
-  (rectIndex: number, classifiedObjects: ClassifiedObject[], metadata: string): void;
+  (watcherIndex: number, classifiedObjects: ClassifiedObject[], metadata: string): void;
 }
 
 /**
  * Callback invoked when an object is detected, but before it is classified.
  *
- * @param rectIndex Index of the rectangle handling the classification event.
+ * @param watcherIndex Index of the rectangle handling the classification event.
  * @param detectedObjects Array of objects describing the shape of the detected objects.
  */
 export interface prePositionClassifierCallback {
-  (rectIndex: number, detectedObjects: Outline[]): void;
+  (watcherIndex: number, detectedObjects: Outline[]): void;
 }
 
 export interface drawingDetectorCallback {
-  (rectIndex: number, objects: Outline[]): void;
+  (watcherIndex: number, objects: Outline[]): void;
 }
 
 export interface AppInfo {
