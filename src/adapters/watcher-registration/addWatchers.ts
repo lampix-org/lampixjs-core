@@ -4,14 +4,15 @@ import {
   LampixInternal
 } from '../../types';
 
-import { WatcherTypes } from '../../constants';
 import { registerClassifierWatchers } from './registerClassifierWatchers';
 import { registerSegmenterWatchers } from './registerSegmenterWatchers';
+import { isClassifier } from '../../utils/isClassifier';
+import { isSegmenter } from '../../utils/isSegmenter';
 
 /**
  * Allows watcher manager to inject device API
  *
- * @param api - Device API, dependency
+ * @param api - Device API
  * @param state - Currently registered watchers per category
  * @internal
  */
@@ -25,23 +26,18 @@ function addWatchersInitializer(api: LampixInternal, state: Manager.Watchers) {
    * @internal
    */
   function addWatchers(watchers: RegisteredWatcher[]) {
-    const reducer = (watcher) => {
-      switch (watcher.source.type) {
-        case WatcherTypes.Classifier:
-          state.classifiers.push(watcher);
-          break;
-        case WatcherTypes.Segmenter:
-          state.segmenters.push(watcher);
-          break;
-        default:
-          break;
-      }
-    };
+    const classifiers = watchers.filter(isClassifier);
+    const segmenters = watchers.filter(isSegmenter);
 
-    watchers.forEach(reducer, state);
+    if (classifiers.length > 0) {
+      state.classifiers = [...state.classifiers, ...classifiers];
+      registerClassifierWatchers(api, state);
+    }
 
-    registerClassifierWatchers(api, state);
-    registerSegmenterWatchers(api, state);
+    if (segmenters.length > 0) {
+      state.segmenters = [...state.segmenters, ...segmenters];
+      registerSegmenterWatchers(api, state);
+    }
   }
 
   return addWatchers;
