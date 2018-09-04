@@ -142,6 +142,7 @@ export interface ClassifiedObject {
   /** Class returned by classifier. */
   recognizedClass: string;
   outline: Outline;
+  metadata?: any;
 }
 
 /**
@@ -151,7 +152,7 @@ export interface ClassifiedObject {
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
  */
 export interface positionClassifierCallback {
-  (watcherIndex: number, classifiedObjects: ClassifiedObject[], metadata: string): void;
+  (watcherIndex: number, classifiedObjects: ClassifiedObject[]): void;
 }
 
 /**
