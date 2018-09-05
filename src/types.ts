@@ -2,7 +2,7 @@ export type Opts<T> = {
   [key: string]: T
 };
 
-export type Serializable = Exclude<any, Function | Symbol | undefined>;
+export type Serializable = Exclude<any, Function | symbol | undefined>;
 
 export namespace InternalAPI {
   export interface RegisterFn { (rectArray: string): void; }
