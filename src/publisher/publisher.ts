@@ -34,7 +34,7 @@ function publisherFactory(topics: PublisherTopics = {}) {
     };
   }
 
-  function publish(topicName: string, info?: any) {
+  function publish(topicName: string, ...data: any[]) {
     if (!Object.prototype.hasOwnProperty.call(topics, topicName)) {
       return;
     }
@@ -60,7 +60,8 @@ function publisherFactory(topics: PublisherTopics = {}) {
       }
 
       setTimeout(() => {
-        topic.listeners[handlerId](info);
+        const handler = topic.listeners[handlerId];
+        handler.apply(handler, data);
       });
     });
   }
