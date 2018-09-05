@@ -1,4 +1,4 @@
-import { listeners } from '../adapters/communication/listeners';
+import { listeners } from '../managers/communication/listeners';
 
 import {
   LampixInternal,

@@ -1,7 +1,7 @@
 import { getLampixInfo } from './api/getLampixInfo';
 import { createRegisteredWatcher } from './api/createRegisteredWatcher';
 
-import * as WatcherManager from './adapters/watcher-registration/manager';
+import * as WatcherManager from './managers/watchers/manager';
 
 import {
   ILampixBridge,

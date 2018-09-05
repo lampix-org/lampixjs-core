@@ -8,7 +8,7 @@ import {
 } from '../types';
 
 import { simpleId } from '../utils/simpleId';
-import * as watcherManager from '../adapters/watcher-registration/manager';
+import * as watcherManager from '../managers/watchers/manager';
 
 /**
  * @param r - Actual data sent to Lampix device
