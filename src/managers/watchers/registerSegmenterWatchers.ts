@@ -6,7 +6,10 @@ import {
 import { debounceRegisterCall } from './debounceRegisterCall';
 import { lampixReadableArray } from '../../utils/lampixReadableArray';
 
-const register = (api, state) => api.registerPositionClassifier(lampixReadableArray(state.segmenters));
+const register = (
+  api: LampixInternal,
+  state: Manager.Watchers
+) => api.registerPositionClassifier(lampixReadableArray(state.segmenters));
 const debouncedRegister = debounceRegisterCall(register);
 
 /**
