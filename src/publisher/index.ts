@@ -1,3 +1,5 @@
 import publisherFactory from './publisher';
 
-export default publisherFactory();
+const publisher = publisherFactory();
+
+export { publisher };
