@@ -2,8 +2,6 @@ export type Opts<T> = {
   [key: string]: T
 };
 
-export type Serializable = Exclude<any, Function | symbol | undefined>;
-
 export namespace InternalAPI {
   export interface RegisterFn { (rectArray: string): void; }
 }
@@ -38,6 +36,11 @@ declare global {
   }
 }
 
+export interface ArbitraryProps {
+  [key: string]: any;
+  [index: number]: any;
+}
+
 /**
  * @public
  */
@@ -66,15 +69,14 @@ export namespace Watcher {
     }
   }
 
-  export interface Watcher {
+  export interface Watcher extends ArbitraryProps {
     shape: {
       type: 'rectangle' | 'polygon' | 'circle';
       data: Watcher.Shape.Rectangle | Watcher.Shape.Polygon | Watcher.Shape.Circle;
     };
     type: Watcher.Types.Classifier | Watcher.Types.Segmenter;
     name: string;
-    params?: { [key: string]: Serializable; };
-    [key: string]: Serializable;
+    params?: ArbitraryProps;
   }
 }
 
