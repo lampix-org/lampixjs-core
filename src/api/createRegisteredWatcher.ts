@@ -26,7 +26,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher): RegisteredWatcher =
       value: true,
       writable: true,
       configurable: false
-    },
+    }
   });
 
   const registeredWatcher: RegisteredWatcher = {
@@ -34,9 +34,11 @@ export const createRegisteredWatcher = (w: Watcher.Watcher): RegisteredWatcher =
     source: w,
     active: state.active,
     resume() {
+      // TODO: hook up with api.resume
       state.active = true;
     },
     pause(time: number = 0) {
+      // TODO: hook up with api.pause
       invariant(isNumber(time) && time >= 0, 'pause() takes an optional positive number as milliseconds');
 
       if (time > 0) {
