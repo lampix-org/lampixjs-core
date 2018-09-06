@@ -1,5 +1,5 @@
 import {
-  Manager,
+  Managers,
   LampixInternal
 } from '../../types';
 
@@ -8,8 +8,8 @@ import { lampixReadableArray } from '../../utils/lampixReadableArray';
 
 const register = (
   api: LampixInternal,
-  state: Manager.Watchers
-) => api.registerSimpleClassifier(lampixReadableArray(state.classifiers));
+  state: Managers.Watchers.Collection
+) => api.registerSimpleClassifier(lampixReadableArray(state.classifiers.list));
 const debouncedRegister = debounceRegisterCall(register);
 
 /**
@@ -22,7 +22,7 @@ const debouncedRegister = debounceRegisterCall(register);
  */
 function registerClassifierWatchers(
   api: LampixInternal,
-  state: Manager.Watchers
+  state: Managers.Watchers.Collection
 ) {
   debouncedRegister(api, state);
 }

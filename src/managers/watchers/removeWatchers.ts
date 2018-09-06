@@ -1,6 +1,6 @@
 import {
   RegisteredWatcher,
-  Manager,
+  Managers,
   LampixInternal
 } from '../../types';
 
@@ -16,7 +16,7 @@ import { isSegmenter } from '../../utils/isSegmenter';
  * @param state - Currently registered watchers per category
  * @internal
  */
-function removeWatchersInitializer(api: LampixInternal, state: Manager.Watchers) {
+function removeWatchersInitializer(api: LampixInternal, state: Managers.Watchers.Collection) {
   /**
    * Removes all the provided watchers from the watch list
    *
@@ -27,8 +27,8 @@ function removeWatchersInitializer(api: LampixInternal, state: Manager.Watchers)
     const classifiers = watchers.filter(isClassifier);
     const segmenters = watchers.filter(isSegmenter);
 
-    state.classifiers = state.classifiers.filter((w) => !classifiers.includes(w));
-    state.segmenters = state.segmenters.filter((w) => !segmenters.includes(w));
+    state.classifiers.list = state.classifiers.list.filter((w) => !classifiers.includes(w));
+    state.segmenters.list = state.segmenters.list.filter((w) => !segmenters.includes(w));
 
     registerClassifierWatchers(api, state);
     registerSegmenterWatchers(api, state);

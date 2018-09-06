@@ -71,16 +71,25 @@ export namespace Watcher {
 
   export interface Watcher extends ArbitraryProps {
     shape: {
-      type: 'rectangle' | 'polygon' | 'circle';
-      data: Watcher.Shape.Rectangle | Watcher.Shape.Polygon | Watcher.Shape.Circle;
+      type:
+        'rectangle' |
+        'polygon' |
+        'circle';
+      data:
+        Watcher.Shape.Rectangle |
+        Watcher.Shape.Polygon |
+        Watcher.Shape.Circle;
     };
-    type: Watcher.Types.Classifier | Watcher.Types.Segmenter;
+    type:
+      Watcher.Types.Classifier |
+      Watcher.Types.Segmenter;
     name: string;
     params?: ArbitraryProps;
+    action: Function;
   }
 }
 
-export interface CoordinatesToTransform extends Watcher.Watcher {
+export interface CoordinatesToTransform extends Watcher.Shape.Rectangle {
   coordinatesType: 'camera' | 'projector';
 }
 
@@ -249,9 +258,9 @@ export namespace PublicAPI {
   export interface WatcherRegistrar {
     /**
      * Add one or more comma separated watchers
-     * @param rectangles - List of {@link Watcher} objects to register
+     * @param watchers - List of {@link Watcher.Watcher} objects to register
      */
-    add(...rectangles: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
+    add(...watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
     /**
      * Remove one or more comma separated registered watchers
      * @param registeredWatchers - List of {@link RegisteredWatcher} objects to remove
@@ -272,9 +281,16 @@ export interface RegisterFn {
   (rectArray: string): void;
 }
 
-export namespace Manager {
-  export interface Watchers {
-    classifiers: RegisteredWatcher[];
-    segmenters: RegisteredWatcher[];
+export namespace Managers {
+  export namespace Watchers {
+    export interface Manager {
+      list: RegisteredWatcher[];
+      actionHandler(index: number, ...data: any[]);
+    }
+
+    export interface Collection {
+      classifiers: Managers.Watchers.Manager;
+      segmenters: Managers.Watchers.Manager;
+    }
   }
 }

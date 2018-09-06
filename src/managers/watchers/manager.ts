@@ -1,5 +1,5 @@
 import {
-  Manager
+  Managers
 } from '../../types';
 
 import { addWatchersInitializer } from './addWatchers';
@@ -7,9 +7,15 @@ import { removeWatchersInitializer } from './removeWatchers';
 
 const internalLampixAPI = window._lampix_internal;
 
-const watchers: Manager.Watchers = {
-  classifiers: [],
-  segmenters: []
+const watchers: Managers.Watchers.Collection = {
+  classifiers: {
+    list: [],
+    actionHandler: () => {}
+  },
+  segmenters: {
+    list: [],
+    actionHandler: () => {}
+  }
 };
 
 const addWatchers = addWatchersInitializer(internalLampixAPI, watchers);
