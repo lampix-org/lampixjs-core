@@ -1,11 +1,9 @@
-// Utils
 import noop from 'lodash/noop';
 import isFunction from 'lodash/isFunction';
 import invariant from 'invariant';
 
 import { internalError } from '../../utils/messages/internalError';
 
-// Types
 import {
   LampixInfo,
   ClassifiedObject,
@@ -13,8 +11,12 @@ import {
   CoordinatesToTransform
 } from '../../types';
 
-// Core
 import { listeners } from './listeners';
+import { publisher } from '../../publisher';
+import {
+  INTERNAL_CLASSIFIER_EVENT,
+  INTERNAL_SEGMENTER_EVENT
+} from '../../events';
 
 /**
  * Creates the functions called by the Lampix backend.
@@ -38,24 +40,23 @@ let bindEvents = () => {
     recognizedClass: string,
     metadata: string
   ) => {
-    invariant(
-      isFunction(listeners.simpleClassifierCb),
-      internalError('callbacks.simpleClassifierCb must be a function.')
+    publisher.publish(
+      INTERNAL_CLASSIFIER_EVENT,
+      rectIndex,
+      recognizedClass,
+      metadata
     );
-
-    listeners.simpleClassifierCb(rectIndex, recognizedClass, metadata);
   };
 
   window.onPositionClassifier = (
     rectIndex: number,
     classifiedObjects: ClassifiedObject[]
   ) => {
-    invariant(
-      isFunction(listeners.positionClassifierCb),
-      internalError('callbacks.positionClassifierCb must be a function.')
+    publisher.publish(
+      INTERNAL_SEGMENTER_EVENT,
+      rectIndex,
+      classifiedObjects
     );
-
-    listeners.positionClassifierCb(rectIndex, classifiedObjects);
   };
 
   window.onPrePositionClassifier = (rectIndex, detectedObjects) => {
