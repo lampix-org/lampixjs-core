@@ -2,22 +2,33 @@ export type Opts<T> = {
   [key: string]: T
 };
 
+export interface ArbitraryProps {
+  [key: string]: any;
+  [index: number]: any;
+}
+
+export interface NoOp {
+  (): void;
+}
+
 export namespace InternalAPI {
   export interface RegisterFn { (rectArray: string): void; }
 }
 
 export type LampixInternal = {
-  registerSimpleClassifier: RegisterFn;
-  registerDrawingDetector: RegisterFn;
-  registerPositionClassifier: RegisterFn;
-  registerMovement: RegisterFn;
+  registerSimpleClassifier: InternalAPI.RegisterFn;
+  registerDrawingDetector: InternalAPI.RegisterFn;
+  registerPositionClassifier: InternalAPI.RegisterFn;
+  registerMovement: InternalAPI.RegisterFn;
+  getLampixInfo: NoOp;
+  getApps: NoOp;
+  resume(): NoOp;
+  pause(): NoOp;
+  deactivateDepthClassifier: NoOp;
   isDepthClassifierActivated: boolean;
-  getLampixInfo: () => void;
   activateDepthClassifier: (opts: Opts<string>) => void;
-  deactivateDepthClassifier: () => void;
   playFullScreenVideo: (filename: string) => void;
   setIgnoredRects: (rectArrayJSON: string) => void;
-  getApps: () => void;
   switchToApp: (appName: string) => void;
   transformCoordinates: (toTransform: string) => void;
 };
@@ -34,11 +45,6 @@ declare global {
     onGetApps: getAppsCallback;
     onTransformCoordinates: transformCoordinatesCallback;
   }
-}
-
-export interface ArbitraryProps {
-  [key: string]: any;
-  [index: number]: any;
 }
 
 /**
