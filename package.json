@@ -31,8 +31,8 @@
   "author": "Lampix",
   "license": "MIT",
   "devDependencies": {
-    "@microsoft/api-documenter": "1.5.11",
-    "@microsoft/api-extractor": "5.10.8",
+    "@microsoft/api-documenter": "1.5.22",
+    "@microsoft/api-extractor": "5.11.1",
     "@types/invariant": "2.2.29",
     "@types/lodash": "4.14.116",
     "husky": "0.14.3",
