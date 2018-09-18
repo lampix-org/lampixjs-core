@@ -6,8 +6,7 @@ import * as WatcherManager from './managers/watchers/manager';
 import {
   ILampixBridge,
   LampixInfo,
-  PublicAPI,
-  Watcher
+  PublicAPI
 } from './types';
 
 const internalLampixAPI = window._lampix_internal;
