@@ -8,7 +8,8 @@ import {
   LampixInfo,
   ClassifiedObject,
   AppInfo,
-  CoordinatesToTransform
+  CoordinatesToTransform,
+  WatcherID
 } from '../../types';
 
 import { listeners } from './listeners';
@@ -26,46 +27,40 @@ let bindEvents = () => {
   // Prevent multiple calls
   bindEvents = noop;
 
-  window.onMovement = (rectIndex, outlines) => {
-    invariant(
-      isFunction(listeners.movementCb),
-      internalError('callbacks.movementCb must be a function.')
-    );
-
-    listeners.movementCb(rectIndex, outlines);
-  };
-
-  window.onSimpleClassifier = (
-    rectIndex: number,
+  window.onObjectClassified = (
+    watcherId: WatcherID,
     recognizedClass: string,
     metadata: string
   ) => {
     publisher.publish(
       INTERNAL_CLASSIFIER_EVENT,
-      rectIndex,
+      watcherId,
       recognizedClass,
       metadata
     );
   };
 
-  window.onPositionClassifier = (
-    rectIndex: number,
+  window.onObjectsDetected = (
+    watcherId: WatcherID,
     classifiedObjects: ClassifiedObject[]
   ) => {
     publisher.publish(
       INTERNAL_SEGMENTER_EVENT,
-      rectIndex,
+      watcherId,
       classifiedObjects
     );
   };
 
-  window.onPrePositionClassifier = (rectIndex, detectedObjects) => {
+  window.onObjectsLocated = (
+    watcherId,
+    detectedObjects
+  ) => {
     invariant(
-      isFunction(listeners.prePositionClassifierCb),
-      internalError('callbacks.prePositionClassifierCb must be a function.')
+      isFunction(listeners.objectsLocatedCb),
+      internalError('callbacks.objectsLocatedCb must be a function.')
     );
 
-    listeners.prePositionClassifierCb(rectIndex, detectedObjects);
+    listeners.objectsLocatedCb(watcherId, detectedObjects);
   };
 
   window.onLampixInfo = (lampixInfo: LampixInfo) => {
@@ -93,15 +88,6 @@ let bindEvents = () => {
     );
 
     listeners.transformCoordinatesCb(transformedRect);
-  };
-
-  window.onDrawingDetector = (rectIndex, objects) => {
-    invariant(
-      isFunction(listeners.drawingDetectorCb),
-      internalError('callbacks.drawingDetectorCb must be a function.')
-    );
-
-    listeners.drawingDetectorCb(rectIndex, objects);
   };
 };
 

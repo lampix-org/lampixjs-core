@@ -2,7 +2,7 @@ import { listeners } from '../managers/communication/listeners';
 
 import {
   LampixInternal,
-  lampixInfoCallback
+  LampixInfoCallback
 } from '../types';
 
 /**
@@ -13,7 +13,7 @@ import {
  * called by CEF with relevant data
  * @internal
  */
-const getLampixInfo = (internalLampixAPI: LampixInternal, resolve: lampixInfoCallback): void => {
+const getLampixInfo = (internalLampixAPI: LampixInternal, resolve: LampixInfoCallback): void => {
   listeners.lampixInfoCb = resolve;
   internalLampixAPI.getLampixInfo();
 };

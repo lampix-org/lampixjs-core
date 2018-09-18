@@ -4,6 +4,8 @@ export type Opts<T> = {
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
+export type WatcherID = string;
+
 export interface ArbitraryProps {
   [key: string]: any;
   [index: number]: any;
@@ -20,19 +22,13 @@ export namespace InternalAPI {
 export type LampixInternal = {
   add_watchers: InternalAPI.RegisterFn;
   remove_watchers: InternalAPI.RegisterFn;
-  registerSimpleClassifier: InternalAPI.RegisterFn;
-  registerDrawingDetector: InternalAPI.RegisterFn;
-  registerPositionClassifier: InternalAPI.RegisterFn;
-  registerMovement: InternalAPI.RegisterFn;
   getLampixInfo: NoOp;
   getApps: NoOp;
-  resume(): NoOp;
-  pause(): NoOp;
+  resume: NoOp;
+  pause: NoOp;
   deactivateDepthClassifier: NoOp;
   isDepthClassifierActivated: boolean;
   activateDepthClassifier: (opts: Opts<string>) => void;
-  playFullScreenVideo: (filename: string) => void;
-  setIgnoredRects: (rectArrayJSON: string) => void;
   switchToApp: (appName: string) => void;
   transformCoordinates: (toTransform: string) => void;
 };
@@ -40,14 +36,12 @@ export type LampixInternal = {
 declare global {
   interface Window {
     _lampix_internal: LampixInternal;
-    onMovement: movementCallback;
-    onSimpleClassifier: simpleClassifierCallback;
-    onPositionClassifier: positionClassifierCallback;
-    onPrePositionClassifier: prePositionClassifierCallback;
-    onDrawingDetector: drawingDetectorCallback;
-    onLampixInfo: lampixInfoCallback;
-    onGetApps: getAppsCallback;
-    onTransformCoordinates: transformCoordinatesCallback;
+    onObjectClassified: ObjectClassifiedCallback;
+    onObjectsDetected: ObjectsDetectedCallback;
+    onObjectsLocated: ObjectsLocatedCallback;
+    onLampixInfo: LampixInfoCallback;
+    onGetApps: GetAppsCallback;
+    onTransformCoordinates: TransformCoordsCallback;
   }
 }
 
@@ -141,7 +135,7 @@ export interface LampixInfo {
  *
  * @param lampixInfo Object containing relevant Lampix information. See {@link LampixInfo}.
  */
-export interface lampixInfoCallback {
+export interface LampixInfoCallback {
   (lampixInfo: LampixInfo): void;
 }
 
@@ -156,24 +150,14 @@ export interface Outline {
 }
 
 /**
- * Callback invoked when movement is detected.
- *
- * @param watcherIndex Index of the rectangle handling the movement event.
- * @param outlines Array of outlines detected in the rectangle. See {@link Outline}.
- */
-export interface movementCallback {
-  (watcherIndex: number, outlines: Outline[]): void;
-}
-
-/**
  * Callback invoked when an object is detected and classified.
  *
- * @param watcherIndex Index of the rectangle handling the classification event.
+ * @param watcherId Index of the rectangle handling the classification event.
  * @param recognizedClass Class returned by the classifier.
  * @param metadata Field for extra information regarding classified objects.
  */
-export interface simpleClassifierCallback {
-  (watcherIndex: number, recognizedClass: string, metadata: string): void;
+export interface ObjectClassifiedCallback {
+  (watcherId: WatcherID, recognizedClass: string, metadata: string): void;
 }
 
 export interface ClassifiedObject {
@@ -188,32 +172,28 @@ export interface ClassifiedObject {
 /**
  * Callback invoked when an object is detected and classified.
  *
- * @param watcherIndex Index of the rectangle handling the classification event.
+ * @param watcherID Index of the rectangle handling the classification event.
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
  */
-export interface positionClassifierCallback {
-  (watcherIndex: number, classifiedObjects: ClassifiedObject[]): void;
+export interface ObjectsDetectedCallback {
+  (watcherId: WatcherID, classifiedObjects: ClassifiedObject[]): void;
 }
 
 /**
  * Callback invoked when an object is detected, but before it is classified.
  *
- * @param watcherIndex Index of the rectangle handling the classification event.
+ * @param watcherId Index of the rectangle handling the classification event.
  * @param detectedObjects Array of objects describing the shape of the detected objects.
  */
-export interface prePositionClassifierCallback {
-  (watcherIndex: number, detectedObjects: Outline[]): void;
-}
-
-export interface drawingDetectorCallback {
-  (watcherIndex: number, objects: Outline[]): void;
+export interface ObjectsLocatedCallback {
+  (watcherId: WatcherID, detectedObjects: Outline[]): void;
 }
 
 export interface AppInfo {
   [name: string]: string;
 }
 
-export interface getAppsCallback {
+export interface GetAppsCallback {
   (apps: AppInfo[]): void;
 }
 
@@ -222,19 +202,17 @@ export interface getAppsCallback {
  *
  * @param toTransform Object specifying the rectangle to transform and what direction the conversion should take
  */
-export interface transformCoordinatesCallback {
+export interface TransformCoordsCallback {
   (transformedRect: CoordinatesToTransform[]): void;
 }
 
 export interface Callbacks {
-  movementCb: movementCallback;
-  simpleClassifierCb: simpleClassifierCallback;
-  positionClassifierCb: positionClassifierCallback;
-  prePositionClassifierCb: prePositionClassifierCallback;
-  lampixInfoCb: lampixInfoCallback;
-  drawingDetectorCb: drawingDetectorCallback;
-  getAppsCb: getAppsCallback;
-  transformCoordinatesCb: transformCoordinatesCallback;
+  objectClassifiedCb: ObjectClassifiedCallback;
+  objectsDetectedCb: ObjectsDetectedCallback;
+  objectsLocatedCb: ObjectsLocatedCallback;
+  lampixInfoCb: LampixInfoCallback;
+  getAppsCb: GetAppsCallback;
+  transformCoordinatesCb: TransformCoordsCallback;
 }
 
 export interface PublisherEventListeners {
