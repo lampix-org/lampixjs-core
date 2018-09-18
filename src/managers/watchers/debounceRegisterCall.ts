@@ -2,7 +2,6 @@ import debounce from 'lodash/debounce';
 import partialRight from 'lodash/partialRight';
 import ary from 'lodash/ary';
 
-// TODO: Perhaps make these configurable
 const timeToWaitInBetweenCalls = 100;
 const options = {
   maxWait: 1000
