@@ -1,8 +1,4 @@
 import noop from 'lodash/noop';
-import isFunction from 'lodash/isFunction';
-import invariant from 'invariant';
-
-import { internalError } from '../../utils/messages/internalError';
 
 import {
   LampixInfo,
@@ -55,38 +51,18 @@ let bindEvents = () => {
     watcherId,
     detectedObjects
   ) => {
-    invariant(
-      isFunction(listeners.objectsLocatedCb),
-      internalError('callbacks.objectsLocatedCb must be a function.')
-    );
-
     listeners.objectsLocatedCb(watcherId, detectedObjects);
   };
 
   window.onLampixInfo = (lampixInfo: LampixInfo) => {
-    invariant(
-      isFunction(listeners.lampixInfoCb),
-      internalError('callbacks.lampixInfoCb must be a function.')
-    );
-
     listeners.lampixInfoCb(lampixInfo);
   };
 
   window.onGetApps = (apps: AppInfo[]) => {
-    invariant(
-      isFunction(listeners.getAppsCb),
-      internalError('callbacks.getAppsCb must be a function.')
-    );
-
     listeners.getAppsCb(apps);
   };
 
   window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
-    invariant(
-      isFunction(listeners.transformCoordinatesCb),
-      internalError('callbacks.transformCoordinatesCb must be a function.')
-    );
-
     listeners.transformCoordinatesCb(transformedRect);
   };
 };

@@ -8,14 +8,15 @@ import {
 } from '../../types';
 
 import { simpleId } from '../../utils/simpleId';
-import * as watcherManager from './manager';
+
+// TODO: wm should not be of type any down there
 
 /**
- * @param r - Actual data sent to Lampix device
- * @param watcherManager - Abstracts away sending data to Lampix device
+ * @param w - Actual data sent to Lampix device
+ * @param wm - Abstracts away sending data to Lampix device
  * @internal
  */
-export const createRegisteredWatcher = (w: Watcher.Watcher): RegisteredWatcher => {
+export const createRegisteredWatcher = (w: Watcher.Watcher, wm: any): RegisteredWatcher => {
   const state: RegisteredWatcherState = Object.defineProperties({}, {
     _id: {
       value: simpleId(),
@@ -48,7 +49,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher): RegisteredWatcher =
       state.active = false;
     },
     remove() {
-      watcherManager.removeWatchers(registeredWatcher);
+      wm.removeWatchers(registeredWatcher);
     }
   };
 

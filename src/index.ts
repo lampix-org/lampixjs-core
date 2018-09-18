@@ -11,4 +11,4 @@ export { LampixBridge };
 export * from './constants';
 export * from './api/helpers';
 
-export const lampix = new LampixBridge();
+export const api = new LampixBridge();
