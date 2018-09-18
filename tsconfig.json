@@ -14,7 +14,8 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "./",
     "rootDir": "src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",
