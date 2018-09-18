@@ -161,6 +161,9 @@ export interface ObjectClassifiedCallback {
   (watcherId: WatcherID, recognizedClass: string, metadata: string): void;
 }
 
+/**
+ * @public
+ */
 export interface ClassifiedObject {
   /** Used to track same object over multiple frames. */
   objectId: string;
