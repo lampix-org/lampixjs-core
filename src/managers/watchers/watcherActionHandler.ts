@@ -21,7 +21,7 @@ function watcherActionHandler(
   internalEvents: string[]
 ) {
   function watcherActionHandler(watcherId: string, ...data: any[]) {
-    const watcher: RegisteredWatcher = wm.collection[watcherId];
+    const watcher: RegisteredWatcher = wm.watchers[watcherId];
 
     // TODO: Handle case where watcher doesn't exist
     if (watcher) {
