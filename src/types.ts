@@ -5,6 +5,7 @@ export type Opts<T> = {
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export type WatcherID = string;
+export type Coords2DPair = { x: number, y: number };
 
 export interface ArbitraryProps {
   [key: string]: any;
@@ -79,7 +80,7 @@ export namespace Watcher {
     }
 
     export interface Polygon {
-      outline: { x: number, y: number };
+      outline: Coords2DPair[];
     }
 
     export interface Circle {
