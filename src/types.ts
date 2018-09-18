@@ -2,6 +2,8 @@ export type Opts<T> = {
   [key: string]: T
 };
 
+export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
 export interface ArbitraryProps {
   [key: string]: any;
   [index: number]: any;
@@ -16,6 +18,8 @@ export namespace InternalAPI {
 }
 
 export type LampixInternal = {
+  add_watchers: InternalAPI.RegisterFn;
+  remove_watchers: InternalAPI.RegisterFn;
   registerSimpleClassifier: InternalAPI.RegisterFn;
   registerDrawingDetector: InternalAPI.RegisterFn;
   registerPositionClassifier: InternalAPI.RegisterFn;
@@ -56,7 +60,23 @@ export namespace Watcher {
     Segmenter = 'segmenter'
   }
 
+  export namespace Actions {
+    export interface ClassifierAction {
+      (recognizedClass: string | number, metadata: string): void;
+    }
+
+    export interface SegmenterAction {
+      (classifiedObjects: ClassifiedObject[]): void;
+    }
+  }
+
   export namespace Shape {
+    export enum Type {
+      Polygon = 'polygon',
+      Rectangle = 'rectangle',
+      Circle = 'circle'
+    }
+
     export interface Rectangle {
       posX: number;
       posY: number;
@@ -65,7 +85,7 @@ export namespace Watcher {
     }
 
     export interface Polygon {
-      [index: number]: number;
+      outline: { x: number, y: number };
     }
 
     export interface Circle {
@@ -73,22 +93,25 @@ export namespace Watcher {
       cy: number;
       r: number;
     }
+
+    export type AllShapes =
+      Watcher.Shape.Rectangle |
+      Watcher.Shape.Polygon |
+      Watcher.Shape.Circle;
   }
 
+  /**
+   * @public
+   */
   export interface Watcher extends ArbitraryProps {
     shape: {
       type:
         'rectangle' |
         'polygon' |
         'circle';
-      data:
-        Watcher.Shape.Rectangle |
-        Watcher.Shape.Polygon |
-        Watcher.Shape.Circle;
+      data: Watcher.Shape.AllShapes;
     };
-    type:
-      Watcher.Types.Classifier |
-      Watcher.Types.Segmenter;
+    type: Watcher.Types;
     name: string;
     params?: ArbitraryProps;
     action: Function;
@@ -261,6 +284,27 @@ export namespace PublicAPI {
   /**
    * @public
    */
+  export interface Rectangle extends Watcher.Shape.Rectangle {
+    type: Watcher.Shape.Type.Rectangle;
+  }
+
+  /**
+   * @public
+   */
+  export interface Polygon extends Watcher.Shape.Polygon {
+    type: Watcher.Shape.Type.Polygon;
+  }
+
+  /**
+   * @public
+   */
+  export interface Circle extends Watcher.Shape.Circle {
+    type: Watcher.Shape.Type.Circle;
+  }
+
+  /**
+   * @public
+   */
   export interface WatcherRegistrar {
     /**
      * Add one or more comma separated watchers
@@ -273,9 +317,7 @@ export namespace PublicAPI {
      */
     remove(...registeredWatchers: RegisteredWatcher[]): Promise<void>;
   }
-  /**
-   * @public
-   */
+
   export interface getLampixInfo { (): Promise<LampixInfo>; }
 }
 
@@ -284,19 +326,15 @@ export interface ILampixBridge {
 }
 
 export interface RegisterFn {
-  (rectArray: string): void;
+  (watchersJSON: string): void;
 }
 
 export namespace Managers {
   export namespace Watchers {
     export interface Manager {
-      list: RegisteredWatcher[];
-      actionHandler(index: number, ...data: any[]);
-    }
-
-    export interface Collection {
-      classifiers: Managers.Watchers.Manager;
-      segmenters: Managers.Watchers.Manager;
+      watchers: {
+        [watcherId: string]: RegisteredWatcher;
+      };
     }
   }
 }

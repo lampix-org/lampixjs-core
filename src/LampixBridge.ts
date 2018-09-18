@@ -1,12 +1,13 @@
 import { getLampixInfo } from './api/getLampixInfo';
-import { createRegisteredWatcher } from './api/createRegisteredWatcher';
+import { createRegisteredWatcher } from './managers/watchers/createRegisteredWatcher';
 
 import * as WatcherManager from './managers/watchers/manager';
 
 import {
   ILampixBridge,
   LampixInfo,
-  PublicAPI
+  PublicAPI,
+  Watcher
 } from './types';
 
 const internalLampixAPI = window._lampix_internal;
@@ -39,11 +40,15 @@ class LampixBridge implements ILampixBridge {
 
       // Impose async to allow the development of proper communication between
       // device API and JS SDK without prompting a major semver bump in the near future
+      // TODO: Onwards towards proper communication!
       return Promise.resolve(watchers);
     },
     remove(...registeredWatchers) {
-      console.log(registeredWatchers);
+      WatcherManager.removeWatchers(...registeredWatchers);
 
+      // Impose async to allow the development of proper communication between
+      // device API and JS SDK without prompting a major semver bump in the near future
+      // TODO: Onwards towards proper communication!
       return Promise.resolve();
     }
   };

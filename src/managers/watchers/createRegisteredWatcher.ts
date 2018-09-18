@@ -5,10 +5,10 @@ import {
   Watcher,
   RegisteredWatcher,
   RegisteredWatcherState
-} from '../types';
+} from '../../types';
 
-import { simpleId } from '../utils/simpleId';
-import * as watcherManager from '../managers/watchers/manager';
+import { simpleId } from '../../utils/simpleId';
+import * as watcherManager from './manager';
 
 /**
  * @param r - Actual data sent to Lampix device
