@@ -12,7 +12,8 @@ import { listeners } from './listeners';
 import { publisher } from '../../publisher';
 import {
   INTERNAL_CLASSIFIER_EVENT,
-  INTERNAL_SEGMENTER_EVENT
+  INTERNAL_SEGMENTER_EVENT,
+  WATCHER_REMOVED
 } from '../../events';
 
 /**
@@ -64,6 +65,10 @@ let bindEvents = () => {
 
   window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
     listeners.transformCoordinatesCb(transformedRect);
+  };
+
+  window.onWatcherRemoved = (watcherId: WatcherID) => {
+    publisher.publish(WATCHER_REMOVED, watcherId);
   };
 };
 

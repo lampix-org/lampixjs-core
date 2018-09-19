@@ -43,6 +43,7 @@ declare global {
     onLampixInfo: LampixInfoCallback;
     onGetApps: GetAppsCallback;
     onTransformCoordinates: TransformCoordsCallback;
+    onWatcherRemoved: WatcherRemovedCallback;
   }
 }
 
@@ -210,6 +211,10 @@ export interface TransformCoordsCallback {
   (transformedRect: CoordinatesToTransform[]): void;
 }
 
+export interface WatcherRemovedCallback {
+  (watcherId: WatcherID): void;
+}
+
 export interface Callbacks {
   objectClassifiedCb: ObjectClassifiedCallback;
   objectsDetectedCb: ObjectsDetectedCallback;
@@ -243,7 +248,13 @@ export interface RegisteredWatcherState {
 export interface RegisteredWatcher {
   _id: string;
   source: Watcher.Watcher;
-  remove(): void;
+  /**
+   *  Removes area from list of watched areas.
+   *  This clears all resources related to this watcher on the device.
+   *  If you aim to reuse the area shortly after disabling it,
+   *  consider using {@link RegisteredWatcher.pause | pause} instead.
+   */
+  remove(): Promise<void>;
   /**
    * Makes the area inactive indefinitely or for a specified time
    * @param time - Time (in milliseconds) area should be inactive
@@ -316,6 +327,9 @@ export namespace Managers {
     export interface Manager {
       watchers: {
         [watcherId: string]: RegisteredWatcher;
+      };
+      watcherRemovalHandlers: {
+        [watcherId: string]: Function
       };
     }
   }

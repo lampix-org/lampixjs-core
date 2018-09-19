@@ -48,10 +48,16 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: any): Registered
 
       state.active = false;
     },
-    remove() {
+    remove(): Promise<void> {
       wm.removeWatchers(registeredWatcher);
+
+      return new Promise((resolve) => {
+        wm.internals.watcherRemovalHandlers[state._id] = resolve;
+      });
     }
   };
+
+  wm.internals.watchers[state._id] = registeredWatcher;
 
   return registeredWatcher;
 };
