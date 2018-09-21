@@ -4,6 +4,7 @@
     "target": "ES5",
     "module": "commonjs",
     "lib": ["dom", "es2015", "es2017"],
+    "downlevelIteration": true,
     "sourceMap": true,
     "declaration": true,
     "allowJs": false,
