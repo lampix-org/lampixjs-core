@@ -44,6 +44,7 @@ declare global {
     onGetApps: GetAppsCallback;
     onTransformCoordinates: TransformCoordsCallback;
     onWatcherRemoved: WatcherRemovedCallback;
+    onWatcherAdded: WatcherAddedCallback;
   }
 }
 
@@ -215,6 +216,10 @@ export interface WatcherRemovedCallback {
   (watcherId: WatcherID): void;
 }
 
+export interface WatcherAddedCallback {
+  (watcherId: WatcherID): void;
+}
+
 export interface Callbacks {
   objectClassifiedCb: ObjectClassifiedCallback;
   objectsDetectedCb: ObjectsDetectedCallback;
@@ -328,9 +333,14 @@ export namespace Managers {
       watchers: {
         [watcherId: string]: RegisteredWatcher;
       };
-      watcherRemovalHandlers: {
+      pendingRemoval: {
         [watcherId: string]: Function
       };
+      pendingAddition: {
+        [watcherId: string]: Function
+      };
+      addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
+      removeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
     }
   }
 }

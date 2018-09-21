@@ -12,15 +12,19 @@ import { publisher } from '../../publisher';
 import {
   INTERNAL_CLASSIFIER_EVENT,
   INTERNAL_SEGMENTER_EVENT,
-  WATCHER_REMOVED
+  WATCHER_REMOVED,
+  WATCHER_ADDED
 } from '../../events';
 
 const internalLampixAPI = window._lampix_internal;
 
-const wm: Managers.Watchers.Manager = {
-  watchers: {},
-  watcherRemovalHandlers: {}
-};
+const wm = {} as Managers.Watchers.Manager;
+
+wm.watchers = {};
+wm.pendingAddition = {};
+wm.pendingRemoval = {};
+wm.addWatchers = addWatchersInitializer(internalLampixAPI, wm);
+wm.removeWatchers = removeWatchersInitializer(internalLampixAPI, wm);
 
 watcherActionHandler(wm, [
   INTERNAL_CLASSIFIER_EVENT,
@@ -28,21 +32,19 @@ watcherActionHandler(wm, [
 ]);
 
 publisher.subscribe(WATCHER_REMOVED, (watcherId: WatcherID) => {
-  const removalHandler = wm.watcherRemovalHandlers[watcherId];
+  const removalHandler = wm.pendingRemoval[watcherId];
 
   if (removalHandler) {
     removalHandler();
   }
-
-  delete wm.watcherRemovalHandlers[watcherId];
-  delete wm.watchers[watcherId];
 });
 
-const addWatchers = addWatchersInitializer(internalLampixAPI, wm);
-const removeWatchers = removeWatchersInitializer(internalLampixAPI, wm);
+publisher.subscribe(WATCHER_ADDED, (watcherId: WatcherID) => {
+  const additionHandler = wm.pendingAddition[watcherId];
 
-export {
-  addWatchers,
-  removeWatchers,
-  wm as internals
-};
+  if (additionHandler) {
+    additionHandler();
+  }
+});
+
+export { wm  as watcherManager };

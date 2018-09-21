@@ -4,19 +4,18 @@ import isNumber from 'lodash/isNumber';
 import {
   Watcher,
   RegisteredWatcher,
-  RegisteredWatcherState
+  RegisteredWatcherState,
+  Managers
 } from '../../types';
 
 import { simpleId } from '../../utils/simpleId';
-
-// TODO: wm should not be of type any down there
 
 /**
  * @param w - Actual data sent to Lampix device
  * @param wm - Abstracts away sending data to Lampix device
  * @internal
  */
-export const createRegisteredWatcher = (w: Watcher.Watcher, wm: any): RegisteredWatcher => {
+export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watchers.Manager): RegisteredWatcher => {
   const state: RegisteredWatcherState = Object.defineProperties({}, {
     _id: {
       value: simpleId(),
@@ -48,16 +47,8 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: any): Registered
 
       state.active = false;
     },
-    remove(): Promise<void> {
-      wm.removeWatchers(registeredWatcher);
-
-      return new Promise((resolve) => {
-        wm.internals.watcherRemovalHandlers[state._id] = resolve;
-      });
-    }
+    remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined)
   };
-
-  wm.internals.watchers[state._id] = registeredWatcher;
 
   return registeredWatcher;
 };

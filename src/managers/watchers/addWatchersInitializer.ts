@@ -1,17 +1,18 @@
 import {
   RegisteredWatcher,
-  Managers,
-  LampixInternal
+  LampixInternal,
+  Watcher,
+  Managers
 } from '../../types';
 
-import { debounceRegisterCall } from './debounceRegisterCall';
+import { createRegisteredWatcher } from './createRegisteredWatcher';
 
 const watcherData = (w: RegisteredWatcher) => ({
   id: w._id,
   ...w.source
 });
 
-const watchersAsJSON = (watchers: RegisteredWatcher[]) => JSON.stringify(watchers.map(watcherData));
+const watchersAsJSON = (rwList: RegisteredWatcher[]) => JSON.stringify(rwList.map(watcherData));
 
 /**
  * Allows watcher manager to inject device API
@@ -21,20 +22,32 @@ const watchersAsJSON = (watchers: RegisteredWatcher[]) => JSON.stringify(watcher
  * @internal
  */
 function addWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
+  function createRwPromise(rw: RegisteredWatcher) {
+    return new Promise((resolve) => {
+      wm.pendingAddition[rw._id] = resolve;
+    }).then(() => {
+      delete wm.pendingAddition[rw._id];
+      wm.watchers[rw._id] = rw;
+
+      return rw;
+    });
+  }
+
   /**
-   * Splits watchers into their respective categories
-   * Calls each category registration handler with
-   * its respective data
-   *
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
-  function addWatchers(...registeredWatchers: RegisteredWatcher[]): void {
-    registeredWatchers.forEach((rw) => { wm.watchers[rw._id] = rw; });
-    api.add_watchers(watchersAsJSON(registeredWatchers));
+  function addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]> {
+    const rwList: RegisteredWatcher[] = watchers.map((w) => createRegisteredWatcher(w, wm));
+
+    // Hehe
+    const promises: Promise<RegisteredWatcher>[] = rwList.map(createRwPromise);
+    api.add_watchers(watchersAsJSON(rwList));
+
+    return Promise.all(promises);
   }
 
-  return debounceRegisterCall(addWatchers);
+  return addWatchers;
 }
 
 export {

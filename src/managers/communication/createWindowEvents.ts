@@ -13,7 +13,8 @@ import { publisher } from '../../publisher';
 import {
   INTERNAL_CLASSIFIER_EVENT,
   INTERNAL_SEGMENTER_EVENT,
-  WATCHER_REMOVED
+  WATCHER_REMOVED,
+  WATCHER_ADDED
 } from '../../events';
 
 /**
@@ -69,6 +70,10 @@ let bindEvents = () => {
 
   window.onWatcherRemoved = (watcherId: WatcherID) => {
     publisher.publish(WATCHER_REMOVED, watcherId);
+  };
+
+  window.onWatcherAdded = (watcherId: WatcherID) => {
+    publisher.publish(WATCHER_ADDED, watcherId);
   };
 };
 
