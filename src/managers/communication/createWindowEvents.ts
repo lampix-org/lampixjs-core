@@ -14,7 +14,9 @@ import {
   INTERNAL_CLASSIFIER_EVENT,
   INTERNAL_SEGMENTER_EVENT,
   WATCHER_REMOVED,
-  WATCHER_ADDED
+  WATCHER_ADDED,
+  WATCHER_PAUSED,
+  WATCHER_RESUMED
 } from '../../events';
 
 /**
@@ -74,6 +76,14 @@ let bindEvents = () => {
 
   window.onWatcherAdded = (watcherId: WatcherID) => {
     publisher.publish(WATCHER_ADDED, watcherId);
+  };
+
+  window.onWatcherPaused = (watcherId: WatcherID) => {
+    publisher.publish(WATCHER_PAUSED, watcherId);
+  };
+
+  window.onWatcherResumed = (watcherId: WatcherID) => {
+    publisher.publish(WATCHER_RESUMED, watcherId);
   };
 };
 

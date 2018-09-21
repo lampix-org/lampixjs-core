@@ -28,7 +28,7 @@
     }
   },
   "project": {
-    "entryPointSourceFile": "lib/index.d.ts"
+    "entryPointSourceFile": "lib/LampixBridge.d.ts"
   },
   "apiJsonFile": {
     "enabled": true,

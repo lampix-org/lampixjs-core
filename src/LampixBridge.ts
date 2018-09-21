@@ -2,6 +2,14 @@ import { getLampixInfo } from './api/getLampixInfo';
 import { bindEvents } from './managers/communication/createWindowEvents';
 import { watcherManager as wm } from './managers/watchers/manager';
 
+import * as constants from './constants';
+
+import { classifier } from './api/helpers/creators/watchers/classifier';
+import { segmenter } from './api/helpers/creators/watchers/segmenter';
+import { circle } from './api/helpers/creators/shapes/circle';
+import { rectangle } from './api/helpers/creators/shapes/rectangle';
+import { polygon } from './api/helpers/creators/shapes/polygon';
+
 import {
   ILampixBridge,
   LampixInfo,
@@ -15,6 +23,14 @@ const internalLampixAPI = window._lampix_internal;
  * @public
  */
 class LampixBridge implements ILampixBridge {
+  constants = constants;
+  helpers = {
+    classifier,
+    segmenter,
+    circle,
+    rectangle,
+    polygon
+  };
   /**
    * Used to retrieve an object describing the Lampix environment
    */
@@ -41,3 +57,10 @@ class LampixBridge implements ILampixBridge {
 export {
   LampixBridge
 };
+
+export {
+  LampixInfo,
+  RegisteredWatcher,
+  PublicAPI,
+  Watcher
+} from './types';

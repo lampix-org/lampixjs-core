@@ -34,8 +34,9 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
     source: w,
     active: state.active,
     resume() {
-      // TODO: hook up with api.resume
-      state.active = true;
+      return wm.resumeWatchers([registeredWatcher]).then(() => {
+        state.active = true;
+      });
     },
     pause(time: number = 0) {
       // TODO: hook up with api.pause
@@ -45,7 +46,9 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
         setTimeout(registeredWatcher.resume, time);
       }
 
-      state.active = false;
+      return wm.pauseWatchers([registeredWatcher]).then(() => {
+        state.active = false;
+      });
     },
     remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined)
   };

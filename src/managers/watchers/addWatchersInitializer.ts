@@ -40,7 +40,6 @@ function addWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manag
   function addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]> {
     const rwList: RegisteredWatcher[] = watchers.map((w) => createRegisteredWatcher(w, wm));
 
-    // Hehe
     const promises: Promise<RegisteredWatcher>[] = rwList.map(createRwPromise);
     api.add_watchers(watchersAsJSON(rwList));
 

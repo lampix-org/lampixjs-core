@@ -23,6 +23,8 @@ export namespace InternalAPI {
 export type LampixInternal = {
   add_watchers: InternalAPI.RegisterFn;
   remove_watchers: InternalAPI.RegisterFn;
+  pause_watchers: InternalAPI.RegisterFn;
+  resume_watchers: InternalAPI.RegisterFn;
   getLampixInfo: NoOp;
   getApps: NoOp;
   resume: NoOp;
@@ -43,8 +45,10 @@ declare global {
     onLampixInfo: LampixInfoCallback;
     onGetApps: GetAppsCallback;
     onTransformCoordinates: TransformCoordsCallback;
-    onWatcherRemoved: WatcherRemovedCallback;
-    onWatcherAdded: WatcherAddedCallback;
+    onWatcherRemoved: WatcherRequestCompleteCallback;
+    onWatcherAdded: WatcherRequestCompleteCallback;
+    onWatcherPaused: WatcherRequestCompleteCallback;
+    onWatcherResumed: WatcherRequestCompleteCallback;
   }
 }
 
@@ -212,11 +216,7 @@ export interface TransformCoordsCallback {
   (transformedRect: CoordinatesToTransform[]): void;
 }
 
-export interface WatcherRemovedCallback {
-  (watcherId: WatcherID): void;
-}
-
-export interface WatcherAddedCallback {
+export interface WatcherRequestCompleteCallback {
   (watcherId: WatcherID): void;
 }
 
@@ -330,17 +330,15 @@ export interface RegisterFn {
 export namespace Managers {
   export namespace Watchers {
     export interface Manager {
-      watchers: {
-        [watcherId: string]: RegisteredWatcher;
-      };
-      pendingRemoval: {
-        [watcherId: string]: Function
-      };
-      pendingAddition: {
-        [watcherId: string]: Function
-      };
+      watchers: { [watcherId: string]: RegisteredWatcher; };
+      pendingRemoval: { [watcherId: string]: Function };
+      pendingAddition: { [watcherId: string]: Function };
+      pendingPausing: { [watcherId: string]: Function };
+      pendingResuming: { [watcherId: string]: Function };
       addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
       removeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
+      pauseWatchers(watchers: RegisteredWatcher[]): Promise<void>;
+      resumeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
     }
   }
 }

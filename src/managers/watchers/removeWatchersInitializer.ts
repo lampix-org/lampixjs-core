@@ -4,7 +4,7 @@ import {
   LampixInternal
 } from '../../types';
 
-const idsAsJSON = (registeredWatchers: RegisteredWatcher[]) => JSON.stringify(registeredWatchers.map((rw) => rw._id));
+import { idsAsJSON } from './idsAsJSON';
 
 /**
  * Allows watcher manager to inject device API
@@ -14,7 +14,7 @@ const idsAsJSON = (registeredWatchers: RegisteredWatcher[]) => JSON.stringify(re
  * @internal
  */
 function removeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
-  function confirmationPromise(rw: RegisteredWatcher) {
+  function confirmationPromise(rw: RegisteredWatcher): Promise<void> {
     return new Promise((resolve) => {
       wm.pendingRemoval[rw._id] = resolve;
     }).then(() => {
