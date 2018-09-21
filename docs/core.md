@@ -2,6 +2,13 @@
 
 # core package
 
+## Namespaces
+
+|  Namespaces | Description |
+|  --- | --- |
+|  [`PublicAPI`](./core.publicapi.md) |  |
+|  [`Watcher`](./core.watcher.md) |  |
+
 ## Classes
 
 |  Class | Description |
@@ -13,4 +20,5 @@
 |  Interface | Description |
 |  --- | --- |
 |  [`LampixInfo`](./core.lampixinfo.md) | Object providing information about the Lampix environment |
+|  [`RegisteredWatcher`](./core.registeredwatcher.md) |  |
 
