@@ -1,5 +1,6 @@
 import invariant from 'invariant';
 import isNumber from 'lodash/isNumber';
+import noop from 'lodash/noop';
 
 import {
   Watcher,
@@ -30,9 +31,9 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
   });
 
   const registeredWatcher: RegisteredWatcher = {
-    _id: state._id,
+    state,
     source: w,
-    active: state.active,
+    action: w.action || noop,
     resume() {
       return wm.resumeWatchers([registeredWatcher]).then(() => {
         state.active = true;

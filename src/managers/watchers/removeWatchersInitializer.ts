@@ -16,10 +16,10 @@ import { idsAsJSON } from './idsAsJSON';
 function removeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
   function confirmationPromise(rw: RegisteredWatcher): Promise<void> {
     return new Promise((resolve) => {
-      wm.pendingRemoval[rw._id] = resolve;
+      wm.pendingRemoval[rw.state._id] = resolve;
     }).then(() => {
-      delete wm.pendingRemoval[rw._id];
-      delete wm.watchers[rw._id];
+      delete wm.pendingRemoval[rw.state._id];
+      delete wm.watchers[rw.state._id];
     });
   }
 

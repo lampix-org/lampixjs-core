@@ -251,7 +251,10 @@ export interface RegisteredWatcherState {
  * @public
  */
 export interface RegisteredWatcher {
-  _id: string;
+  state: {
+    _id: string,
+    active: boolean
+  };
   source: Watcher.Watcher;
   /**
    *  Removes area from list of watched areas.
@@ -269,10 +272,7 @@ export interface RegisteredWatcher {
    * Makes the area active
    */
   resume(): void;
-  /**
-   * Active status of the area
-   */
-  active: boolean;
+  action: Function;
 }
 
 /**

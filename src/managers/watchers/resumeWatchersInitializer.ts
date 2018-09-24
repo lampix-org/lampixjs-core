@@ -16,9 +16,9 @@ import { idsAsJSON } from './idsAsJSON';
 function resumeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
   function createPromise(rw: RegisteredWatcher): Promise<void> {
     return new Promise((resolve) => {
-      wm.pendingResuming[rw._id] = resolve;
+      wm.pendingResuming[rw.state._id] = resolve;
     }).then(() => {
-      delete wm.pendingResuming[rw._id];
+      delete wm.pendingResuming[rw.state._id];
     });
   }
 

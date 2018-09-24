@@ -16,9 +16,9 @@ import { idsAsJSON } from './idsAsJSON';
 function pauseWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
   function createPromise(rw: RegisteredWatcher): Promise<void> {
     return new Promise((resolve) => {
-      wm.pendingPausing[rw._id] = resolve;
+      wm.pendingPausing[rw.state._id] = resolve;
     }).then(() => {
-      delete wm.pendingPausing[rw._id];
+      delete wm.pendingPausing[rw.state._id];
     });
   }
 
