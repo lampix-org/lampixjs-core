@@ -5,8 +5,8 @@ import {
 } from '../../../../types';
 
 const polygon = (outline: Coords2DPair[]): PublicAPI.Polygon => ({
-  outline,
-  type: Watcher.Shape.Type.Polygon
+  type: Watcher.Shape.Type.Polygon,
+  data: outline
 });
 
 export { polygon };

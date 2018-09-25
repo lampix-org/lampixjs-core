@@ -16,11 +16,13 @@ const rectangle = (
   width: number,
   height: number
 ): PublicAPI.Rectangle => ({
-  width,
-  height,
-  posX: x,
-  posY: y,
-  type: Watcher.Shape.Type.Rectangle
+  type: Watcher.Shape.Type.Rectangle,
+  data: {
+    width,
+    height,
+    posX: x,
+    posY: y
+  }
 });
 
 export { rectangle };

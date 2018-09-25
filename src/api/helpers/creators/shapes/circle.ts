@@ -8,10 +8,12 @@ const circle = (
   cy: number,
   r: number
 ): PublicAPI.Circle => ({
-  cx,
-  cy,
-  r,
-  type: Watcher.Shape.Type.Circle
+  type: Watcher.Shape.Type.Circle,
+  data: {
+    cx,
+    cy,
+    r
+  }
 });
 
 export { circle };

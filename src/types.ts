@@ -85,9 +85,7 @@ export namespace Watcher {
       height: number;
     }
 
-    export interface Polygon {
-      outline: Coords2DPair[];
-    }
+    export interface Polygon extends Array<Coords2DPair>{}
 
     export interface Circle {
       cx: number;
@@ -282,22 +280,25 @@ export namespace PublicAPI {
   /**
    * @public
    */
-  export interface Rectangle extends Watcher.Shape.Rectangle {
+  export interface Rectangle {
     type: Watcher.Shape.Type.Rectangle;
+    data: Watcher.Shape.Rectangle;
   }
 
   /**
    * @public
    */
-  export interface Polygon extends Watcher.Shape.Polygon {
+  export interface Polygon {
     type: Watcher.Shape.Type.Polygon;
+    data: Watcher.Shape.Polygon;
   }
 
   /**
    * @public
    */
-  export interface Circle extends Watcher.Shape.Circle {
+  export interface Circle {
     type: Watcher.Shape.Type.Circle;
+    data: Watcher.Shape.Circle;
   }
 
   /**
