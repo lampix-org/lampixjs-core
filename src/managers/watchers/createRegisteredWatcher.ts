@@ -35,6 +35,10 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
     source: w,
     action: w.action || noop,
     resume() {
+      if (state.active) {
+        return Promise.resolve();
+      }
+
       return wm.resumeWatchers([registeredWatcher]).then(() => {
         state.active = true;
       });
@@ -45,6 +49,10 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
 
       if (time > 0) {
         setTimeout(registeredWatcher.resume, time);
+      }
+
+      if (!state.active) {
+        return Promise.resolve();
       }
 
       return wm.pauseWatchers([registeredWatcher]).then(() => {
