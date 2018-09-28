@@ -59,7 +59,8 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
         state.active = false;
       });
     },
-    remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined)
+    remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined),
+    update: (shape: Watcher.Shape.AllShapes) => wm.updateWatcherShape(state._id, shape)
   };
 
   return registeredWatcher;

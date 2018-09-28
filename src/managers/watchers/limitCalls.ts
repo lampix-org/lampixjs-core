@@ -2,7 +2,7 @@ import debounce from 'lodash/debounce';
 import partialRight from 'lodash/partialRight';
 import ary from 'lodash/ary';
 
-const timeToWaitInBetweenCalls = 100;
+const timeToWaitInBetweenCalls = 25;
 const options = {
   maxWait: 1000
 };
@@ -12,7 +12,7 @@ const options = {
 // With partialRight only, TypeScript would return type Function0
 // which corresponds to arity 0 and TypeScript would signal
 // the function got 1 argument instead of 0
-const debounceRegisterCall = ary(
+const limitCalls = ary(
   partialRight(
     debounce,
     timeToWaitInBetweenCalls,
@@ -21,4 +21,4 @@ const debounceRegisterCall = ary(
   1
 );
 
-export { debounceRegisterCall };
+export { limitCalls };

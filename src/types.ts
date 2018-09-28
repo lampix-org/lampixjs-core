@@ -17,7 +17,8 @@ export interface NoOp {
 }
 
 export namespace InternalAPI {
-  export interface RegisterFn { (rectArray: string): void; }
+  export interface RegisterFn { (data: string): void; }
+  export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
 }
 
 export type LampixInternal = {
@@ -25,15 +26,8 @@ export type LampixInternal = {
   remove_watchers: InternalAPI.RegisterFn;
   pause_watchers: InternalAPI.RegisterFn;
   resume_watchers: InternalAPI.RegisterFn;
+  update_watchers_shape: InternalAPI.UpdateShape;
   getLampixInfo: NoOp;
-  getApps: NoOp;
-  resume: NoOp;
-  pause: NoOp;
-  deactivateDepthClassifier: NoOp;
-  isDepthClassifierActivated: boolean;
-  activateDepthClassifier: (opts: Opts<string>) => void;
-  switchToApp: (appName: string) => void;
-  transformCoordinates: (toTransform: string) => void;
 };
 
 declare global {
@@ -270,6 +264,7 @@ export interface RegisteredWatcher {
    * Makes the area active
    */
   resume(): void;
+  update(shape: Watcher.Shape.AllShapes): Promise<void>;
   action: Function;
 }
 
@@ -330,16 +325,22 @@ export interface RegisterFn {
 
 export namespace Managers {
   export namespace Watchers {
+    export interface WatcherPendingMap {
+      [watcherId: string]: Function;
+    }
+
     export interface Manager {
       watchers: { [watcherId: string]: RegisteredWatcher; };
-      pendingRemoval: { [watcherId: string]: Function };
-      pendingAddition: { [watcherId: string]: Function };
-      pendingPausing: { [watcherId: string]: Function };
-      pendingResuming: { [watcherId: string]: Function };
+      pendingRemoval: WatcherPendingMap;
+      pendingAddition: WatcherPendingMap;
+      pendingPausing: WatcherPendingMap;
+      pendingResuming: WatcherPendingMap;
+      pendingUpdate: WatcherPendingMap;
       addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
       removeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
       pauseWatchers(watchers: RegisteredWatcher[]): Promise<void>;
       resumeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
+      updateWatcherShape(watcherId: WatcherID, shape: Watcher.Shape.AllShapes): Promise<void>;
     }
   }
 }
