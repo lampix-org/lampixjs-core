@@ -2,7 +2,7 @@ import { simpleId } from './utils/simpleId';
 
 const internalPrefix = 'lx-internal';
 const publicPrefix = 'lx';
-const internalEvent = (name: string) => `${internalPrefix}/${name}-${simpleId}`;
+const internalEvent = (name: string) => `${internalPrefix}/${name}-${simpleId()}`;
 const publicEvent = (name: string) => `${publicPrefix}/${name}`;
 
 const INTERNAL_CLASSIFIER_EVENT = internalEvent('object-classified');
