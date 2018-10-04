@@ -16,7 +16,8 @@ import {
   WATCHER_REMOVED,
   WATCHER_ADDED,
   WATCHER_PAUSED,
-  WATCHER_RESUMED
+  WATCHER_RESUMED,
+  WATCHER_UPDATED
 } from '../../events';
 
 /**
@@ -84,6 +85,10 @@ let bindEvents = () => {
 
   window.onWatcherResumed = (watcherId: WatcherID) => {
     publisher.publish(WATCHER_RESUMED, watcherId);
+  };
+
+  window.onWatcherUpdated = (watcherId: WatcherID) => {
+    publisher.publish(WATCHER_UPDATED, watcherId);
   };
 };
 

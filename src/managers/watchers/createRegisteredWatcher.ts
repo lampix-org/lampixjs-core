@@ -60,7 +60,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
       });
     },
     remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined),
-    update: (shape: Watcher.Shape.AllShapes) => wm.updateWatcherShape(state._id, shape)
+    updateShape: (shape: Watcher.Shape.AllShapes) => wm.updateWatcherShape(state._id, shape)
   };
 
   return registeredWatcher;

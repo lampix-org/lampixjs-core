@@ -26,7 +26,7 @@ function updateWatcherShapeInitializer(api: LampixInternal, wm: Managers.Watcher
    * @internal
    */
   function updateWatcherShape(watcherId: WatcherID, shape: Watcher.Shape.AllShapes): Promise<void> {
-    api.update_watchers_shape(watcherId, JSON.stringify(shape));
+    api.update_watcher_shape(watcherId, JSON.stringify(shape));
 
     return createPromise(watcherId);
   }

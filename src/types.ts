@@ -26,7 +26,7 @@ export type LampixInternal = {
   remove_watchers: InternalAPI.RegisterFn;
   pause_watchers: InternalAPI.RegisterFn;
   resume_watchers: InternalAPI.RegisterFn;
-  update_watchers_shape: InternalAPI.UpdateShape;
+  update_watcher_shape: InternalAPI.UpdateShape;
   getLampixInfo: NoOp;
 };
 
@@ -43,6 +43,7 @@ declare global {
     onWatcherAdded: WatcherRequestCompleteCallback;
     onWatcherPaused: WatcherRequestCompleteCallback;
     onWatcherResumed: WatcherRequestCompleteCallback;
+    onWatcherUpdated: WatcherRequestCompleteCallback;
   }
 }
 
@@ -264,7 +265,7 @@ export interface RegisteredWatcher {
    * Makes the area active
    */
   resume(): void;
-  update(shape: Watcher.Shape.AllShapes): Promise<void>;
+  updateShape(shape: Watcher.Shape.AllShapes): Promise<void>;
   action: Function;
 }
 
