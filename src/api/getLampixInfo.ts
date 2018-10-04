@@ -15,7 +15,7 @@ import {
  */
 const getLampixInfo = (internalLampixAPI: LampixInternal, resolve: LampixInfoCallback): void => {
   listeners.lampixInfoCb = resolve;
-  internalLampixAPI.getLampixInfo();
+  internalLampixAPI.get_lampix_info();
 };
 
 export { getLampixInfo };

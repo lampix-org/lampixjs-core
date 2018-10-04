@@ -27,7 +27,7 @@ export type LampixInternal = {
   pause_watchers: InternalAPI.RegisterFn;
   resume_watchers: InternalAPI.RegisterFn;
   update_watcher_shape: InternalAPI.UpdateShape;
-  getLampixInfo: NoOp;
+  get_lampix_info: NoOp;
 };
 
 declare global {
@@ -36,14 +36,14 @@ declare global {
     onObjectClassified: ObjectClassifiedCallback;
     onObjectsDetected: ObjectsDetectedCallback;
     onObjectsLocated: ObjectsLocatedCallback;
-    onLampixInfo: LampixInfoCallback;
-    onGetApps: GetAppsCallback;
-    onTransformCoordinates: TransformCoordsCallback;
     onWatcherRemoved: WatcherRequestCompleteCallback;
     onWatcherAdded: WatcherRequestCompleteCallback;
     onWatcherPaused: WatcherRequestCompleteCallback;
     onWatcherResumed: WatcherRequestCompleteCallback;
     onWatcherUpdated: WatcherRequestCompleteCallback;
+    onLampixInfo: LampixInfoCallback;
+    onGetApps: GetAppsCallback;
+    onTransformCoordinates: TransformCoordsCallback;
   }
 }
 
