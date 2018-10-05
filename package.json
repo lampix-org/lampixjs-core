@@ -17,7 +17,7 @@
     "access": "public"
   },
   "scripts": {
-    "docs": "api-documenter markdown --input-folder lib --output-folder docs",
+    "generate-api-ref": "api-documenter markdown --input-folder lib --output-folder api-reference",
     "extract-api": "api-extractor run",
     "build": "shx rm -rf ./lib && webpack",
     "build:docker:unix": "docker run -v $(pwd):/usr/lampixjs-sdk -w /usr/lampixjs-sdk -u $(id -u):$(id -g) -it --rm --name lampixjs-lib node:8 npm run build",
