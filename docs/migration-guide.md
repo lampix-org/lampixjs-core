@@ -3,10 +3,10 @@
 ## 0.x.x to 1.x.x
 
 - [Watcher data structure](#watcher-data-structure)
-- [Watchers can be added / removed on demand](#watcher-add-remove)
-- [Requests to Lampix return a Promise each](#promises)
-- [Registered watcher interface](#registered-watcher-interface)
-- [Watcher index no longer necessary](#no-rect-index)
+- [Watcher add and remove](#watcher-add-and-remove)
+- [Promise based API](#promise-based-api)
+- [Registered watcher object](#registered-watcher-object)
+- [Watcher index no longer necessary](#watcher-index-no-longer-necessary)
 
 ## Watcher data structure
 
@@ -57,7 +57,7 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 - `params` - provides further information that may be required based on the `name` prop
 - `action` - function triggered by Lampix when something happens inside the watcher
 
-## Watchers can be added / removed on demand
+## Watcher add and remove
 
 ### v0.x.x
 ```
@@ -112,7 +112,7 @@ const w2 = {
 lampix.watchers.add(w1, w2);
 ```
 
-## Requests to Lampix return a Promise each
+## Promise based API
 
 **v0.x.x** doesn't notify when an action has completed on the device.  
 **v1.x.x** fixes this issue via Promises.
@@ -125,7 +125,7 @@ lampix.getLampixInfo((data) => console.log('Lampix info: ', data));
 // ...
 ```
 
-## Registered watcher
+## Registered watcher object
 
 `lampix.watchers.add(w1, w2, ..., wN)` returns a Promise that resolves with *N* objects through which the newly added watchers can be managed. 
 
