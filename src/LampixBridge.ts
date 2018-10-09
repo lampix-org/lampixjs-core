@@ -1,4 +1,5 @@
 import { getLampixInfo } from './api/getLampixInfo';
+import { switchToApp } from './api/switchToApp';
 import { bindEvents } from './managers/communication/createWindowEvents';
 import { watcherManager as wm } from './managers/watchers/manager';
 
@@ -34,11 +35,11 @@ class LampixBridge implements ILampixBridge {
   /**
    * Used to retrieve an object describing the Lampix environment
    */
-  public getLampixInfo(): Promise<LampixInfo> {
-    return new Promise((resolve) => {
-      getLampixInfo(internalLampixAPI, resolve);
-    });
-  }
+  public getLampixInfo: () => Promise<LampixInfo> = getLampixInfo(internalLampixAPI);
+  /**
+   * Allows changing from one app to the specified app
+   */
+  public switchToApp: (name: string) => Promise<void> = switchToApp(internalLampixAPI);
 
   /**
    * Watcher manager

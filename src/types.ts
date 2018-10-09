@@ -19,6 +19,7 @@ export interface NoOp {
 export namespace InternalAPI {
   export interface RegisterFn { (data: string): void; }
   export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
+  export interface SwitchToApp { (appName: string): void; }
 }
 
 export type LampixInternal = {
@@ -28,6 +29,7 @@ export type LampixInternal = {
   resume_watchers: InternalAPI.RegisterFn;
   update_watcher_shape: InternalAPI.UpdateShape;
   get_lampix_info: NoOp;
+  switch_to_app: InternalAPI.SwitchToApp;
 };
 
 declare global {
