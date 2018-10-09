@@ -45,8 +45,12 @@ Passing extra information to Lampix can only be done through the `.classifier` p
   // they will differ based on the name property
   // neural_network_name is a prop used with NeuralNetworkClassifier
   params: {},
-  // Action to be triggered when something happens inside a watcher
-  action: Function
+  // Action to be triggered when something is classified inside the watcher
+  onClassification: Function,
+  // Optional
+  // Only for type: segmenter
+  // Called before onClassification with contour information for the located objects
+  onLocation: Function
 }
 ```
 
@@ -56,7 +60,8 @@ Passing extra information to Lampix can only be done through the `.classifier` p
   - `segmenter` - used when the location of the object is relevant
 - `name` - specifies the logic to run for the watcher ([examples](#watcher-names))
 - `params` - provides further information that may be required based on the `name` prop
-- `action` - function triggered by Lampix when something happens inside the watcher
+- `onClassification` - function triggered by Lampix when something is classified inside the watcher
+- `onLocation` - optional function triggered by Lampix watchers before `onClassification` (only for `type: 'segmenter'`)
 
 ## Watcher names for commonly used classifier strings
 
@@ -109,7 +114,7 @@ const watchers = [
 ];
 
 lampix.registerSimpleClassifier(watchers, (index, recognizedClass) => {
-  console.log(`Movement in watcher ${index}, class: ${recognizedClass}`);
+  console.log(`Watcher ${index}, class: ${recognizedClass}`);
 });
 ```
 
@@ -124,17 +129,18 @@ const w1 = {
   params: {
     neural_network_name: 'fin_all_small'
   },
-  action: (recognizedClass) => console.log(`Watcher 1 movement, class: ${recognizedClass}`)
+  onClassification: (recognizedClass) => console.log(`Watcher 1, class: ${recognizedClass}`)
 };
 
 const w2 = {
-  type: 'classifier',
-  name: 'NeuralNetworkClassifier',
-  shape: lampix.helpers.rectangle(200, 200, 50, 50),
+  type: 'segmenter',
+  name: 'NeuralNetworkSegmenter',
+  shape: lampix.helpers.rectangle(200, 200, 300, 300),
   params: {
-    neural_network_name: 'fin_all_small'
+    neural_network_name: 'fruits'
   },
-  action: (recognizedClass) => console.log(`Watcher 2 movement, class: ${recognizedClass}`)
+  onClassification: (detectedObjects) => detectedObjects.forEach((do) => console.log(do.classTag, do.outline)),
+  onLocation: (locatedObjects) => locatedObjects.forEach((lo) => console.log(lo.outline))
 };
 
 lampix.watchers.add(w1, w2);
@@ -174,23 +180,24 @@ lampix.watchers.add(w1, w2).then((rw1, rw2) => {
 
 **v0.x.x** provides the index of the watcher where movement is detected along with other relevant information (classes, outlines, metadata), but it is up to the user to always remember what watcher corresponds to a particular index in order to perform custom actions per watcher.
 
-**v1.x.x** fixes this issue by allowing the user to add an `.action` property on watchers either on the source data for the watcher or on the registered watcher itself. 
+**v1.x.x** fixes this issue by allowing the user to add an `.onClassification` property on watchers either on the source data for the watcher or on the registered watcher itself. 
 
 ```
 // ===== v1.x.x =====
 
 const w1 = {
   ...,
-  action: () => console.log('Action specific to w1');
+  onClassification: () => console.log('Action specific to w1');
 }
 
 const w2 = {
   ...
-  // This one gets no action prop
+  // This one gets no onClassification prop
 };
 
 lampix.watchers.add(w1, w2).then((rw1, rw2) => {
-  // Setting the action for the second watcher at a later time
-  rw2.action = () => console.log('Action specific to w2');
+  // Setting onClassification handler for the second watcher at a later time
+  // Same works for onLocation
+  rw2.onClassification = () => console.log('Action specific to w2');
 });
 ```
