@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   context: __dirname,
   devtool: 'source-map',
-  mode: 'development',
+  mode: 'production',
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
     path: path.resolve(__dirname, 'lib'),
