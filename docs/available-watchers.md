@@ -2,6 +2,7 @@
 
 - [NeuralNetworkClassifier](#neuralnetworkclassifier)
 - [NeuralNetworkSegmenter](#neuralnetworksegmenter)
+- [DepthClassifier](#depthclassifier)
 
 ***
 
@@ -10,7 +11,9 @@
 *Uses a convolutional neural network to classify objects in the area watched by this classifier.  
 The area is defined by the dimension of the neural network and the center of the bounding box of the contour registered from JS.*
 
-**NeuralNetworkClassifier** requires the parameter `neural_network_name` to be specified: 
+**NeuralNetworkClassifier** requires the parameter `neural_network_name` to be specified.
+
+### Usage:
 
 ```
 {
@@ -30,7 +33,9 @@ Like [NeuralNetworkClassifier](#neuralnetworkclassifier), NeuralNetworkSegmenter
 
 NeuralNetworkSegmenter can detect (i.e locate and classify) multiple objects at a time in the specified watcher shape. 
 
-**NeuralNetworkSegmenter** requires the parameter `neural_network_name` to be specified:
+**NeuralNetworkSegmenter** requires the parameter `neural_network_name` to be specified.
+
+### Usage:
 
 ```
 {
@@ -39,6 +44,21 @@ NeuralNetworkSegmenter can detect (i.e locate and classify) multiple objects at 
   params: {
     neural_network_name: <some_NN_name>
   }
+}
+```
+
+***
+
+## DepthClassifier
+
+Detects any object on or above the surface defined by the watcher's shape, returning contour information.
+
+### Usage:
+
+```
+{
+  type: 'segmenter',
+  name: 'DepthClassifier'
 }
 ```
 
