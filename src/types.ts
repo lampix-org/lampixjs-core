@@ -58,6 +58,12 @@ export namespace Watcher {
     Segmenter = 'segmenter'
   }
 
+  export enum Names {
+    NNClassifier = 'NeuralNetworkClassifier',
+    NNSegmenter = 'NeuralNetworkSegmenter',
+    DepthClassifier = 'DepthClassifier'
+  }
+
   export namespace Actions {
     export interface ClassifierAction {
       (recognizedClass: string | number, metadata: string): void;
@@ -353,4 +359,8 @@ export namespace Managers {
       updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void>;
     }
   }
+}
+
+export enum StandardNeuralNetworks {
+  Fingers = 'fin_all_small'
 }

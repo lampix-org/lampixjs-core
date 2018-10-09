@@ -5,11 +5,15 @@ import { watcherManager as wm } from './managers/watchers/manager';
 
 import * as constants from './constants';
 
+// Helpers
 import { classifier } from './api/helpers/creators/watchers/classifier';
 import { segmenter } from './api/helpers/creators/watchers/segmenter';
 import { circle } from './api/helpers/creators/shapes/circle';
 import { rectangle } from './api/helpers/creators/shapes/rectangle';
 import { polygon } from './api/helpers/creators/shapes/polygon';
+
+// Presets
+import { button } from './api/presets/button';
 
 import {
   ILampixBridge,
@@ -31,6 +35,9 @@ class LampixBridge implements ILampixBridge {
     circle,
     rectangle,
     polygon
+  };
+  presets = {
+    button
   };
   /**
    * Used to retrieve an object describing the Lampix environment
