@@ -265,7 +265,7 @@ export interface RegisteredWatcher {
    * Makes the area active
    */
   resume(): void;
-  updateShape(shape: Watcher.Shape.AllShapes): Promise<void>;
+  updateShape(shape: PublicAPI.Shape): Promise<void>;
   action: Function;
 }
 
@@ -295,6 +295,11 @@ export namespace PublicAPI {
   export interface Circle {
     type: Watcher.Shape.Type.Circle;
     data: Watcher.Shape.Circle;
+  }
+
+  export interface Shape {
+    type: Watcher.Shape.Type;
+    data: Watcher.Shape.AllShapes;
   }
 
   /**
@@ -341,7 +346,7 @@ export namespace Managers {
       removeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
       pauseWatchers(watchers: RegisteredWatcher[]): Promise<void>;
       resumeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
-      updateWatcherShape(watcherId: WatcherID, shape: Watcher.Shape.AllShapes): Promise<void>;
+      updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void>;
     }
   }
 }
