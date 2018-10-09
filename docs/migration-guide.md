@@ -3,6 +3,7 @@
 ## 0.x.x to 1.x.x
 
 - [Watcher data structure](#watcher-data-structure)
+- [Watcher names for commonly used classifier strings](#watcher-names-for-commonly-used-classifier-strings)
 - [Watcher add and remove](#watcher-add-and-remove)
 - [Promise based API](#promise-based-api)
 - [Registered watcher object](#registered-watcher-object)
@@ -53,9 +54,36 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 - `type`
   - `classifier` - used when the location of the object is irrelevant (i.e buttons, toggles)
   - `segmenter` - used when the location of the object is relevant
-- `name` - specifies the logic to run for the watcher
+- `name` - specifies the logic to run for the watcher ([examples](#watcher-names))
 - `params` - provides further information that may be required based on the `name` prop
 - `action` - function triggered by Lampix when something happens inside the watcher
+
+## Watcher names for commonly used classifier strings
+
+### cls_loc_fin_all_small
+
+- used as a simple classifier in **v0.x.x** => `type: 'classifier'`
+- uses a neural network => `name: 'NeuralNetworkClassifier'`
+- need to specify neural network name => `params: { neural_network_name: 'fin_all_small' }`
+
+```
+{
+  type: 'classifier',
+  name: 'NeuralNetworkClassifier',
+  params: {
+    neural_network_name: 'fin_all_small'
+  },
+  ...
+}
+```
+
+### segm_*
+
+This applies to former *position classifiers* (currently referred to as *segmenters*) whose string started with `segm_`, such as `segm_cls_loc_nes`, `segm_cls_loc_cars`, `segm_cls_loc_bar` etc.
+
+- used as a position classifier in **v0.x.x** => `type: 'segmenter'`
+- uses a neural network => `name: 'NeuralNetworkSegmenter'`
+- need to specify neural network name => `params: { neural_network_name: '*' }`, where * represents the strings after `segm_cls_loc`, `segm_cls_` or `segm_`
 
 ## Watcher add and remove
 
