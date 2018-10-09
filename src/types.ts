@@ -28,8 +28,9 @@ export type LampixInternal = {
   pause_watchers: InternalAPI.RegisterFn;
   resume_watchers: InternalAPI.RegisterFn;
   update_watcher_shape: InternalAPI.UpdateShape;
-  get_lampix_info: NoOp;
   switch_to_app: InternalAPI.SwitchToApp;
+  get_lampix_info: NoOp;
+  get_apps: NoOp;
 };
 
 declare global {

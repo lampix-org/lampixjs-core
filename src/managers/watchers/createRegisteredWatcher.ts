@@ -46,7 +46,6 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
       });
     },
     pause(time: number = 0) {
-      // TODO: hook up with api.pause
       invariant(isNumber(time) && time >= 0, 'pause() takes an optional positive number as milliseconds');
 
       if (time > 0) {
