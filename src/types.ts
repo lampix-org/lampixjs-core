@@ -108,7 +108,8 @@ export namespace Watcher {
     type: Watcher.Types;
     name: string;
     params?: ArbitraryProps;
-    action: Function;
+    onClassification: Function;
+    onLocation?: Function;
   }
 }
 
@@ -266,7 +267,8 @@ export interface RegisteredWatcher {
    */
   resume(): void;
   updateShape(shape: PublicAPI.Shape): Promise<void>;
-  action: Function;
+  onClassification: Function;
+  onLocation?: Function;
 }
 
 /**

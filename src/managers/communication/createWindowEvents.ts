@@ -17,7 +17,8 @@ import {
   WATCHER_ADDED,
   WATCHER_PAUSED,
   WATCHER_RESUMED,
-  WATCHER_UPDATED
+  WATCHER_UPDATED,
+  OBJECTS_LOCATED
 } from '../../events';
 
 /**
@@ -45,18 +46,14 @@ let bindEvents = () => {
     watcherId: WatcherID,
     classifiedObjects: ClassifiedObject[]
   ) => {
-    publisher.publish(
-      INTERNAL_SEGMENTER_EVENT,
-      watcherId,
-      classifiedObjects
-    );
+    publisher.publish(INTERNAL_SEGMENTER_EVENT, watcherId, classifiedObjects);
   };
 
   window.onObjectsLocated = (
     watcherId,
-    detectedObjects
+    locatedObjects
   ) => {
-    listeners.objectsLocatedCb(watcherId, detectedObjects);
+    publisher.publish(OBJECTS_LOCATED, watcherId, locatedObjects);
   };
 
   window.onLampixInfo = (lampixInfo: LampixInfo) => {

@@ -34,7 +34,8 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
   const registeredWatcher: RegisteredWatcher = {
     state,
     source: w,
-    action: w.action || noop,
+    onClassification: w.onClassification || noop,
+    onLocation: w.onLocation,
     resume() {
       if (state.active) {
         return Promise.resolve();

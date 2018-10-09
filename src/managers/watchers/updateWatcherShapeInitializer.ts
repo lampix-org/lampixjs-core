@@ -2,7 +2,7 @@ import {
   WatcherID,
   LampixInternal,
   Managers,
-  Watcher
+  PublicAPI
 } from '../../types';
 
 /**
@@ -25,7 +25,7 @@ function updateWatcherShapeInitializer(api: LampixInternal, wm: Managers.Watcher
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
-  function updateWatcherShape(watcherId: WatcherID, shape: Watcher.Shape.AllShapes): Promise<void> {
+  function updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void> {
     api.update_watcher_shape(watcherId, JSON.stringify(shape));
 
     return createPromise(watcherId);

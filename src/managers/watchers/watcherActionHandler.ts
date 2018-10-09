@@ -12,25 +12,29 @@ import { publisher } from '../../publisher';
  * Used for private classifier and segmenter event handling
  *
  * @param watchers - Contains list and actionHandler for the specific list
- * @param internalEvents - Specifies internal event to handle action delegation for
+ * @param internalEvents - Specifies internal event to handle action delegation
  *
  * @internal
  */
 function watcherActionHandler(
+  action: 'onClassification' | 'onLocation',
   wm: Managers.Watchers.Manager,
-  internalEvents: string[]
+  ...internalEvents: string[]
 ) {
-  function watcherActionHandler(watcherId: string, ...data: any[]) {
+  function handler(watcherId: string, ...data: any[]) {
     const rw: RegisteredWatcher = wm.watchers[watcherId];
 
-    // TODO: Handle case where watcher doesn't exist
-    if (rw) {
-      rw.action.apply(rw.action, data);
+    if (!rw) {
+      // TODO: Handle case where watcher doesn't exist
+      // Use specific error
+      throw new Error(`RegisteredWatcher ${watcherId} does not exist.`);
     }
+
+    rw[action].apply(rw[action], data);
   }
 
   internalEvents.forEach((event) => {
-    publisher.subscribe(event, watcherActionHandler);
+    publisher.subscribe(event, handler);
   });
 }
 

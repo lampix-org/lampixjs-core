@@ -15,6 +15,7 @@ import { publisher } from '../../publisher';
 import {
   INTERNAL_CLASSIFIER_EVENT,
   INTERNAL_SEGMENTER_EVENT,
+  OBJECTS_LOCATED,
   WATCHER_REMOVED,
   WATCHER_ADDED,
   WATCHER_PAUSED,
@@ -37,10 +38,8 @@ wm.pauseWatchers = pauseWatchersInitializer(internalLampixAPI, wm);
 wm.resumeWatchers = resumeWatchersInitializer(internalLampixAPI, wm);
 wm.updateWatcherShape = updateWatcherShapeInitializer(internalLampixAPI, wm);
 
-watcherActionHandler(wm, [
-  INTERNAL_CLASSIFIER_EVENT,
-  INTERNAL_SEGMENTER_EVENT
-]);
+watcherActionHandler('onClassification', wm, INTERNAL_CLASSIFIER_EVENT, INTERNAL_SEGMENTER_EVENT);
+watcherActionHandler('onLocation', wm, OBJECTS_LOCATED);
 
 [
   { event: WATCHER_REMOVED, map: wm.pendingRemoval },
