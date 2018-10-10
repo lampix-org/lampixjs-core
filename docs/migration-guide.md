@@ -154,7 +154,7 @@ lampix.watchers.add(w1, w2);
 ```
 lampix.watchers.add(w1, w2).then(() => console.log('Watchers ready to be used'));
 lampix.watchers.remove(registeredWatcher1, registeredWatcher2).then(() => console.log('Watchers removed'));
-lampix.getLampixInfo((data) => console.log('Lampix info: ', data));
+lampix.getLampixInfo().then((data) => console.log('Lampix info: ', data));
 
 // ...
 ```
