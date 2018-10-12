@@ -64,7 +64,9 @@ class LampixBridge implements ILampixBridge {
    */
   public watchers: PublicAPI.WatcherRegistrar = {
     add: (...watcherList) => wm.addWatchers(watcherList),
-    remove: (...registeredWatchers) => wm.removeWatchers(registeredWatchers)
+    remove: (...registeredWatchers) => wm.removeWatchers(registeredWatchers),
+    pauseAll: () => wm.pauseAllWatchers(),
+    resumeAll: () => wm.resumeAllWatchers()
   };
 }
 

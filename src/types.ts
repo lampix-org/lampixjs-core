@@ -327,6 +327,8 @@ export namespace PublicAPI {
      * @param registeredWatchers - List of {@link RegisteredWatcher} objects to remove
      */
     remove(...registeredWatchers: RegisteredWatcher[]): Promise<void>;
+    pauseAll(): Promise<void>;
+    resumeAll(): Promise<void>;
   }
 
   export interface getLampixInfo { (): Promise<LampixInfo>; }
@@ -356,7 +358,9 @@ export namespace Managers {
       addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]>;
       removeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
       pauseWatchers(watchers: RegisteredWatcher[]): Promise<void>;
+      pauseAllWatchers(): Promise<void>;
       resumeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
+      resumeAllWatchers(): Promise<void>;
       updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void>;
     }
   }

@@ -38,6 +38,10 @@ wm.pauseWatchers = pauseWatchersInitializer(internalLampixAPI, wm);
 wm.resumeWatchers = resumeWatchersInitializer(internalLampixAPI, wm);
 wm.updateWatcherShape = updateWatcherShapeInitializer(internalLampixAPI, wm);
 
+const getWatchers = () => Object.keys(wm.watchers).map((id) => wm.watchers[id]);
+wm.pauseAllWatchers = () => wm.pauseWatchers(getWatchers());
+wm.resumeAllWatchers = () => wm.resumeWatchers(getWatchers());
+
 watcherActionHandler('onClassification', wm, INTERNAL_CLASSIFIER_EVENT, INTERNAL_SEGMENTER_EVENT);
 watcherActionHandler('onLocation', wm, OBJECTS_LOCATED);
 
