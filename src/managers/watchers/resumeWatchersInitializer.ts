@@ -18,6 +18,7 @@ function resumeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Ma
     return new Promise((resolve) => {
       wm.pendingResuming[rw.state._id] = resolve;
     }).then(() => {
+      rw.state.active = true;
       delete wm.pendingResuming[rw.state._id];
     });
   }

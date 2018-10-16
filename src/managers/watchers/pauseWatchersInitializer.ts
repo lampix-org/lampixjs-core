@@ -18,6 +18,7 @@ function pauseWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Man
     return new Promise((resolve) => {
       wm.pendingPausing[rw.state._id] = resolve;
     }).then(() => {
+      rw.state.active = false;
       delete wm.pendingPausing[rw.state._id];
     });
   }
