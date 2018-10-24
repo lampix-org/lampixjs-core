@@ -13,9 +13,8 @@ import { watcherActionHandler } from './watcherActionHandler';
 import { publisher } from '../../publisher';
 
 import {
-  INTERNAL_CLASSIFIER_EVENT,
-  INTERNAL_SEGMENTER_EVENT,
-  OBJECTS_LOCATED,
+  CLASSIFICATION_EVENT,
+  LOCATION_EVENT,
   WATCHER_REMOVED,
   WATCHER_ADDED,
   WATCHER_PAUSED,
@@ -42,8 +41,8 @@ const getWatchers = () => Object.keys(wm.watchers).map((id) => wm.watchers[id]);
 wm.pauseAllWatchers = () => wm.pauseWatchers(getWatchers());
 wm.resumeAllWatchers = () => wm.resumeWatchers(getWatchers());
 
-watcherActionHandler('onClassification', wm, INTERNAL_CLASSIFIER_EVENT, INTERNAL_SEGMENTER_EVENT);
-watcherActionHandler('onLocation', wm, OBJECTS_LOCATED);
+watcherActionHandler('onClassification', wm, CLASSIFICATION_EVENT);
+watcherActionHandler('onLocation', wm, LOCATION_EVENT);
 
 [
   { event: WATCHER_REMOVED, map: wm.pendingRemoval },

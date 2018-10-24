@@ -41,9 +41,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
         return Promise.resolve();
       }
 
-      return wm.resumeWatchers([registeredWatcher]).then(() => {
-        state.active = true;
-      });
+      return wm.resumeWatchers([registeredWatcher]);
     },
     pause(time: number = 0) {
       invariant(isNumber(time) && time >= 0, 'pause() takes an optional positive number as milliseconds');
@@ -56,9 +54,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
         return Promise.resolve();
       }
 
-      return wm.pauseWatchers([registeredWatcher]).then(() => {
-        state.active = false;
-      });
+      return wm.pauseWatchers([registeredWatcher]);
     },
     remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined),
     updateShape: (shape: PublicAPI.Shape) => wm.updateWatcherShape(state._id, shape).then(() => {
