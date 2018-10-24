@@ -11,14 +11,13 @@ import {
 import { listeners } from './listeners';
 import { publisher } from '../../publisher';
 import {
-  INTERNAL_CLASSIFIER_EVENT,
-  INTERNAL_SEGMENTER_EVENT,
+  CLASSIFICATION_EVENT,
+  LOCATION_EVENT,
   WATCHER_REMOVED,
   WATCHER_ADDED,
   WATCHER_PAUSED,
   WATCHER_RESUMED,
-  WATCHER_UPDATED,
-  OBJECTS_LOCATED
+  WATCHER_UPDATED
 } from '../../events';
 
 /**
@@ -29,31 +28,18 @@ let bindEvents = () => {
   // Prevent multiple calls
   bindEvents = noop;
 
-  window.onObjectClassified = (
-    watcherId: WatcherID,
-    recognizedClass: string,
-    metadata: string
-  ) => {
-    publisher.publish(
-      INTERNAL_CLASSIFIER_EVENT,
-      watcherId,
-      recognizedClass,
-      metadata
-    );
-  };
-
-  window.onObjectsDetected = (
+  window.onObjectsClassified = (
     watcherId: WatcherID,
     classifiedObjects: ClassifiedObject[]
   ) => {
-    publisher.publish(INTERNAL_SEGMENTER_EVENT, watcherId, classifiedObjects);
+    publisher.publish(CLASSIFICATION_EVENT, watcherId, classifiedObjects);
   };
 
   window.onObjectsLocated = (
     watcherId,
     locatedObjects
   ) => {
-    publisher.publish(OBJECTS_LOCATED, watcherId, locatedObjects);
+    publisher.publish(LOCATION_EVENT, watcherId, locatedObjects);
   };
 
   window.onLampixInfo = (lampixInfo: LampixInfo) => {

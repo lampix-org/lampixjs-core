@@ -36,8 +36,7 @@ export type LampixInternal = {
 declare global {
   interface Window {
     _lampix_internal: LampixInternal;
-    onObjectClassified: ObjectClassifiedCallback;
-    onObjectsDetected: ObjectsDetectedCallback;
+    onObjectsClassified: ObjectsClassifiedCallback;
     onObjectsLocated: ObjectsLocatedCallback;
     onWatcherRemoved: WatcherRequestCompleteCallback;
     onWatcherAdded: WatcherRequestCompleteCallback;
@@ -54,32 +53,20 @@ declare global {
  * @public
  */
 export namespace Watcher {
-  export enum Types {
-    Classifier = 'classifier',
-    Segmenter = 'segmenter'
-  }
-
   export enum Names {
     NNClassifier = 'NeuralNetworkClassifier',
     NNSegmenter = 'NeuralNetworkSegmenter',
     DepthClassifier = 'DepthClassifier'
   }
 
-  export namespace Actions {
-    export interface ClassifierAction {
-      (recognizedClass: string | number, metadata: string): void;
-    }
-
-    export interface SegmenterAction {
-      (classifiedObjects: ClassifiedObject[]): void;
-    }
+  export interface onClassificationCallback {
+    (classifiedObjects: ClassifiedObject[]): void;
   }
 
   export namespace Shape {
     export enum Type {
       Polygon = 'polygon',
-      Rectangle = 'rectangle',
-      Circle = 'circle'
+      Rectangle = 'rectangle'
     }
 
     export interface Rectangle {
@@ -91,16 +78,9 @@ export namespace Watcher {
 
     export interface Polygon extends Array<Coords2DPair>{}
 
-    export interface Circle {
-      cx: number;
-      cy: number;
-      r: number;
-    }
-
     export type AllShapes =
       Watcher.Shape.Rectangle |
-      Watcher.Shape.Polygon |
-      Watcher.Shape.Circle;
+      Watcher.Shape.Polygon;
   }
 
   /**
@@ -108,13 +88,9 @@ export namespace Watcher {
    */
   export interface Watcher extends ArbitraryProps {
     shape: {
-      type:
-        'rectangle' |
-        'polygon' |
-        'circle';
+      type: Watcher.Shape.Type.Rectangle | Watcher.Shape.Type.Polygon;
       data: Watcher.Shape.AllShapes;
     };
-    type: Watcher.Types;
     name: string;
     params?: ArbitraryProps;
     onClassification: Function;
@@ -132,7 +108,7 @@ export interface CoordinatesToTransform extends Watcher.Shape.Rectangle {
  * @public
  */
 export interface LampixInfo {
-  /** Lampix unique hardware ID. */
+  /** Lampix unique ID. */
   id: string;
   /** Lampix OS version. */
   version: string;
@@ -143,7 +119,7 @@ export interface LampixInfo {
 /**
  * Callback invoked when Lampix information is available.
  *
- * @param lampixInfo Object containing relevant Lampix information. See {@link LampixInfo}.
+ * @param lampixInfo Object containing Lampix information. See {@link LampixInfo}.
  */
 export interface LampixInfoCallback {
   (lampixInfo: LampixInfo): void;
@@ -160,25 +136,14 @@ export interface Outline {
 }
 
 /**
- * Callback invoked when an object is detected and classified.
- *
- * @param watcherId Index of the rectangle handling the classification event.
- * @param recognizedClass Class returned by the classifier.
- * @param metadata Field for extra information regarding classified objects.
- */
-export interface ObjectClassifiedCallback {
-  (watcherId: WatcherID, recognizedClass: string, metadata: string): void;
-}
-
-/**
  * @public
  */
 export interface ClassifiedObject {
   /** Used to track same object over multiple frames. */
-  objectId: string;
+  objectId?: string;
   /** Class returned by classifier. */
-  recognizedClass: string;
-  outline: Outline;
+  classTag: string;
+  outline?: Outline;
   metadata?: any;
 }
 
@@ -188,7 +153,7 @@ export interface ClassifiedObject {
  * @param watcherID Index of the rectangle handling the classification event.
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
  */
-export interface ObjectsDetectedCallback {
+export interface ObjectsClassifiedCallback {
   (watcherId: WatcherID, classifiedObjects: ClassifiedObject[]): void;
 }
 
@@ -224,8 +189,7 @@ export interface WatcherRequestCompleteCallback {
 }
 
 export interface Callbacks {
-  objectClassifiedCb: ObjectClassifiedCallback;
-  objectsDetectedCb: ObjectsDetectedCallback;
+  objectsClassifiedCb: ObjectsClassifiedCallback;
   objectsLocatedCb: ObjectsLocatedCallback;
   lampixInfoCb: LampixInfoCallback;
   getAppsCb: GetAppsCallback;
@@ -298,14 +262,6 @@ export namespace PublicAPI {
   export interface Polygon {
     type: Watcher.Shape.Type.Polygon;
     data: Watcher.Shape.Polygon;
-  }
-
-  /**
-   * @public
-   */
-  export interface Circle {
-    type: Watcher.Shape.Type.Circle;
-    data: Watcher.Shape.Circle;
   }
 
   export interface Shape {
