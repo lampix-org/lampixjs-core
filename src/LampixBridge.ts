@@ -7,7 +7,6 @@ import { watcherManager as wm } from './managers/watchers/manager';
 import * as constants from './constants';
 
 // Helpers
-import { circle } from './api/helpers/creators/shapes/circle';
 import { rectangle } from './api/helpers/creators/shapes/rectangle';
 import { polygon } from './api/helpers/creators/shapes/polygon';
 
@@ -30,7 +29,6 @@ const internalLampixAPI = window._lampix_internal;
 class LampixBridge implements ILampixBridge {
   constants = constants;
   helpers = {
-    circle,
     rectangle,
     polygon
   };
