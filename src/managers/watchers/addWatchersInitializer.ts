@@ -6,6 +6,7 @@ import {
 } from '../../types';
 
 import { createRegisteredWatcher } from './createRegisteredWatcher';
+import { waitForAPI } from '../../api/waitForAPI';
 
 const watcherData = (w: RegisteredWatcher) => ({
   id: w.state._id,
@@ -41,9 +42,11 @@ function addWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manag
     const rwList: RegisteredWatcher[] = watchers.map((w) => createRegisteredWatcher(w, wm));
 
     const promises: Promise<RegisteredWatcher>[] = rwList.map(createRwPromise);
-    api.add_watchers(watchersAsJSON(rwList));
 
-    return Promise.all(promises);
+    return waitForAPI().then(() => {
+      api.add_watchers(watchersAsJSON(rwList));
+      return Promise.all(promises);
+    });
   }
 
   return addWatchers;

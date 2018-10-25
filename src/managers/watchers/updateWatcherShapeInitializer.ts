@@ -5,6 +5,8 @@ import {
   PublicAPI
 } from '../../types';
 
+import { waitForAPI } from '../../api/waitForAPI';
+
 /**
  * Allows watcher manager to inject device API
  *
@@ -26,9 +28,10 @@ function updateWatcherShapeInitializer(api: LampixInternal, wm: Managers.Watcher
    * @internal
    */
   function updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void> {
-    api.update_watcher_shape(watcherId, JSON.stringify(shape));
-
-    return createPromise(watcherId);
+    return waitForAPI().then(() => {
+      api.update_watcher_shape(watcherId, JSON.stringify(shape));
+      return createPromise(watcherId);
+    });
   }
 
   return updateWatcherShape;

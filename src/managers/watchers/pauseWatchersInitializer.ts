@@ -5,6 +5,7 @@ import {
 } from '../../types';
 
 import { idsAsJSON } from './idsAsJSON';
+import { waitForAPI } from '../../api/waitForAPI';
 
 /**
  * Allows watcher manager to inject device API
@@ -29,9 +30,11 @@ function pauseWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Man
    */
   function pauseWatchers(rwList: RegisteredWatcher[]): Promise<void> {
     const promises: Promise<void>[] = rwList.map(createPromise);
-    api.pause_watchers(idsAsJSON(rwList));
 
-    return Promise.all(promises).then(() => undefined);
+    return waitForAPI().then(() => {
+      api.pause_watchers(idsAsJSON(rwList));
+      return Promise.all(promises).then(() => undefined);
+    });
   }
 
   return pauseWatchers;
