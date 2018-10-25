@@ -6,6 +6,8 @@ import {
   LampixInfoCallback
 } from '../types';
 
+import { waitForAPI } from './waitForAPI';
+
 /**
  * Business logic for the retrieval of the Lampix description object
  *
@@ -14,9 +16,10 @@ import {
  * called by CEF with relevant data
  * @internal
  */
-const getLampixInfo = (api: LampixInternal) => (): Promise<LampixInfo> => new Promise((resolve: LampixInfoCallback) => {
-  listeners.lampixInfoCb = resolve;
-  api.get_lampix_info();
-});
+const getLampixInfo = (api: LampixInternal) => (): Promise<LampixInfo> =>
+  waitForAPI().then(() => new Promise((resolve: LampixInfoCallback) => {
+    listeners.lampixInfoCb = resolve;
+    api.get_lampix_info();
+  }));
 
 export { getLampixInfo };

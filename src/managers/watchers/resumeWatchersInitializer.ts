@@ -5,6 +5,7 @@ import {
 } from '../../types';
 
 import { idsAsJSON } from './idsAsJSON';
+import { waitForAPI } from '../../api/waitForAPI';
 
 /**
  * Allows watcher manager to inject device API
@@ -29,9 +30,12 @@ function resumeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Ma
    */
   function resumeWatchers(rwList: RegisteredWatcher[]): Promise<void> {
     const promises: Promise<void>[] = rwList.map(createPromise);
-    api.resume_watchers(idsAsJSON(rwList));
 
-    return Promise.all(promises).then(() => undefined);
+    return waitForAPI().then(() => {
+      api.resume_watchers(idsAsJSON(rwList));
+      return Promise.all(promises).then(() => undefined);
+    });
+
   }
 
   return resumeWatchers;
