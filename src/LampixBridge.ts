@@ -1,5 +1,3 @@
-import { waitForApi } from './waitForApi';
-
 import { getLampixInfo } from './api/getLampixInfo';
 import { switchToApp } from './api/switchToApp';
 import { getApps } from './api/getApps';
@@ -23,9 +21,7 @@ import {
   AppInfo
 } from './types';
 
-waitForApi();
 bindEvents();
-
 const internalLampixAPI = window._lampix_internal;
 
 /**
