@@ -38,7 +38,6 @@ Passing extra information to Lampix can only be done through the `.classifier` p
     // or polygon
     data: [{ x: number, y: number }, { x: number, y: number }, { x: number, y: number }]
   },
-  type: 'classifier' | 'segmenter',
   // NeuralNetworkClassifier, DepthClassifier, MovementBasedSegmenter etc.
   name: string,
   // params are optional
@@ -48,32 +47,26 @@ Passing extra information to Lampix can only be done through the `.classifier` p
   // Action to be triggered when something is classified inside the watcher
   onClassification: Function,
   // Optional
-  // Only for type: segmenter
   // Called before onClassification with contour information for the located objects
   onLocation: Function
 }
 ```
 
 - `shape` - describes the outline of the watcher. You may use `lampix.helpers.rectangle(x, y, w, h)` or `lampix.helpers.polygon([...])` to create the shape object.
-- `type`
-  - `classifier` - used when the location of the object is irrelevant (i.e buttons, toggles)
-  - `segmenter` - used when the location of the object is relevant
 - `name` - specifies the logic to run for the watcher ([examples](#watcher-names))
 - `params` - provides further information that may be required based on the `name` prop
 - `onClassification` - function triggered by Lampix when something is classified inside the watcher
-- `onLocation` - optional function triggered by Lampix watchers before `onClassification` (only for `type: 'segmenter'`)
+- `onLocation` - optional function triggered by Lampix watchers before `onClassification`
 
 ## Watcher names for commonly used classifier strings
 
 ### cls_loc_fin_all_small
 
-- used as a simple classifier in **v0.x.x** => `type: 'classifier'`
 - uses a neural network => `name: 'NeuralNetworkClassifier'`
 - need to specify neural network name => `params: { neural_network_name: 'fin_all_small' }`
 
 ```
 {
-  type: 'classifier',
   name: 'NeuralNetworkClassifier',
   params: {
     neural_network_name: 'fin_all_small'
@@ -82,12 +75,24 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 }
 ```
 
+You can also use the `presets.button` as seen below:
+
+```
+import lampix from '@lampix/core';
+
+function someCallback() {
+  console.log('I will be called when a finger is recognized at x: 50, y: 50');
+}
+
+const w = lampix.presets.button(50, 50, someCallback);
+lampix.watchers.add(w).then(([rw]) => console.log(w));
+```
+
 ### segm_*
 
 This applies to former *position classifiers* (currently referred to as *segmenters*) whose string started with `segm_`, such as `segm_cls_loc_nes`, `segm_cls_loc_cars`, `segm_cls_loc_bar` etc.
 
-- used as a position classifier in **v0.x.x** => `type: 'segmenter'`
-- uses a neural network => `name: 'NeuralNetworkSegmenter'`
+- uses a neural network => `name: 'MovementBasedSegmenter'`
 - need to specify neural network name => `params: { neural_network_name: '*' }`, where * represents the strings after `segm_cls_loc`, `segm_cls_` or `segm_`
 
 ## Watcher add and remove
@@ -123,18 +128,16 @@ lampix.registerSimpleClassifier(watchers, (index, recognizedClass) => {
 import lampix from '@lampix/core';
 
 const w1 = {
-  type: 'classifier',
   name: 'NeuralNetworkClassifier',
   shape: lampix.helpers.rectangle(100, 100, 50, 50),
   params: {
     neural_network_name: 'fin_all_small'
   },
-  onClassification: (recognizedClass) => console.log(`Watcher 1, class: ${recognizedClass}`)
+  onClassification: (recognizedObjects) => console.log(`Watcher 1, class: ${recognizedObject[0].classTag}`)
 };
 
 const w2 = {
-  type: 'segmenter',
-  name: 'NeuralNetworkSegmenter',
+  name: 'MovementBasedSegmenter',
   shape: lampix.helpers.rectangle(200, 200, 300, 300),
   params: {
     neural_network_name: 'fruits'
