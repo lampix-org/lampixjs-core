@@ -11,7 +11,7 @@ const button = (x: number, y: number, onClassification: Function = noop) => ({
   shape: rectangle(x, y, 50, 50),
   name: Watcher.Names.NNClassifier,
   params: {
-    neural_network_name: `cls_loc_${StandardNeuralNetworks.Fingers}`
+    neural_network_name: StandardNeuralNetworks.Fingers
   }
 });
 

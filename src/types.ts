@@ -323,5 +323,5 @@ export namespace Managers {
 }
 
 export enum StandardNeuralNetworks {
-  Fingers = 'fin_all_small'
+  Fingers = 'fingers'
 }
