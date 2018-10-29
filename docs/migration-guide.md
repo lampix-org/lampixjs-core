@@ -133,7 +133,7 @@ const w1 = {
   params: {
     neural_network_name: 'fin_all_small'
   },
-  onClassification: (recognizedObjects) => console.log(`Watcher 1, class: ${recognizedObject[0].classTag}`)
+  onClassification: (recognizedObjects) => console.log(`Watcher 1, class: ${recognizedObjects[0].classTag}`)
 };
 
 const w2 = {
