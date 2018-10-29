@@ -7,6 +7,7 @@ const listeners: Callbacks = {
   objectsLocatedCb: noop,
   lampixInfoCb: noop,
   getAppsCb: noop,
+  getAppConfigCb: noop,
   transformCoordinatesCb: noop
 };
 

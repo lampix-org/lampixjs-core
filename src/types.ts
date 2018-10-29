@@ -31,6 +31,7 @@ export type LampixInternal = {
   switch_to_app: InternalAPI.SwitchToApp;
   get_lampix_info: NoOp;
   get_apps: NoOp;
+  get_config_data: NoOp;
 };
 
 declare global {
@@ -46,6 +47,7 @@ declare global {
     onLampixInfo: LampixInfoCallback;
     onGetApps: GetAppsCallback;
     onTransformCoordinates: TransformCoordsCallback;
+    onAppConfig: AppConfigCallback;
   }
 }
 
@@ -184,6 +186,10 @@ export interface TransformCoordsCallback {
   (transformedRect: CoordinatesToTransform[]): void;
 }
 
+export interface AppConfigCallback {
+  (appConfig: object): void;
+}
+
 export interface WatcherRequestCompleteCallback {
   (watcherId: WatcherID): void;
 }
@@ -193,6 +199,7 @@ export interface Callbacks {
   objectsLocatedCb: ObjectsLocatedCallback;
   lampixInfoCb: LampixInfoCallback;
   getAppsCb: GetAppsCallback;
+  getAppConfigCb: AppConfigCallback;
   transformCoordinatesCb: TransformCoordsCallback;
 }
 

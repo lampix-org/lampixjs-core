@@ -42,18 +42,6 @@ let bindEvents = () => {
     publisher.publish(LOCATION_EVENT, watcherId, locatedObjects);
   };
 
-  window.onLampixInfo = (lampixInfo: LampixInfo) => {
-    listeners.lampixInfoCb(lampixInfo);
-  };
-
-  window.onGetApps = (apps: AppInfo[]) => {
-    listeners.getAppsCb(apps);
-  };
-
-  window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
-    listeners.transformCoordinatesCb(transformedRect);
-  };
-
   window.onWatcherRemoved = (watcherId: WatcherID) => {
     publisher.publish(WATCHER_REMOVED, watcherId);
   };
@@ -72,6 +60,22 @@ let bindEvents = () => {
 
   window.onWatcherUpdated = (watcherId: WatcherID) => {
     publisher.publish(WATCHER_UPDATED, watcherId);
+  };
+
+  window.onLampixInfo = (lampixInfo: LampixInfo) => {
+    listeners.lampixInfoCb(lampixInfo);
+  };
+
+  window.onGetApps = (apps: AppInfo[]) => {
+    listeners.getAppsCb(apps);
+  };
+
+  window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
+    listeners.transformCoordinatesCb(transformedRect);
+  };
+
+  window.onAppConfig = (data: object) => {
+    listeners.getAppConfigCb(data);
   };
 };
 
