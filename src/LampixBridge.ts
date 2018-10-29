@@ -21,7 +21,6 @@ import {
 } from './types';
 
 bindEvents();
-const internalLampixAPI = window._lampix_internal;
 
 /**
  * @public
@@ -38,15 +37,15 @@ class LampixBridge implements ILampixBridge {
   /**
    * Used to retrieve an object describing the Lampix environment
    */
-  public getLampixInfo: () => Promise<LampixInfo> = getLampixInfo(internalLampixAPI);
+  public getLampixInfo: () => Promise<LampixInfo> = getLampixInfo();
   /**
    * Allows changing from one app to the specified app
    */
-  public switchToApp: (name: string) => Promise<void> = switchToApp(internalLampixAPI);
+  public switchToApp: (name: string) => Promise<void> = switchToApp();
   /**
    * Retrieve a list of available apps to switch to
    */
-  public getApps: () => Promise<AppInfo[]> = getApps(internalLampixAPI);
+  public getApps: () => Promise<AppInfo[]> = getApps();
 
   /**
    * Watcher manager

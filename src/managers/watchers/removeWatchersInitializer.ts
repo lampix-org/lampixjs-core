@@ -1,7 +1,6 @@
 import {
   RegisteredWatcher,
-  Managers,
-  LampixInternal
+  Managers
 } from '../../types';
 
 import { idsAsJSON } from './idsAsJSON';
@@ -10,11 +9,10 @@ import { waitForAPI } from '../../api/waitForAPI';
 /**
  * Allows watcher manager to inject device API
  *
- * @param api - Device API
  * @param state - Currently registered watchers per category
  * @internal
  */
-function removeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
+function removeWatchersInitializer(wm: Managers.Watchers.Manager) {
   function confirmationPromise(rw: RegisteredWatcher): Promise<void> {
     return new Promise((resolve) => {
       wm.pendingRemoval[rw.state._id] = resolve;
@@ -34,7 +32,7 @@ function removeWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Ma
     const promises = registeredWatchers.map(confirmationPromise);
 
     return waitForAPI().then(() => {
-      api.remove_watchers(idsAsJSON(registeredWatchers));
+      window._lampix_internal.remove_watchers(idsAsJSON(registeredWatchers));
 
       // The .then avoids returning [undefined, undefined, ..., undefined]
       return Promise.all(promises).then(() => undefined);

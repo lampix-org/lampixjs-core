@@ -1,6 +1,5 @@
 import {
   RegisteredWatcher,
-  LampixInternal,
   Watcher,
   Managers
 } from '../../types';
@@ -18,11 +17,10 @@ const watchersAsJSON = (rwList: RegisteredWatcher[]) => JSON.stringify(rwList.ma
 /**
  * Allows watcher manager to inject device API
  *
- * @param api - Device API
  * @param state - Currently registered watchers per category
  * @internal
  */
-function addWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manager) {
+function addWatchersInitializer(wm: Managers.Watchers.Manager) {
   function createRwPromise(rw: RegisteredWatcher) {
     return new Promise((resolve) => {
       wm.pendingAddition[rw.state._id] = resolve;
@@ -44,7 +42,7 @@ function addWatchersInitializer(api: LampixInternal, wm: Managers.Watchers.Manag
     const promises: Promise<RegisteredWatcher>[] = rwList.map(createRwPromise);
 
     return waitForAPI().then(() => {
-      api.add_watchers(watchersAsJSON(rwList));
+      window._lampix_internal.add_watchers(watchersAsJSON(rwList));
       return Promise.all(promises);
     });
   }

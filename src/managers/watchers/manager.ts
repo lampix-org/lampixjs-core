@@ -22,7 +22,6 @@ import {
   WATCHER_UPDATED
 } from '../../events';
 
-const internalLampixAPI = window._lampix_internal;
 const wm = {} as Managers.Watchers.Manager;
 
 wm.watchers = {};
@@ -31,11 +30,11 @@ wm.pendingRemoval = {};
 wm.pendingPausing = {};
 wm.pendingResuming = {};
 wm.pendingUpdate = {};
-wm.addWatchers = addWatchersInitializer(internalLampixAPI, wm);
-wm.removeWatchers = removeWatchersInitializer(internalLampixAPI, wm);
-wm.pauseWatchers = pauseWatchersInitializer(internalLampixAPI, wm);
-wm.resumeWatchers = resumeWatchersInitializer(internalLampixAPI, wm);
-wm.updateWatcherShape = updateWatcherShapeInitializer(internalLampixAPI, wm);
+wm.addWatchers = addWatchersInitializer(wm);
+wm.removeWatchers = removeWatchersInitializer(wm);
+wm.pauseWatchers = pauseWatchersInitializer(wm);
+wm.resumeWatchers = resumeWatchersInitializer(wm);
+wm.updateWatcherShape = updateWatcherShapeInitializer(wm);
 
 const getWatchers = () => Object.keys(wm.watchers).map((id) => wm.watchers[id]);
 wm.pauseAllWatchers = () => wm.pauseWatchers(getWatchers());

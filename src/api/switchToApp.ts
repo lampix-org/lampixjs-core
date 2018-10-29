@@ -1,6 +1,3 @@
-import {
-  LampixInternal
-} from '../types';
 import { waitForAPI } from './waitForAPI';
 
 // TODO: App async lifecycle (such as exiting etc.)
@@ -9,12 +6,11 @@ import { waitForAPI } from './waitForAPI';
 /**
  * Business logic for switching to another application
  *
- * @param internalLampixAPI API provided by CEF (simulator or device)
  * @internal
  */
-const switchToApp = (api: LampixInternal) => (name: string): Promise<void> =>
+const switchToApp = () => (name: string): Promise<void> =>
   waitForAPI().then(() => {
-    api.switch_to_app(name);
+    window._lampix_internal.switch_to_app(name);
     return Promise.resolve();
   });
 
