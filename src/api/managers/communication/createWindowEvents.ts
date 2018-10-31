@@ -6,10 +6,10 @@ import {
   AppInfo,
   CoordinatesToTransform,
   WatcherID
-} from '../../types';
+} from '../../../types';
 
 import { listeners } from './listeners';
-import { publisher } from '../../publisher';
+import { publisher } from '../../../publisher';
 import {
   CLASSIFICATION_EVENT,
   LOCATION_EVENT,
@@ -18,7 +18,7 @@ import {
   WATCHER_PAUSED,
   WATCHER_RESUMED,
   WATCHER_UPDATED
-} from '../../events';
+} from '../../../events';
 
 /**
  * Creates the functions called by the Lampix backend.

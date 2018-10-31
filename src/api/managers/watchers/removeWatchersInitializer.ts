@@ -1,10 +1,10 @@
 import {
   RegisteredWatcher,
   Managers
-} from '../../types';
+} from '../../../types';
 
 import { idsAsJSON } from './idsAsJSON';
-import { waitForAPI } from '../../api/waitForAPI';
+import { waitForAPI } from '../../../api/waitForAPI';
 
 /**
  * Allows watcher manager to inject device API

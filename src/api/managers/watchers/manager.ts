@@ -1,7 +1,7 @@
 import {
   Managers,
   WatcherID
-} from '../../types';
+} from '../../../types';
 
 import { addWatchersInitializer } from './addWatchersInitializer';
 import { removeWatchersInitializer } from './removeWatchersInitializer';
@@ -10,7 +10,7 @@ import { resumeWatchersInitializer } from './resumeWatchersInitializer';
 import { updateWatcherShapeInitializer } from './updateWatcherShapeInitializer';
 import { watcherActionHandler } from './watcherActionHandler';
 
-import { publisher } from '../../publisher';
+import { publisher } from '../../../publisher';
 
 import {
   CLASSIFICATION_EVENT,
@@ -20,7 +20,7 @@ import {
   WATCHER_PAUSED,
   WATCHER_RESUMED,
   WATCHER_UPDATED
-} from '../../events';
+} from '../../../events';
 
 const wm = {} as Managers.Watchers.Manager;
 

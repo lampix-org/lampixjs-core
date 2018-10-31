@@ -2,9 +2,9 @@ import {
   WatcherID,
   Managers,
   PublicAPI
-} from '../../types';
+} from '../../../types';
 
-import { waitForAPI } from '../../api/waitForAPI';
+import { waitForAPI } from '../../waitForAPI';
 
 /**
  * Allows watcher manager to inject device API

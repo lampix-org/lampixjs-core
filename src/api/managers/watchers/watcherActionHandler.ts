@@ -1,9 +1,9 @@
 import {
   RegisteredWatcher,
   Managers
-} from '../../types';
+} from '../../../types';
 
-import { publisher } from '../../publisher';
+import { publisher } from '../../../publisher';
 
 /**
  * Initializes watcher action handler for a specific internal event

@@ -1,6 +1,6 @@
 import noop from 'lodash/noop';
 
-import { Callbacks } from '../../types';
+import { Callbacks } from '../../../types';
 
 const listeners: Callbacks = {
   objectsClassifiedCb: noop,

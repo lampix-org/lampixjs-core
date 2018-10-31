@@ -8,9 +8,9 @@ import {
   RegisteredWatcherState,
   Managers,
   PublicAPI
-} from '../../types';
+} from '../../../types';
 
-import { simpleId } from '../../utils/simpleId';
+import { simpleId } from '../../../utils/simpleId';
 
 /**
  * @param w - Actual data sent to Lampix device

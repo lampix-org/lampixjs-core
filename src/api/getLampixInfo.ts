@@ -1,4 +1,4 @@
-import { listeners } from '../managers/communication/listeners';
+import { listeners } from '../api/managers/communication/listeners';
 
 import {
   LampixInfo,

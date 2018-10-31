@@ -2,10 +2,10 @@ import {
   RegisteredWatcher,
   Watcher,
   Managers
-} from '../../types';
+} from '../../../types';
 
 import { createRegisteredWatcher } from './createRegisteredWatcher';
-import { waitForAPI } from '../../api/waitForAPI';
+import { waitForAPI } from '../../waitForAPI';
 
 const watcherData = (w: RegisteredWatcher) => ({
   id: w.state._id,
