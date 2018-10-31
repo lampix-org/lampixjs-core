@@ -20,6 +20,8 @@ export namespace InternalAPI {
   export interface RegisterFn { (data: string): void; }
   export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
   export interface SwitchToApp { (appName: string): void; }
+  export interface WriteFile { (filename: string, data: string): void; }
+  export interface ReadFile { (filename: string): void; }
 }
 
 export type LampixInternal = {
@@ -32,6 +34,8 @@ export type LampixInternal = {
   get_lampix_info: NoOp;
   get_apps: NoOp;
   get_config_data: NoOp;
+  write_file: InternalAPI.WriteFile,
+  read_file: InternalAPI.ReadFile
 };
 
 declare global {
@@ -48,6 +52,8 @@ declare global {
     onGetApps: GetAppsCallback;
     onTransformCoordinates: TransformCoordsCallback;
     onAppConfig: AppConfigCallback;
+    onFileWritten: FileWrittenCallback;
+    onFileRead: FileReadCallback;
   }
 }
 
@@ -192,6 +198,14 @@ export interface AppConfigCallback {
 
 export interface WatcherRequestCompleteCallback {
   (watcherId: WatcherID): void;
+}
+
+export interface FileWrittenCallback {
+  (error: string, filename: string): void;
+}
+
+export interface FileReadCallback {
+  (error: string, filename: string, data: object): void;
 }
 
 export interface Callbacks {
