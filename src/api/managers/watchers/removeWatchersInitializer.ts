@@ -5,6 +5,8 @@ import {
 
 import { idsAsJSON } from './idsAsJSON';
 import { waitForAPI } from '../../../api/waitForAPI';
+import { LampixEvents } from '../../../events';
+import { listen } from '../communication/settler';
 
 /**
  * Allows watcher manager to inject device API
@@ -14,12 +16,10 @@ import { waitForAPI } from '../../../api/waitForAPI';
  */
 function removeWatchersInitializer(wm: Managers.Watchers.Manager) {
   function confirmationPromise(rw: RegisteredWatcher): Promise<void> {
-    return new Promise((resolve) => {
-      wm.pendingRemoval[rw.state._id] = resolve;
-    }).then(() => {
-      delete wm.pendingRemoval[rw.state._id];
-      delete wm.watchers[rw.state._id];
-    });
+    return listen(LampixEvents.WatcherRemoved, rw.state._id)
+      .then(() => {
+        delete wm.watchers[rw.state._id];
+      });
   }
 
   /**

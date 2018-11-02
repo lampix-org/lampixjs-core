@@ -346,3 +346,8 @@ export namespace Managers {
 export enum StandardNeuralNetworks {
   Fingers = 'fingers'
 }
+
+export interface Settler {
+  resolve: Function;
+  reject: Function;
+}

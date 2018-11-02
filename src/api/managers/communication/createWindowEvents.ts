@@ -8,17 +8,8 @@ import {
   WatcherID
 } from '../../../types';
 
-import { listeners } from './listeners';
 import { publisher } from '../../../publisher';
-import {
-  CLASSIFICATION_EVENT,
-  LOCATION_EVENT,
-  WATCHER_REMOVED,
-  WATCHER_ADDED,
-  WATCHER_PAUSED,
-  WATCHER_RESUMED,
-  WATCHER_UPDATED
-} from '../../../events';
+import { LampixEvents } from '../../../events';
 
 /**
  * Creates the functions called by the Lampix backend.
@@ -32,50 +23,77 @@ let bindEvents = () => {
     watcherId: WatcherID,
     classifiedObjects: ClassifiedObject[]
   ) => {
-    publisher.publish(CLASSIFICATION_EVENT, watcherId, classifiedObjects);
+    publisher.publish(LampixEvents.Classification, {
+      error: null,
+      data: { watcherId, classifiedObjects }
+    });
   };
 
   window.onObjectsLocated = (
     watcherId,
     locatedObjects
   ) => {
-    publisher.publish(LOCATION_EVENT, watcherId, locatedObjects);
+    publisher.publish(LampixEvents.Location, {
+      error: null,
+      data: { watcherId, locatedObjects }
+    });
   };
 
   window.onWatcherRemoved = (watcherId: WatcherID) => {
-    publisher.publish(WATCHER_REMOVED, watcherId);
+    publisher.publish(LampixEvents.WatcherRemoved, {
+      error: null,
+      data: { watcherId }
+    });
   };
 
   window.onWatcherAdded = (watcherId: WatcherID) => {
-    publisher.publish(WATCHER_ADDED, watcherId);
+    publisher.publish(LampixEvents.WatcherAdded, {
+      error: null,
+      data: { watcherId }
+    });
   };
 
   window.onWatcherPaused = (watcherId: WatcherID) => {
-    publisher.publish(WATCHER_PAUSED, watcherId);
+    publisher.publish(LampixEvents.WatcherPaused, {
+      error: null,
+      data: { watcherId }
+    });
   };
 
   window.onWatcherResumed = (watcherId: WatcherID) => {
-    publisher.publish(WATCHER_RESUMED, watcherId);
+    publisher.publish(LampixEvents.WatcherResumed, {
+      error: null,
+      data: { watcherId }
+    });
   };
 
   window.onWatcherUpdated = (watcherId: WatcherID) => {
-    publisher.publish(WATCHER_UPDATED, watcherId);
+    publisher.publish(LampixEvents.WatcherUpdated, {
+      error: null,
+      data: { watcherId }
+    });
   };
 
   window.onLampixInfo = (lampixInfo: LampixInfo) => {
-    listeners.lampixInfoCb(lampixInfo);
+    publisher.publish(LampixEvents.LampixInfo, {
+      error: null,
+      data: { lampixInfo }
+    });
   };
 
   window.onGetApps = (apps: AppInfo[]) => {
-    listeners.getAppsCb(apps);
+    publisher.publish(LampixEvents.GetApps, {
+      error: null,
+      data: { apps }
+    });
   };
 
   window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
-    listeners.transformCoordinatesCb(transformedRect);
+    publisher.publish(LampixEvents.TransformCoordinates, transformedRect);
   };
 
   window.onAppConfig = (data: object) => {
-    listeners.getAppConfigCb(data);
+    publisher.publish(LampixEvents.AppConfig, data);
   };
 };
 

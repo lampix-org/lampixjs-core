@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "target": "ES5",
+    "target": "esnext",
     "module": "commonjs",
-    "lib": ["dom", "es2015", "es2017"],
+    "lib": ["dom", "es2015", "es2017", "es2018"],
     "downlevelIteration": true,
     "sourceMap": true,
     "declaration": true,

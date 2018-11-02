@@ -1,11 +1,10 @@
-import { listeners } from '../api/managers/communication/listeners';
-
 import {
-  GetAppsCallback,
   AppInfo
 } from '../types';
 
 import { waitForAPI } from './waitForAPI';
+import { LampixEvents } from '../events';
+import { listen } from './managers/communication/settler';
 
 /**
  * Business logic for retrieving available apps
@@ -13,9 +12,12 @@ import { waitForAPI } from './waitForAPI';
  * @internal
  */
 const getApps = () => (): Promise<AppInfo[]> =>
-  waitForAPI().then(() => new Promise((resolve: GetAppsCallback) => {
-    listeners.getAppsCb = resolve;
-    window._lampix_internal.get_apps();
-  }));
+  waitForAPI()
+    .then(() => {
+      const promise = listen(LampixEvents.GetApps);
+      window._lampix_internal.get_apps();
+      return promise;
+    })
+    .then(({ apps }: { apps: AppInfo[] }) => apps);
 
 export { getApps };
