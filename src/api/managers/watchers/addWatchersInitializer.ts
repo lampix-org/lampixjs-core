@@ -6,6 +6,8 @@ import {
 
 import { createRegisteredWatcher } from './createRegisteredWatcher';
 import { waitForAPI } from '../../waitForAPI';
+import { LampixEvents } from '../../../events';
+import { listen } from '../communication/settler';
 
 const watcherData = (w: RegisteredWatcher) => ({
   id: w.state._id,
@@ -22,14 +24,11 @@ const watchersAsJSON = (rwList: RegisteredWatcher[]) => JSON.stringify(rwList.ma
  */
 function addWatchersInitializer(wm: Managers.Watchers.Manager) {
   function createRwPromise(rw: RegisteredWatcher) {
-    return new Promise((resolve) => {
-      wm.pendingAddition[rw.state._id] = resolve;
-    }).then(() => {
-      delete wm.pendingAddition[rw.state._id];
-      wm.watchers[rw.state._id] = rw;
-
-      return rw;
-    });
+    return listen(LampixEvents.WatcherAdded, rw.state._id)
+      .then(() => {
+        wm.watchers[rw.state._id] = rw;
+        return rw;
+      });
   }
 
   /**

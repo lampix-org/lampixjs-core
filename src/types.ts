@@ -22,6 +22,10 @@ export namespace InternalAPI {
   export interface SwitchToApp { (appName: string): void; }
   export interface WriteFile { (filename: string, data: string): void; }
   export interface ReadFile { (filename: string): void; }
+  export interface LampixResponse {
+    error: string;
+    data: any;
+  }
 }
 
 export type LampixInternal = {
@@ -345,4 +349,13 @@ export namespace Managers {
 
 export enum StandardNeuralNetworks {
   Fingers = 'fingers'
+}
+
+export interface SettlerMap {
+  [key: string]: Settler;
+}
+
+export interface Settler {
+  resolve: Function;
+  reject: Function;
 }

@@ -1,10 +1,11 @@
 import {
   WatcherID,
-  Managers,
   PublicAPI
 } from '../../../types';
 
 import { waitForAPI } from '../../waitForAPI';
+import { LampixEvents } from '../../../events';
+import { listen } from '../communication/settler';
 
 /**
  * Allows watcher manager to inject device API
@@ -12,13 +13,10 @@ import { waitForAPI } from '../../waitForAPI';
  * @param state - Currently registered watchers per category
  * @internal
  */
-function updateWatcherShapeInitializer(wm: Managers.Watchers.Manager) {
+function updateWatcherShapeInitializer() {
   function createPromise(watcherId: WatcherID): Promise<void> {
-    return new Promise((resolve) => {
-      wm.pendingUpdate[watcherId] = resolve;
-    }).then(() => {
-      delete wm.pendingUpdate[watcherId];
-    });
+    return listen(LampixEvents.WatcherUpdated, watcherId)
+      .then(() => undefined);
   }
 
   /**

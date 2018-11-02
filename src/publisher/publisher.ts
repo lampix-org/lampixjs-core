@@ -59,10 +59,8 @@ function publisherFactory(topics: PublisherTopics = {}) {
         return;
       }
 
-      setTimeout(() => {
-        const handler = topic.listeners[handlerId];
-        handler.apply(handler, data);
-      });
+      const handler = topic.listeners[handlerId];
+      handler.apply(handler, data);
     });
   }
 

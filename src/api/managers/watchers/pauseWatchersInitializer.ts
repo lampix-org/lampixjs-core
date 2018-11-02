@@ -1,10 +1,11 @@
 import {
-  RegisteredWatcher,
-  Managers
+  RegisteredWatcher
 } from '../../../types';
 
 import { idsAsJSON } from './idsAsJSON';
 import { waitForAPI } from '../../../api/waitForAPI';
+import { LampixEvents } from '../../../events';
+import { listen } from '../communication/settler';
 
 /**
  * Allows watcher manager to inject device API
@@ -12,14 +13,12 @@ import { waitForAPI } from '../../../api/waitForAPI';
  * @param state - Currently registered watchers per category
  * @internal
  */
-function pauseWatchersInitializer(wm: Managers.Watchers.Manager) {
+function pauseWatchersInitializer() {
   function createPromise(rw: RegisteredWatcher): Promise<void> {
-    return new Promise((resolve) => {
-      wm.pendingPausing[rw.state._id] = resolve;
-    }).then(() => {
-      rw.state.active = false;
-      delete wm.pendingPausing[rw.state._id];
-    });
+    return listen(LampixEvents.WatcherPaused, rw.state._id)
+      .then(() => {
+        rw.state.active = false;
+      });
   }
 
   /**
