@@ -62,14 +62,14 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 
 ### cls_loc_fin_all_small
 
-- uses a neural network => `name: 'NeuralNetworkClassifier'`
-- need to specify neural network name => `params: { neural_network_name: 'fin_all_small' }`
+- uses a neural network and doesn't provide location information => `name: 'NeuralNetworkClassifier'`
+- need to specify neural network name => `params: { neural_network_name: 'fingers' }`
 
 ```
 {
   name: 'NeuralNetworkClassifier',
   params: {
-    neural_network_name: 'fin_all_small'
+    neural_network_name: 'fingers'
   },
   ...
 }
@@ -131,7 +131,7 @@ const w1 = {
   name: 'NeuralNetworkClassifier',
   shape: lampix.helpers.rectangle(100, 100, 50, 50),
   params: {
-    neural_network_name: 'fin_all_small'
+    neural_network_name: 'fingers'
   },
   onClassification: (recognizedObjects) => console.log(`Watcher 1, class: ${recognizedObjects[0].classTag}`)
 };
