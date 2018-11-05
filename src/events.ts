@@ -10,5 +10,6 @@ export enum LampixEvents {
   AppConfig = 'lx/app-config',
   Classification = 'lx/classification',
   Location = 'lx/location',
-  FileWritten = 'lx/file-written'
+  FileWritten = 'lx/file-written',
+  FileRead = 'lx/file-read'
 }

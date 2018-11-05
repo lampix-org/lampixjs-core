@@ -108,6 +108,13 @@ let bindEvents = () => {
       data: { filename }
     });
   };
+
+  window.onFileRead = (error: string, filename: string, data: object) => {
+    publisher.publish(LampixEvents.FileRead, {
+      error,
+      data: { filename, data }
+    });
+  };
 };
 
 export { bindEvents };
