@@ -9,5 +9,6 @@ export enum LampixEvents {
   TransformCoordinates = 'lx/transform-coordinates',
   AppConfig = 'lx/app-config',
   Classification = 'lx/classification',
-  Location = 'lx/location'
+  Location = 'lx/location',
+  FileWritten = 'lx/file-written'
 }

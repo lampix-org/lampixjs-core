@@ -2,6 +2,7 @@ import { getLampixInfo } from './api/getLampixInfo';
 import { switchToApp } from './api/switchToApp';
 import { getApps } from './api/getApps';
 import { getAppConfig } from './api/getAppConfig';
+import { writeJsonToFile } from './api/writeJsonToFile';
 import { bindEvents } from './api/managers/communication/createWindowEvents';
 import { watcherManager as wm } from './api/managers/watchers/manager';
 
@@ -52,6 +53,7 @@ class LampixBridge implements ILampixBridge {
    * Retrieve application specific data from config.json if available
    */
   public getAppConfig: () => Promise<object> = getAppConfig();
+  public writeJsonToFile: (filename: string, data: object) => Promise<void> = writeJsonToFile();
 
   /**
    * Watcher manager

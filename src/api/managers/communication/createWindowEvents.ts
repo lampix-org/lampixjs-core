@@ -101,6 +101,13 @@ let bindEvents = () => {
       data: { config }
     });
   };
+
+  window.onFileWritten = (error: string, filename: string) => {
+    publisher.publish(LampixEvents.FileWritten, {
+      error,
+      data: { filename }
+    });
+  };
 };
 
 export { bindEvents };
