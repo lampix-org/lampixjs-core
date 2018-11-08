@@ -2,7 +2,7 @@ import { Settler, SettlerMap, InternalAPI } from '../../../types';
 
 import { publisher } from '../../../publisher';
 import { LampixEvents } from '../../../events';
-import { simpleId } from '../../../utils/simpleId';
+import { generateId } from '../../../utils/generateId';
 
 interface PendingSettlementMap {
   [key: string]: SettlerMap;
@@ -10,7 +10,13 @@ interface PendingSettlementMap {
 
 const pendingSettlement = {} as PendingSettlementMap;
 
-const listen = (event: LampixEvents, id: string = simpleId()) => {
+/**
+ * @internal
+ *
+ * @param event
+ * @param id
+ */
+const listen = (event: LampixEvents, id: string = generateId()) => {
   pendingSettlement[event] = pendingSettlement[event] || {} as SettlerMap;
   let settler = pendingSettlement[event][id] = {} as Settler;
 

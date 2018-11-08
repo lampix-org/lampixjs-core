@@ -10,7 +10,7 @@ import {
   PublicAPI
 } from '../../../types';
 
-import { simpleId } from '../../../utils/simpleId';
+import { generateId } from '../../../utils/generateId';
 
 /**
  * @param w - Actual data sent to Lampix device
@@ -20,7 +20,7 @@ import { simpleId } from '../../../utils/simpleId';
 export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watchers.Manager): RegisteredWatcher => {
   const state: RegisteredWatcherState = Object.defineProperties({}, {
     _id: {
-      value: simpleId(),
+      value: generateId(),
       writable: false,
       configurable: false
     },
