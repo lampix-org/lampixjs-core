@@ -19,7 +19,7 @@ export interface NoOp {
 export namespace InternalAPI {
   export interface RegisterFn { (data: string): void; }
   export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
-  export interface SwitchToApp { (appName: string): void; }
+  export interface SwitchToApp { (appName: string, queryParams?: string): void; }
   export interface WriteFile { (filename: string, data: string): void; }
   export interface ReadFile { (filename: string): void; }
   export interface LampixResponse {
@@ -358,4 +358,8 @@ export interface SettlerMap {
 export interface Settler {
   resolve: Function;
   reject: Function;
+}
+
+export interface QueryParamsObject {
+  [key: string]: string;
 }

@@ -1,5 +1,6 @@
 import { getLampixInfo } from './api/getLampixInfo';
 import { switchToApp } from './api/switchToApp';
+import { exit } from './api/exit';
 import { getApps } from './api/getApps';
 import { getAppConfig } from './api/getAppConfig';
 import { writeJsonToFile } from './api/writeJsonToFile';
@@ -20,7 +21,8 @@ import {
   ILampixBridge,
   LampixInfo,
   PublicAPI,
-  AppInfo
+  AppInfo,
+  QueryParamsObject
 } from './types';
 
 bindEvents();
@@ -44,7 +46,17 @@ class LampixBridge implements ILampixBridge {
   /**
    * Allows changing from one app to the specified app
    */
-  public switchToApp: (name: string) => Promise<void> = switchToApp();
+  public switchToApp: (name: string, queryParams?: QueryParamsObject) => Promise<void> = switchToApp();
+  /**
+   * Helper function that uses {@link LampixBridge.switchToApp} internally
+   * Does not allow specifying other query parameters
+   *
+   * Exits to {@link constants.APP_SWITCHER_NAME} by default
+   *
+   * If the app has been started with a "switch-back-to" query parameter via the {@link LampixBridge.switchToApp}
+   * method, then the value of this param will take precedence over the default
+   */
+  public exit: () => Promise<void> = exit();
   /**
    * Retrieve a list of available apps to switch to
    */
