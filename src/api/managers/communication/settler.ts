@@ -1,8 +1,8 @@
-import { Settler, SettlerMap, InternalAPI } from '../../../types';
+import { Settler, SettlerMap, LampixResponse } from '../../../types';
 
 import { publisher } from '../../../publisher';
-import { LampixEvents } from '../../../events';
-import { generateId } from '../../../utils/generateId';
+import { LampixEvents, eventToCallbackMap } from '../../../events';
+import { request } from '../../request';
 
 interface PendingSettlementMap {
   [key: string]: SettlerMap;
@@ -16,17 +16,26 @@ const pendingSettlement = {} as PendingSettlementMap;
  * @param event
  * @param id
  */
-const listen = (event: LampixEvents, id: string = generateId()) => {
-  pendingSettlement[event] = pendingSettlement[event] || {} as SettlerMap;
-  let settler = pendingSettlement[event][id] = {} as Settler;
+const listen = <T>(event: LampixEvents, data: object = null): Promise<T> => {
+  const callbackName = eventToCallbackMap[event];
+  const req = request(callbackName, data);
 
-  const promise = new Promise((resolve, reject) => {
+  pendingSettlement[event] = pendingSettlement[event] || {} as SettlerMap;
+  let settler = pendingSettlement[event][req.requestId] = {} as Settler;
+
+  const promise = new Promise<T>((resolve, reject) => {
     settler.resolve = resolve;
     settler.reject = reject;
   });
 
   // Settle the promise
-  const unsubscribe = publisher.subscribe(event, ({ error, data }: InternalAPI.LampixResponse) => {
+  const unsubscribe = publisher.subscribe(event, (response: LampixResponse) => {
+    const { requestId, error, data } = response;
+
+    if (req.requestId !== requestId) {
+      return;
+    }
+
     if (error) {
       settler.reject(error);
     } else {
@@ -34,7 +43,7 @@ const listen = (event: LampixEvents, id: string = generateId()) => {
     }
 
     settler = null;
-    delete pendingSettlement[event][id];
+    delete pendingSettlement[event][requestId];
   });
 
   /**
