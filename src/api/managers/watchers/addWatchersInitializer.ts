@@ -23,14 +23,6 @@ const watchersAsJSON = (rwList: RegisteredWatcher[]) => JSON.stringify(rwList.ma
  * @internal
  */
 function addWatchersInitializer(wm: Managers.Watchers.Manager) {
-  function createRwPromise(rw: RegisteredWatcher) {
-    return listen(LampixEvents.WatcherAdded, rw.state._id)
-      .then(() => {
-        wm.watchers[rw.state._id] = rw;
-        return rw;
-      });
-  }
-
   /**
    * @param watchers - Mixed array of all watchers to add
    * @internal
@@ -38,11 +30,18 @@ function addWatchersInitializer(wm: Managers.Watchers.Manager) {
   function addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]> {
     const rwList: RegisteredWatcher[] = watchers.map((w) => createRegisteredWatcher(w, wm));
 
-    const promises: Promise<RegisteredWatcher>[] = rwList.map(createRwPromise);
+    const request = listen<RegisteredWatcher[]>(LampixEvents.WatcherAdded, {
+      watchers: rwList
+    });
+
+    request.then(() => rwList.forEach((rw) => {
+      wm.watchers[rw.state._id] = rw;
+      return rw;
+    }));
 
     return waitForAPI().then(() => {
       window._lampix_internal.add_watchers(watchersAsJSON(rwList));
-      return Promise.all(promises);
+      return request;
     });
   }
 
