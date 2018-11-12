@@ -16,7 +16,7 @@ const pendingSettlement = {} as PendingSettlementMap;
  * @param event
  * @param id
  */
-const listen = <T>(event: LampixEvents, data: object = null): Promise<T> => {
+const listen = <T extends object>(event: LampixEvents, data: object = null) => {
   const callbackName = eventToCallbackMap[event];
   const req = request(callbackName, data);
 
@@ -29,7 +29,7 @@ const listen = <T>(event: LampixEvents, data: object = null): Promise<T> => {
   });
 
   // Settle the promise
-  const unsubscribe = publisher.subscribe(event, (response: LampixResponse) => {
+  const unsubscribe = publisher.subscribe(event, (response: LampixResponse<T>) => {
     const { requestId, error, data } = response;
 
     if (req.requestId !== requestId) {
@@ -61,7 +61,10 @@ const listen = <T>(event: LampixEvents, data: object = null): Promise<T> => {
   promise.then(always);
   promise.catch(always);
 
-  return promise;
+  return {
+    promise,
+    request: req
+  };
 };
 
 export { listen };
