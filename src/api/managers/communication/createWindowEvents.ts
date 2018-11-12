@@ -1,7 +1,6 @@
 import noop from 'lodash/noop';
 
 import {
-  LampixInfo,
   ClassifiedObject,
   CoordinatesToTransform,
   WatcherID
@@ -73,11 +72,8 @@ let bindEvents = () => {
     });
   };
 
-  window.onLampixInfo = (lampixInfo: LampixInfo) => {
-    publisher.publish(LampixEvents.LampixInfo, {
-      error: null,
-      data: { lampixInfo }
-    });
+  window.onLampixInfo = (response) => {
+    publisher.publish(LampixEvents.LampixInfo, response);
   };
 
   window.onGetApps = (response) => {

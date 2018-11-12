@@ -1,5 +1,6 @@
 import {
-  LampixInfo
+  LampixInfo,
+  ResponsePayloads
 } from '../types';
 
 import { waitForAPI } from './waitForAPI';
@@ -14,10 +15,10 @@ import { listen } from './managers/communication/settler';
 const getLampixInfo = () => (): Promise<LampixInfo> =>
   waitForAPI()
     .then(() => {
-      const promise = listen(LampixEvents.LampixInfo);
-      window._lampix_internal.get_lampix_info();
+      const { promise, request } = listen<ResponsePayloads.LampixInfoPayload>(LampixEvents.LampixInfo);
+      window._lampix_internal.get_lampix_info(JSON.stringify(request));
       return promise;
     })
-    .then(({ lampixInfo }: { lampixInfo: LampixInfo }) => lampixInfo);
+    .then(({ info }) => info);
 
 export { getLampixInfo };

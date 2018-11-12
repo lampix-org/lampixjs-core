@@ -37,7 +37,8 @@ export interface LampixResponse<T extends object> {
 }
 
 export namespace ResponsePayloads {
-  export interface Apps { apps: AppInfo[]; }
+  export interface AppsPayload { apps: AppInfo[]; }
+  export interface LampixInfoPayload { info: LampixInfo; }
 }
 
 export interface LampixRequest {
@@ -211,7 +212,7 @@ export interface AppInfo {
 }
 
 export interface GetAppsCallback {
-  (r: LampixResponse<ResponsePayloads.Apps>): void;
+  (r: LampixResponse<ResponsePayloads.AppsPayload>): void;
 }
 
 /**
