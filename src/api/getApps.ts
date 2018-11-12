@@ -15,7 +15,7 @@ import { listen } from './managers/communication/settler';
 const getApps = () => (): Promise<AppInfo[]> =>
   waitForAPI()
     .then(() => {
-      const { promise, request } = listen<ResponsePayloads.GetApps>(LampixEvents.GetApps);
+      const { promise, request } = listen<ResponsePayloads.Apps>(LampixEvents.GetApps);
       window._lampix_internal.get_apps(JSON.stringify(request));
       return promise;
     })
