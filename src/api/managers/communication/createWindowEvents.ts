@@ -3,7 +3,6 @@ import noop from 'lodash/noop';
 import {
   LampixInfo,
   ClassifiedObject,
-  AppInfo,
   CoordinatesToTransform,
   WatcherID
 } from '../../../types';
@@ -81,11 +80,8 @@ let bindEvents = () => {
     });
   };
 
-  window.onGetApps = (apps: AppInfo[]) => {
-    publisher.publish(LampixEvents.GetApps, {
-      error: null,
-      data: { apps }
-    });
+  window.onGetApps = (response) => {
+    publisher.publish(LampixEvents.GetApps, response);
   };
 
   window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {

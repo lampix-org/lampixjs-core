@@ -17,14 +17,14 @@ export interface NoOp {
 }
 
 export namespace InternalAPI {
-  export interface RegisterFn { (data: string): void; }
+  export interface RequestFn { (data: string): void; }
   export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
   export interface SwitchToApp { (appName: string, queryParams?: string): void; }
   export interface WriteFile { (filename: string, data: string): void; }
   export interface ReadFile { (filename: string): void; }
 }
 
-export interface LampixResponse {
+export interface LampixResponse<T extends object> {
   /**
    * Request / response mapping ID
    */
@@ -33,7 +33,13 @@ export interface LampixResponse {
   /**
    * Action specific data
    */
-  data: object;
+  data: T;
+}
+
+export namespace ResponsePayloads {
+  export interface GetApps {
+    apps: AppInfo[];
+  }
 }
 
 export interface LampixRequest {
@@ -52,15 +58,15 @@ export interface LampixRequest {
 }
 
 export type LampixInternal = {
-  add_watchers: InternalAPI.RegisterFn;
-  remove_watchers: InternalAPI.RegisterFn;
-  pause_watchers: InternalAPI.RegisterFn;
-  resume_watchers: InternalAPI.RegisterFn;
+  add_watchers: InternalAPI.RequestFn;
+  remove_watchers: InternalAPI.RequestFn;
+  pause_watchers: InternalAPI.RequestFn;
+  resume_watchers: InternalAPI.RequestFn;
   update_watcher_shape: InternalAPI.UpdateShape;
   switch_to_app: InternalAPI.SwitchToApp;
-  get_lampix_info: NoOp;
-  get_apps: NoOp;
-  get_config_data: NoOp;
+  get_lampix_info: InternalAPI.RequestFn;
+  get_apps: InternalAPI.RequestFn;
+  get_config_data: InternalAPI.RequestFn;
   write_file: InternalAPI.WriteFile,
   read_file: InternalAPI.ReadFile
 };
@@ -207,7 +213,7 @@ export interface AppInfo {
 }
 
 export interface GetAppsCallback {
-  (apps: AppInfo[]): void;
+  (r: LampixResponse<ResponsePayloads.GetApps>): void;
 }
 
 /**

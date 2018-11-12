@@ -1,5 +1,6 @@
 import {
-  AppInfo
+  AppInfo,
+  ResponsePayloads
 } from '../types';
 
 import { waitForAPI } from './waitForAPI';
@@ -14,8 +15,8 @@ import { listen } from './managers/communication/settler';
 const getApps = () => (): Promise<AppInfo[]> =>
   waitForAPI()
     .then(() => {
-      const promise = listen(LampixEvents.GetApps);
-      window._lampix_internal.get_apps();
+      const { promise, request } = listen<ResponsePayloads.GetApps>(LampixEvents.GetApps);
+      window._lampix_internal.get_apps(JSON.stringify(request));
       return promise;
     })
     .then(({ apps }: { apps: AppInfo[] }) => apps);
