@@ -11,7 +11,8 @@ export enum LampixEvents {
   Classification = 'lx/classification',
   Location = 'lx/location',
   FileWritten = 'lx/file-written',
-  FileRead = 'lx/file-read'
+  FileRead = 'lx/file-read',
+  SwitchToApp = 'lx/switch-to-app'
 }
 
 export const eventToCallbackMap = {
@@ -27,5 +28,6 @@ export const eventToCallbackMap = {
   [LampixEvents.AppConfig]: 'onAppConfig',
   [LampixEvents.TransformCoordinates]: 'onTransformCoordinates',
   [LampixEvents.FileRead]: 'onFileRead',
-  [LampixEvents.FileWritten]: 'onFileWritten'
+  [LampixEvents.FileWritten]: 'onFileWritten',
+  [LampixEvents.SwitchToApp]: 'onSwitchApp'
 };

@@ -39,6 +39,7 @@ export namespace ResponsePayloads {
   export interface LampixInfoPayload { info: LampixInfo; }
   export interface FileReadPayload { data: object; }
   export interface FileWrittenPayload {}
+  export interface SwitchToApp {}
 }
 
 export interface LampixRequest {
@@ -62,7 +63,7 @@ export type LampixInternal = {
   pause_watchers: InternalAPI.RequestFn;
   resume_watchers: InternalAPI.RequestFn;
   update_watcher_shape: InternalAPI.UpdateShape;
-  switch_to_app: InternalAPI.SwitchToApp;
+  switch_to_app: InternalAPI.RequestFn;
   get_lampix_info: InternalAPI.RequestFn;
   get_apps: InternalAPI.RequestFn;
   get_config_data: InternalAPI.RequestFn;
