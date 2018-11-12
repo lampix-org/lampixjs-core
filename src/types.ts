@@ -22,10 +22,33 @@ export namespace InternalAPI {
   export interface SwitchToApp { (appName: string, queryParams?: string): void; }
   export interface WriteFile { (filename: string, data: string): void; }
   export interface ReadFile { (filename: string): void; }
-  export interface LampixResponse {
-    error: string;
-    data: any;
-  }
+}
+
+export interface LampixResponse {
+  /**
+   * Request / response mapping ID
+   */
+  requestId: string;
+  error: string;
+  /**
+   * Action specific data
+   */
+  data: object;
+}
+
+export interface LampixRequest {
+  /**
+   * Request / response mapping ID
+   */
+  requestId: string;
+  /**
+   * window.* function to call for the response of a specific action
+   */
+  callback: string;
+  /**
+   * Stringified JSON with action specific data
+   */
+  data: string;
 }
 
 export type LampixInternal = {
@@ -210,15 +233,6 @@ export interface FileWrittenCallback {
 
 export interface FileReadCallback {
   (error: string, filename: string, data: object): void;
-}
-
-export interface Callbacks {
-  objectsClassifiedCb: ObjectsClassifiedCallback;
-  objectsLocatedCb: ObjectsLocatedCallback;
-  lampixInfoCb: LampixInfoCallback;
-  getAppsCb: GetAppsCallback;
-  getAppConfigCb: AppConfigCallback;
-  transformCoordinatesCb: TransformCoordsCallback;
 }
 
 export interface PublisherEventListeners {
