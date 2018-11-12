@@ -94,11 +94,8 @@ let bindEvents = () => {
     });
   };
 
-  window.onFileWritten = (error: string, filename: string) => {
-    publisher.publish(LampixEvents.FileWritten, {
-      error,
-      data: { filename }
-    });
+  window.onFileWritten = (response) => {
+    publisher.publish(LampixEvents.FileWritten, response);
   };
 
   window.onFileRead = (response) => {

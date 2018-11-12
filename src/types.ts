@@ -20,8 +20,6 @@ export namespace InternalAPI {
   export interface RequestFn { (data: string): void; }
   export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
   export interface SwitchToApp { (appName: string, queryParams?: string): void; }
-  export interface WriteFile { (filename: string, data: string): void; }
-  export interface ReadFile { (filename: string): void; }
 }
 
 export interface LampixResponse<T extends object> {
@@ -40,6 +38,7 @@ export namespace ResponsePayloads {
   export interface AppsPayload { apps: AppInfo[]; }
   export interface LampixInfoPayload { info: LampixInfo; }
   export interface FileReadPayload { data: object; }
+  export interface FileWrittenPayload {}
 }
 
 export interface LampixRequest {
@@ -67,8 +66,8 @@ export type LampixInternal = {
   get_lampix_info: InternalAPI.RequestFn;
   get_apps: InternalAPI.RequestFn;
   get_config_data: InternalAPI.RequestFn;
-  write_file: InternalAPI.WriteFile,
-  read_file: InternalAPI.ReadFile
+  write_file: InternalAPI.RequestFn,
+  read_file: InternalAPI.RequestFn
 };
 
 declare global {
@@ -234,7 +233,7 @@ export interface WatcherRequestCompleteCallback {
 }
 
 export interface FileWrittenCallback {
-  (error: string, filename: string): void;
+  (r: ResponsePayloads.FileWrittenPayload): void;
 }
 
 export interface FileReadCallback {
