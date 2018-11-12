@@ -39,6 +39,7 @@ export interface LampixResponse<T extends object> {
 export namespace ResponsePayloads {
   export interface AppsPayload { apps: AppInfo[]; }
   export interface LampixInfoPayload { info: LampixInfo; }
+  export interface FileReadPayload { data: object; }
 }
 
 export interface LampixRequest {
@@ -162,7 +163,7 @@ export interface LampixInfo {
  * @param lampixInfo Object containing Lampix information. See {@link LampixInfo}.
  */
 export interface LampixInfoCallback {
-  (lampixInfo: LampixInfo): void;
+  (r: ResponsePayloads.LampixInfoPayload): void;
 }
 
 export interface Point {
@@ -237,7 +238,7 @@ export interface FileWrittenCallback {
 }
 
 export interface FileReadCallback {
-  (error: string, filename: string, data: object): void;
+  (r: ResponsePayloads.FileReadPayload): void;
 }
 
 export interface PublisherEventListeners {
