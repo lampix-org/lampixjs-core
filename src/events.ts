@@ -13,3 +13,19 @@ export enum LampixEvents {
   FileWritten = 'lx/file-written',
   FileRead = 'lx/file-read'
 }
+
+export const eventToCallbackMap = {
+  [LampixEvents.WatcherAdded]: 'onWatcherAdded',
+  [LampixEvents.WatcherRemoved]: 'onWatcherRemoved',
+  [LampixEvents.WatcherPaused]: 'onWatcherPaused',
+  [LampixEvents.WatcherResumed]: 'onWatcherResumed',
+  [LampixEvents.WatcherUpdated]: 'onWatcherUpdated',
+  [LampixEvents.Classification]: 'onClassification',
+  [LampixEvents.Location]: 'onLocation',
+  [LampixEvents.LampixInfo]: 'onLampixInfo',
+  [LampixEvents.GetApps]: 'onGetApps',
+  [LampixEvents.AppConfig]: 'onAppConfig',
+  [LampixEvents.TransformCoordinates]: 'onTransformCoordinates',
+  [LampixEvents.FileRead]: 'onFileRead',
+  [LampixEvents.FileWritten]: 'onFileWritten'
+};
