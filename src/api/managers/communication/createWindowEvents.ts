@@ -38,15 +38,12 @@ let bindEvents = () => {
     });
   };
 
-  window.onWatcherRemoved = (watcherId: WatcherID) => {
-    publisher.publish(LampixEvents.WatcherRemoved, {
-      error: null,
-      data: { watcherId }
-    });
-  };
-
   window.onWatcherAdded = (response: ResponsePayloads.AddWatchers) => {
     publisher.publish(LampixEvents.WatcherAdded, response);
+  };
+
+  window.onWatcherRemoved = (response: ResponsePayloads.RemoveWatchers) => {
+    publisher.publish(LampixEvents.WatcherRemoved, response);
   };
 
   window.onWatcherPaused = (watcherId: WatcherID) => {

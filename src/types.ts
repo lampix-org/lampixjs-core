@@ -41,6 +41,7 @@ export namespace ResponsePayloads {
   export interface FileWrittenPayload {}
   export interface SwitchToApp {}
   export interface AddWatchers { watcherIds: WatcherID[]; }
+  export interface RemoveWatchers { watcherIds: WatcherID[]; }
   export interface UpdateWatcher {}
 }
 
@@ -78,7 +79,7 @@ declare global {
     _lampix_internal: LampixInternal;
     onObjectsClassified: ObjectsClassifiedCallback;
     onObjectsLocated: ObjectsLocatedCallback;
-    onWatcherRemoved: WatcherRequestCompleteCallback;
+    onWatcherRemoved: WatchersRemovedCallback;
     onWatcherAdded: WatchersAddedCallback;
     onWatcherPaused: WatcherRequestCompleteCallback;
     onWatcherResumed: WatcherRequestCompleteCallback;
@@ -233,6 +234,10 @@ export interface AppConfigCallback {
 
 export interface WatchersAddedCallback {
   (r: ResponsePayloads.AddWatchers): void;
+}
+
+export interface WatchersRemovedCallback {
+  (r: ResponsePayloads.RemoveWatchers): void;
 }
 
 export interface WatcherUpdatedCallback {

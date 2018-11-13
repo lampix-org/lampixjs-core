@@ -1,9 +1,9 @@
 import {
   RegisteredWatcher,
-  Managers
+  Managers,
+  ResponsePayloads
 } from '../../../types';
 
-import { idsAsJSON } from './idsAsJSON';
 import { waitForAPI } from '../../../api/waitForAPI';
 import { LampixEvents } from '../../../events';
 import { listen } from '../communication/settler';
@@ -15,13 +15,6 @@ import { listen } from '../communication/settler';
  * @internal
  */
 function removeWatchersInitializer(wm: Managers.Watchers.Manager) {
-  function confirmationPromise(rw: RegisteredWatcher): Promise<void> {
-    return listen(LampixEvents.WatcherRemoved, rw.state._id)
-      .then(() => {
-        delete wm.watchers[rw.state._id];
-      });
-  }
-
   /**
    * Removes all the provided watchers from the watch list
    *
@@ -29,14 +22,20 @@ function removeWatchersInitializer(wm: Managers.Watchers.Manager) {
    * @internal
    */
   function removeWatchers(registeredWatchers: RegisteredWatcher[]): Promise<void> {
-    const promises = registeredWatchers.map(confirmationPromise);
-
-    return waitForAPI().then(() => {
-      window._lampix_internal.remove_watchers(idsAsJSON(registeredWatchers));
-
-      // The .then avoids returning [undefined, undefined, ..., undefined]
-      return Promise.all(promises).then(() => undefined);
+    const { promise, request } = listen<ResponsePayloads.RemoveWatchers>(LampixEvents.WatcherRemoved, {
+      watcherIds: registeredWatchers.map((rw) => rw.state._id)
     });
+
+    promise.then(() => registeredWatchers.forEach((rw) => {
+      delete wm.watchers[rw.state._id];
+    }));
+
+    return waitForAPI()
+      .then(() => {
+        window._lampix_internal.remove_watchers(JSON.stringify(request));
+        return promise;
+      })
+      .then(() => undefined);
   }
 
   return removeWatchers;
