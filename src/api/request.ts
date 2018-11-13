@@ -6,7 +6,7 @@ const request = (
 ) => ({
   callback,
   data,
-  requestId: generateId(),
+  request_id: generateId(),
 });
 
 export { request };

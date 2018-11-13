@@ -26,7 +26,7 @@ export interface LampixResponse<T extends object> {
   /**
    * Request / response mapping ID
    */
-  requestId: string;
+  request_id: string;
   error: string;
   /**
    * Action specific data
@@ -52,7 +52,7 @@ export interface LampixRequest {
   /**
    * Request / response mapping ID
    */
-  requestId: string;
+  request_id: string;
   /**
    * window.* function to call for the response of a specific action
    */

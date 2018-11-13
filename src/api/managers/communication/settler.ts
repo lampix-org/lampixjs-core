@@ -21,7 +21,7 @@ const listen = <T extends object>(event: LampixEvents, data: object = null) => {
   const req = request(callbackName, data);
 
   pendingSettlement[event] = pendingSettlement[event] || {} as SettlerMap;
-  let settler = pendingSettlement[event][req.requestId] = {} as Settler;
+  let settler = pendingSettlement[event][req.request_id] = {} as Settler;
 
   const promise = new Promise<T>((resolve, reject) => {
     settler.resolve = resolve;
@@ -30,9 +30,9 @@ const listen = <T extends object>(event: LampixEvents, data: object = null) => {
 
   // Settle the promise
   const unsubscribe = publisher.subscribe(event, (response: LampixResponse<T>) => {
-    const { requestId, error, data } = response;
+    const { request_id, error, data } = response;
 
-    if (req.requestId !== requestId) {
+    if (req.request_id !== request_id) {
       return;
     }
 
@@ -43,7 +43,7 @@ const listen = <T extends object>(event: LampixEvents, data: object = null) => {
     }
 
     settler = null;
-    delete pendingSettlement[event][requestId];
+    delete pendingSettlement[event][request_id];
   });
 
   /**
