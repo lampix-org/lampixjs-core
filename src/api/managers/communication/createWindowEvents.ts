@@ -39,22 +39,22 @@ let bindEvents = () => {
   };
 
   window.onWatcherAdded = (response: ResponsePayloads.AddWatchers) => {
-    publisher.publish(LampixEvents.WatcherAdded, response);
+    publisher.publish(LampixEvents.WatchersAdded, response);
   };
 
   window.onWatcherRemoved = (response: ResponsePayloads.RemoveWatchers) => {
-    publisher.publish(LampixEvents.WatcherRemoved, response);
+    publisher.publish(LampixEvents.WatchersRemoved, response);
   };
 
   window.onWatcherPaused = (watcherId: WatcherID) => {
-    publisher.publish(LampixEvents.WatcherPaused, {
+    publisher.publish(LampixEvents.WatchersPaused, {
       error: null,
       data: { watcherId }
     });
   };
 
   window.onWatcherResumed = (watcherId: WatcherID) => {
-    publisher.publish(LampixEvents.WatcherResumed, {
+    publisher.publish(LampixEvents.WatchersResumed, {
       error: null,
       data: { watcherId }
     });

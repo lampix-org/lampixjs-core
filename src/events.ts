@@ -1,8 +1,8 @@
 export enum LampixEvents {
-  WatcherRemoved = 'lx/watcher-removed',
-  WatcherAdded = 'lx/watcher-added',
-  WatcherPaused = 'lx/watcher-paused',
-  WatcherResumed = 'lx/watcher-resumed',
+  WatchersRemoved = 'lx/watchers-removed',
+  WatchersAdded = 'lx/watchers-added',
+  WatchersPaused = 'lx/watchers-paused',
+  WatchersResumed = 'lx/watchers-resumed',
   WatcherUpdated = 'lx/watcher-updated',
   LampixInfo = 'lx/lampix-info',
   GetApps = 'lx/get-apps',
@@ -16,10 +16,10 @@ export enum LampixEvents {
 }
 
 export const eventToCallbackMap = {
-  [LampixEvents.WatcherAdded]: 'onWatcherAdded',
-  [LampixEvents.WatcherRemoved]: 'onWatcherRemoved',
-  [LampixEvents.WatcherPaused]: 'onWatcherPaused',
-  [LampixEvents.WatcherResumed]: 'onWatcherResumed',
+  [LampixEvents.WatchersAdded]: 'onWatchersAdded',
+  [LampixEvents.WatchersRemoved]: 'onWatchersRemoved',
+  [LampixEvents.WatchersPaused]: 'onWatchersPaused',
+  [LampixEvents.WatchersResumed]: 'onWatchersResumed',
   [LampixEvents.WatcherUpdated]: 'onWatcherUpdated',
   [LampixEvents.Classification]: 'onClassification',
   [LampixEvents.Location]: 'onLocation',

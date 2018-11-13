@@ -29,7 +29,7 @@ function addWatchersInitializer(wm: Managers.Watchers.Manager) {
   function addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]> {
     const rwList: RegisteredWatcher[] = watchers.map((w) => createRegisteredWatcher(w, wm));
 
-    const { promise, request } = listen<ResponsePayloads.AddWatchers>(LampixEvents.WatcherAdded, {
+    const { promise, request } = listen<ResponsePayloads.AddWatchers>(LampixEvents.WatchersAdded, {
       watchers: rwList.map(watcherData)
     });
 
