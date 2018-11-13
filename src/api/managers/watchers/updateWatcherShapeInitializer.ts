@@ -1,6 +1,7 @@
 import {
   WatcherID,
-  PublicAPI
+  PublicAPI,
+  ResponsePayloads
 } from '../../../types';
 
 import { waitForAPI } from '../../waitForAPI';
@@ -14,20 +15,22 @@ import { listen } from '../communication/settler';
  * @internal
  */
 function updateWatcherShapeInitializer() {
-  function createPromise(watcherId: WatcherID): Promise<void> {
-    return listen(LampixEvents.WatcherUpdated, watcherId)
-      .then(() => undefined);
-  }
-
   /**
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
   function updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void> {
-    return waitForAPI().then(() => {
-      window._lampix_internal.update_watcher_shape(watcherId, JSON.stringify(shape));
-      return createPromise(watcherId);
+    const { promise, request } = listen<ResponsePayloads.UpdateWatcher>(LampixEvents.WatcherUpdated, {
+      watcherId,
+      shape
     });
+
+    return waitForAPI()
+      .then(() => {
+        window._lampix_internal.update_watcher_shape(JSON.stringify(request));
+        return promise;
+      })
+    .then(() => undefined);
   }
 
   return updateWatcherShape;

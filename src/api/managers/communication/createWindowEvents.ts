@@ -63,11 +63,8 @@ let bindEvents = () => {
     });
   };
 
-  window.onWatcherUpdated = (watcherId: WatcherID) => {
-    publisher.publish(LampixEvents.WatcherUpdated, {
-      error: null,
-      data: { watcherId }
-    });
+  window.onWatcherUpdated = (response: ResponsePayloads.UpdateWatcher) => {
+    publisher.publish(LampixEvents.WatcherUpdated, response);
   };
 
   window.onLampixInfo = (response) => {
