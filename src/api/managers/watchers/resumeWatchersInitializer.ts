@@ -1,8 +1,8 @@
 import {
-  RegisteredWatcher
+  RegisteredWatcher,
+  ResponsePayloads
 } from '../../../types';
 
-import { idsAsJSON } from './idsAsJSON';
 import { waitForAPI } from '../../waitForAPI';
 import { LampixEvents } from '../../../events';
 import { listen } from '../communication/settler';
@@ -14,24 +14,23 @@ import { listen } from '../communication/settler';
  * @internal
  */
 function resumeWatchersInitializer() {
-  function createPromise(rw: RegisteredWatcher): Promise<void> {
-    return listen(LampixEvents.WatcherResumed, rw.state._id)
-      .then(() => {
-        rw.state.active = true;
-      });
-  }
-
   /**
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
   function resumeWatchers(rwList: RegisteredWatcher[]): Promise<void> {
-    const promises: Promise<void>[] = rwList.map(createPromise);
-
-    return waitForAPI().then(() => {
-      window._lampix_internal.resume_watchers(idsAsJSON(rwList));
-      return Promise.all(promises).then(() => undefined);
+    const { promise, request } = listen<ResponsePayloads.WatchersResumed>(LampixEvents.WatchersResumed, {
+      watcherIds: rwList.map((rw) => rw.state._id)
     });
+
+    promise.then(() => rwList.forEach((rw) => { rw.state.active = true; }));
+
+    return waitForAPI()
+      .then(() => {
+        window._lampix_internal.resume_watchers(JSON.stringify(request));
+        return promise;
+      })
+      .then(() => undefined);
 
   }
 

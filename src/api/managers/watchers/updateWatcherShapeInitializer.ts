@@ -20,7 +20,7 @@ function updateWatcherShapeInitializer() {
    * @internal
    */
   function updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void> {
-    const { promise, request } = listen<ResponsePayloads.UpdateWatcher>(LampixEvents.WatcherUpdated, {
+    const { promise, request } = listen<ResponsePayloads.WatchersUpdated>(LampixEvents.WatcherUpdated, {
       watcherId,
       shape
     });
@@ -30,7 +30,7 @@ function updateWatcherShapeInitializer() {
         window._lampix_internal.update_watcher_shape(JSON.stringify(request));
         return promise;
       })
-    .then(() => undefined);
+      .then(() => undefined);
   }
 
   return updateWatcherShape;

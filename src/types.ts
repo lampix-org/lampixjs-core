@@ -40,9 +40,11 @@ export namespace ResponsePayloads {
   export interface FileReadPayload { data: object; }
   export interface FileWrittenPayload {}
   export interface SwitchToApp {}
-  export interface AddWatchers { watcherIds: WatcherID[]; }
-  export interface RemoveWatchers { watcherIds: WatcherID[]; }
-  export interface UpdateWatcher {}
+  export interface WatchersAdded { watcherIds: WatcherID[]; }
+  export interface WatchersRemoved { watcherIds: WatcherID[]; }
+  export interface WatchersUpdated {}
+  export interface WatchersPaused {}
+  export interface WatchersResumed {}
 }
 
 export interface LampixRequest {
@@ -79,10 +81,10 @@ declare global {
     _lampix_internal: LampixInternal;
     onObjectsClassified: ObjectsClassifiedCallback;
     onObjectsLocated: ObjectsLocatedCallback;
-    onWatcherRemoved: WatchersRemovedCallback;
-    onWatcherAdded: WatchersAddedCallback;
-    onWatcherPaused: WatcherRequestCompleteCallback;
-    onWatcherResumed: WatcherRequestCompleteCallback;
+    onWatchersRemoved: WatchersRemovedCallback;
+    onWatchersAdded: WatchersAddedCallback;
+    onWatchersPaused: WatchersPausedCallback;
+    onWatchersResumed: WatchersResumedCallback;
     onWatcherUpdated: WatcherUpdatedCallback;
     onLampixInfo: LampixInfoCallback;
     onGetApps: GetAppsCallback;
@@ -219,6 +221,34 @@ export interface GetAppsCallback {
   (r: LampixResponse<ResponsePayloads.AppsPayload>): void;
 }
 
+export interface WatchersAddedCallback {
+  (r: LampixResponse<ResponsePayloads.WatchersAdded>): void;
+}
+
+export interface WatchersRemovedCallback {
+  (r: LampixResponse<ResponsePayloads.WatchersRemoved>): void;
+}
+
+export interface WatcherUpdatedCallback {
+  (r: LampixResponse<ResponsePayloads.WatchersUpdated>): void;
+}
+
+export interface WatchersPausedCallback {
+  (r: LampixResponse<ResponsePayloads.WatchersPaused>): void;
+}
+
+export interface WatchersResumedCallback {
+  (r: LampixResponse<ResponsePayloads.WatchersResumed>): void;
+}
+
+export interface FileWrittenCallback {
+  (r: LampixResponse<ResponsePayloads.FileWrittenPayload>): void;
+}
+
+export interface FileReadCallback {
+  (r: LampixResponse<ResponsePayloads.FileReadPayload>): void;
+}
+
 /**
  * Callback invoked when converting camera coordinates to projector, or vice versa
  *
@@ -230,30 +260,6 @@ export interface TransformCoordsCallback {
 
 export interface AppConfigCallback {
   (appConfig: object): void;
-}
-
-export interface WatchersAddedCallback {
-  (r: ResponsePayloads.AddWatchers): void;
-}
-
-export interface WatchersRemovedCallback {
-  (r: ResponsePayloads.RemoveWatchers): void;
-}
-
-export interface WatcherUpdatedCallback {
-  (r: ResponsePayloads.UpdateWatcher): void;
-}
-
-export interface WatcherRequestCompleteCallback {
-  (watcherId: WatcherID): void;
-}
-
-export interface FileWrittenCallback {
-  (r: ResponsePayloads.FileWrittenPayload): void;
-}
-
-export interface FileReadCallback {
-  (r: ResponsePayloads.FileReadPayload): void;
 }
 
 export interface PublisherEventListeners {
