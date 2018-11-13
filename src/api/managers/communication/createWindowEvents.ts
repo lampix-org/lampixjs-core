@@ -2,7 +2,6 @@ import noop from 'lodash/noop';
 
 import {
   ClassifiedObject,
-  CoordinatesToTransform,
   WatcherID
 } from '../../../types';
 
@@ -65,11 +64,8 @@ let bindEvents = () => {
     publisher.publish(LampixEvents.GetApps, response);
   };
 
-  window.onTransformCoordinates = (transformedRect: CoordinatesToTransform[]) => {
-    publisher.publish(LampixEvents.TransformCoordinates, {
-      error: null,
-      data: { transformedRect }
-    });
+  window.onTransformCoordinates = (response) => {
+    publisher.publish(LampixEvents.TransformCoordinates, response);
   };
 
   window.onAppConfig = (config: object) => {

@@ -45,6 +45,7 @@ export namespace ResponsePayloads {
   export interface WatchersUpdated {}
   export interface WatchersPaused {}
   export interface WatchersResumed {}
+  export interface RectCoordsTransformed { rectangles: RectCoords[]; }
 }
 
 export interface LampixRequest {
@@ -73,7 +74,8 @@ export type LampixInternal = {
   get_apps: InternalAPI.RequestFn;
   get_config_data: InternalAPI.RequestFn;
   write_file: InternalAPI.RequestFn,
-  read_file: InternalAPI.RequestFn
+  read_file: InternalAPI.RequestFn,
+  transform_coordinates: InternalAPI.RequestFn
 };
 
 declare global {
@@ -144,7 +146,7 @@ export namespace Watcher {
   }
 }
 
-export interface CoordinatesToTransform extends Watcher.Shape.Rectangle {
+export interface RectCoords extends Watcher.Shape.Rectangle {
   coordinatesType: 'camera' | 'projector';
 }
 
@@ -255,7 +257,7 @@ export interface FileReadCallback {
  * @param toTransform Object specifying the rectangle to transform and what direction the conversion should take
  */
 export interface TransformCoordsCallback {
-  (transformedRect: CoordinatesToTransform[]): void;
+  (r: LampixResponse<ResponsePayloads.RectCoordsTransformed>): void;
 }
 
 export interface AppConfigCallback {

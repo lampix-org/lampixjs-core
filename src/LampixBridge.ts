@@ -5,6 +5,7 @@ import { getApps } from './api/getApps';
 import { getAppConfig } from './api/getAppConfig';
 import { writeJsonToFile } from './api/writeJsonToFile';
 import { readJsonFromFile } from './api/readJsonFromFile';
+import { transformRectCoords } from './api/transformRectCoords';
 import { bindEvents } from './api/managers/communication/createWindowEvents';
 import { watcherManager as wm } from './api/managers/watchers/manager';
 
@@ -22,7 +23,8 @@ import {
   LampixInfo,
   PublicAPI,
   AppInfo,
-  QueryParamsObject
+  QueryParamsObject,
+  RectCoords
 } from './types';
 
 bindEvents();
@@ -68,6 +70,7 @@ class LampixBridge implements ILampixBridge {
   public getAppConfig: () => Promise<object> = getAppConfig();
   public writeJsonToFile: (filename: string, data: object) => Promise<void> = writeJsonToFile();
   public readJsonFromFile: (filename: string) => Promise<object> = readJsonFromFile();
+  public transformRectCoords: (...rectCoords: RectCoords[]) => Promise<RectCoords[]> = transformRectCoords();
 
   /**
    * Watcher manager
