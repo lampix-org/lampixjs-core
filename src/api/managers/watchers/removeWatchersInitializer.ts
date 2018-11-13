@@ -23,7 +23,7 @@ function removeWatchersInitializer(wm: Managers.Watchers.Manager) {
    */
   function removeWatchers(registeredWatchers: RegisteredWatcher[]): Promise<void> {
     const { promise, request } = listen<ResponsePayloads.WatchersRemoved>(LampixEvents.WatchersRemoved, {
-      watcherIds: registeredWatchers.map((rw) => rw.state._id)
+      watcher_ids: registeredWatchers.map((rw) => rw.state._id)
     });
 
     promise.then(() => registeredWatchers.forEach((rw) => {

@@ -20,7 +20,7 @@ function pauseWatchersInitializer() {
    */
   function pauseWatchers(rwList: RegisteredWatcher[]): Promise<void> {
     const { promise, request } = listen<ResponsePayloads.WatchersPaused>(LampixEvents.WatchersPaused, {
-      watcherIds: rwList.map((rw) => rw.state._id)
+      watcher_ids: rwList.map((rw) => rw.state._id)
     });
 
     promise.then(() => rwList.forEach((rw) => { rw.state.active = false; }));

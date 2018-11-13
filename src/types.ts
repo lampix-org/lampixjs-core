@@ -40,8 +40,8 @@ export namespace ResponsePayloads {
   export interface FileReadPayload { data: object; }
   export interface FileWrittenPayload {}
   export interface SwitchToApp {}
-  export interface WatchersAdded { watcherIds: WatcherID[]; }
-  export interface WatchersRemoved { watcherIds: WatcherID[]; }
+  export interface WatchersAdded { watcher_ids: WatcherID[]; }
+  export interface WatchersRemoved { watcher_ids: WatcherID[]; }
   export interface WatchersUpdated {}
   export interface WatchersPaused {}
   export interface WatchersResumed {}
