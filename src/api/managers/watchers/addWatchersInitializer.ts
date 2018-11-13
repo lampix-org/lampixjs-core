@@ -1,7 +1,8 @@
 import {
   RegisteredWatcher,
   Watcher,
-  Managers
+  Managers,
+  ResponsePayloads
 } from '../../../types';
 
 import { createRegisteredWatcher } from './createRegisteredWatcher';
@@ -13,8 +14,6 @@ const watcherData = (w: RegisteredWatcher) => ({
   id: w.state._id,
   ...w.source
 });
-
-const watchersAsJSON = (rwList: RegisteredWatcher[]) => JSON.stringify(rwList.map(watcherData));
 
 /**
  * Allows watcher manager to inject device API
@@ -30,19 +29,21 @@ function addWatchersInitializer(wm: Managers.Watchers.Manager) {
   function addWatchers(watchers: Watcher.Watcher[]): Promise<RegisteredWatcher[]> {
     const rwList: RegisteredWatcher[] = watchers.map((w) => createRegisteredWatcher(w, wm));
 
-    const request = listen<RegisteredWatcher[]>(LampixEvents.WatcherAdded, {
-      watchers: rwList
+    const { promise, request } = listen<ResponsePayloads.AddWatchers>(LampixEvents.WatcherAdded, {
+      watchers: rwList.map(watcherData)
     });
 
-    request.then(() => rwList.forEach((rw) => {
+    promise.then(() => rwList.forEach((rw) => {
       wm.watchers[rw.state._id] = rw;
       return rw;
     }));
 
-    return waitForAPI().then(() => {
-      window._lampix_internal.add_watchers(watchersAsJSON(rwList));
-      return request;
-    });
+    return waitForAPI()
+      .then(() => {
+        window._lampix_internal.add_watchers(JSON.stringify(request));
+        return promise;
+      })
+      .then(() => rwList);
   }
 
   return addWatchers;

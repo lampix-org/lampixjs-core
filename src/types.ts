@@ -40,6 +40,7 @@ export namespace ResponsePayloads {
   export interface FileReadPayload { data: object; }
   export interface FileWrittenPayload {}
   export interface SwitchToApp {}
+  export interface AddWatchers { watcherIds: WatcherID[]; }
 }
 
 export interface LampixRequest {
@@ -77,7 +78,7 @@ declare global {
     onObjectsClassified: ObjectsClassifiedCallback;
     onObjectsLocated: ObjectsLocatedCallback;
     onWatcherRemoved: WatcherRequestCompleteCallback;
-    onWatcherAdded: WatcherRequestCompleteCallback;
+    onWatcherAdded: WatchersAddedCallback;
     onWatcherPaused: WatcherRequestCompleteCallback;
     onWatcherResumed: WatcherRequestCompleteCallback;
     onWatcherUpdated: WatcherRequestCompleteCallback;
@@ -227,6 +228,10 @@ export interface TransformCoordsCallback {
 
 export interface AppConfigCallback {
   (appConfig: object): void;
+}
+
+export interface WatchersAddedCallback {
+  (r: ResponsePayloads.AddWatchers): void;
 }
 
 export interface WatcherRequestCompleteCallback {

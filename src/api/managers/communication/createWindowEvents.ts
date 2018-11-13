@@ -3,7 +3,8 @@ import noop from 'lodash/noop';
 import {
   ClassifiedObject,
   CoordinatesToTransform,
-  WatcherID
+  WatcherID,
+  ResponsePayloads
 } from '../../../types';
 
 import { publisher } from '../../../publisher';
@@ -44,11 +45,8 @@ let bindEvents = () => {
     });
   };
 
-  window.onWatcherAdded = (watcherId: WatcherID) => {
-    publisher.publish(LampixEvents.WatcherAdded, {
-      error: null,
-      data: { watcherId }
-    });
+  window.onWatcherAdded = (response: ResponsePayloads.AddWatchers) => {
+    publisher.publish(LampixEvents.WatcherAdded, response);
   };
 
   window.onWatcherPaused = (watcherId: WatcherID) => {
