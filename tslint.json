@@ -15,7 +15,8 @@
         "no-param-reassign": [2, { "props": false }],
         "variable-name": [
             true,
-            "allow-leading-underscore"
+            "allow-leading-underscore",
+            "allow-snake-case"
         ]
     },
     "rulesDirectory": []

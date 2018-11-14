@@ -19,9 +19,9 @@ function updateWatcherShapeInitializer() {
    * @param watchers - Mixed array of all watchers to add
    * @internal
    */
-  function updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void> {
+  function updateWatcherShape(watcher_id: WatcherID, shape: PublicAPI.Shape): Promise<void> {
     const { promise, request } = listen<ResponsePayloads.WatchersUpdated>(LampixEvents.WatcherUpdated, {
-      watcherId,
+      watcher_id,
       shape
     });
 

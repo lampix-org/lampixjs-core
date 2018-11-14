@@ -17,22 +17,22 @@ let bindEvents = () => {
   bindEvents = noop;
 
   window.onObjectsClassified = (
-    watcherId: WatcherID,
+    watcher_id: WatcherID,
     classifiedObjects: ClassifiedObject[]
   ) => {
     publisher.publish(LampixEvents.Classification, {
       error: null,
-      data: { watcherId, objects: classifiedObjects }
+      data: { watcher_id, objects: classifiedObjects }
     });
   };
 
   window.onObjectsLocated = (
-    watcherId,
+    watcher_id,
     locatedObjects
   ) => {
     publisher.publish(LampixEvents.Location, {
       error: null,
-      data: { watcherId, objects: locatedObjects }
+      data: { watcher_id, objects: locatedObjects }
     });
   };
 

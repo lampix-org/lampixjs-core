@@ -18,7 +18,7 @@ export interface NoOp {
 
 export namespace InternalAPI {
   export interface RequestFn { (data: string): void; }
-  export interface UpdateShape { (watcherId: WatcherID, shape: string): void; }
+  export interface UpdateShape { (watcher_id: WatcherID, shape: string): void; }
   export interface SwitchToApp { (appName: string, queryParams?: string): void; }
 }
 
@@ -202,17 +202,17 @@ export interface ClassifiedObject {
  * @param classifiedObjects Array of detected objects. See {@link ClassifiedObject}.
  */
 export interface ObjectsClassifiedCallback {
-  (watcherId: WatcherID, classifiedObjects: ClassifiedObject[]): void;
+  (watcher_id: WatcherID, classifiedObjects: ClassifiedObject[]): void;
 }
 
 /**
  * Callback invoked when an object is detected, but before it is classified.
  *
- * @param watcherId Index of the rectangle handling the classification event.
+ * @param watcher_id Index of the rectangle handling the classification event.
  * @param detectedObjects Array of objects describing the shape of the detected objects.
  */
 export interface ObjectsLocatedCallback {
-  (watcherId: WatcherID, detectedObjects: Outline[]): void;
+  (watcher_id: WatcherID, detectedObjects: Outline[]): void;
 }
 
 export interface AppInfo {
@@ -369,11 +369,11 @@ export interface RegisterFn {
 export namespace Managers {
   export namespace Watchers {
     export interface WatcherPendingMap {
-      [watcherId: string]: Function;
+      [watcher_id: string]: Function;
     }
 
     export interface Manager {
-      watchers: { [watcherId: string]: RegisteredWatcher; };
+      watchers: { [watcher_id: string]: RegisteredWatcher; };
       pendingRemoval: WatcherPendingMap;
       pendingAddition: WatcherPendingMap;
       pendingPausing: WatcherPendingMap;
@@ -385,7 +385,7 @@ export namespace Managers {
       pauseAllWatchers(): Promise<void>;
       resumeWatchers(watchers: RegisteredWatcher[]): Promise<void>;
       resumeAllWatchers(): Promise<void>;
-      updateWatcherShape(watcherId: WatcherID, shape: PublicAPI.Shape): Promise<void>;
+      updateWatcherShape(watcher_id: WatcherID, shape: PublicAPI.Shape): Promise<void>;
     }
   }
 }

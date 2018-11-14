@@ -21,14 +21,14 @@ function watcherActionHandler(
   wm: Managers.Watchers.Manager,
   ...internalEvents: string[]
 ) {
-  function handler(data: { error: string, data: { watcherId: string, objects: any[] }}) {
-    const { data: { watcherId, objects } } = data;
-    const rw: RegisteredWatcher = wm.watchers[watcherId];
+  function handler(data: { error: string, data: { watcher_id: string, objects: any[] }}) {
+    const { data: { watcher_id, objects } } = data;
+    const rw: RegisteredWatcher = wm.watchers[watcher_id];
 
     if (!rw) {
       // TODO: Handle case where watcher doesn't exist
       // Use specific error
-      throw new Error(`RegisteredWatcher ${watcherId} does not exist.`);
+      throw new Error(`RegisteredWatcher ${watcher_id} does not exist.`);
     }
 
     rw[action].call(rw[action], objects);
