@@ -46,20 +46,15 @@ const listen = <T extends object>(event: LampixEvents, data: object = null) => {
     delete pendingSettlement[event][request_id];
   });
 
-  /**
-   * Resolve and reject receive only one argument (by spec design)
-   * And yes, I tried using .finally, but TypeScript is being peculiar about it,
-   * es2018.promise or not
-   *
-   * @param data - Reject reason or a resolve value
-   */
-  const always = (data: any) => {
+  promise.then((data: any) => {
     unsubscribe();
     return data;
-  };
+  });
 
-  promise.then(always);
-  promise.catch(always);
+  promise.catch((reason: any) => {
+    unsubscribe();
+    throw reason;
+  });
 
   return {
     promise,
