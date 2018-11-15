@@ -13,7 +13,7 @@
 
 ### v0.x.x
 
-```
+```js
 {
   posX: number,
   posY: number,
@@ -29,7 +29,7 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 
 ### v1.x.x
 
-```
+```js
 {
   shape: {
     type: 'rectangle' | 'polygon',
@@ -65,7 +65,7 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 - uses a neural network and doesn't provide location information => `name: 'NeuralNetworkClassifier'`
 - need to specify neural network name => `params: { neural_network_name: 'fingers' }`
 
-```
+```js
 {
   name: 'NeuralNetworkClassifier',
   params: {
@@ -77,7 +77,7 @@ Passing extra information to Lampix can only be done through the `.classifier` p
 
 You can also use the `presets.button` as seen below:
 
-```
+```js
 import lampix from '@lampix/core';
 
 function someCallback() {
@@ -98,7 +98,7 @@ This applies to former *position classifiers* (currently referred to as *segment
 ## Watcher add and remove
 
 ### v0.x.x
-```
+```js
 import lampix from '@lampix/core';
 
 const watchers = [
@@ -124,7 +124,7 @@ lampix.registerSimpleClassifier(watchers, (index, recognizedClass) => {
 ```
 
 ### v1.x.x
-```
+```js
 import lampix from '@lampix/core';
 
 const w1 = {
@@ -154,7 +154,7 @@ lampix.watchers.add(w1, w2);
 **v0.x.x** doesn't notify when an action has completed on the device.  
 **v1.x.x** fixes this issue via Promises.
 
-```
+```js
 lampix.watchers.add(w1, w2).then(() => console.log('Watchers ready to be used'));
 lampix.watchers.remove(registeredWatcher1, registeredWatcher2).then(() => console.log('Watchers removed'));
 lampix.getLampixInfo().then((data) => console.log('Lampix info: ', data));
@@ -171,7 +171,7 @@ The information used to create the registered watcher can be found in the `.sour
 
 See the API reference for more information.
 
-```
+```js
 lampix.watchers.add(w1, w2).then((rw1, rw2) => {
   // Now that we can safely use these watchers, let's pause them
   rw1.pause(); // pause indefinitely
@@ -185,7 +185,7 @@ lampix.watchers.add(w1, w2).then((rw1, rw2) => {
 
 **v1.x.x** fixes this issue by allowing the user to add an `.onClassification` property on watchers either on the source data for the watcher or on the registered watcher itself. 
 
-```
+```js
 // ===== v1.x.x =====
 
 const w1 = {
