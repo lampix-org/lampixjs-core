@@ -1,5 +1,5 @@
-# LampixJS &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lampix/lampix/blob/master/LICENSE)
+# LampixJS
 
-LampixJS is the official JavaScript library for creating [Lampix](https://lampix.com/) applications.
+LampixJS is the official JavaScript library used to create [Lampix](https://lampix.com/) applications, making use of the internal API Lampix devices expose.
 
-It is not meant to be used outside of the context of Lampix or the Lampix Simulator.
+
