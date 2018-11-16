@@ -31,6 +31,27 @@ The fields that are most relevant to Lampix, my.lampix.com and / or the App Swit
   * **lampixVersion**, specifies a range of versions the app is compatible with (e.g "2.0.0", ">= 2.0.0 <= 10.5.1" etc. - as seen on [NPM semver's package](https://docs.npmjs.com/misc/semver#ranges)). The current version is "2.1.0"
   * **showInAppSwitcher**, used to prevent or force its showing in the App Switcher (true, by default)
 
+### Example
+
+```js
+{
+  "name": "trivia",
+  "displayName": "Trivia",
+  "version": "1.1.1",
+  "description": "Test your knowledge on different topics",
+  "author": {
+    "name": "Your name",
+    "email": "your@email.com"
+  },
+  "lampixConfig": {
+    "lampixVersion": "2.1.0",
+    "showInAppSwitcher": true
+  }
+}
+```
+
+**NOTE**: You don't need to keep track of two *package.json* files if your app already uses one. You can use the one NPM uses, and Lampix will only use the fields specified above. **It is important to know** that the `getApps()` function returns a list of all the available apps with *ALL* the metadata in *package.json* (at least for now).
+
 ## config.json and schema.json
 
 **config.json** contains arbitrary information, as the application demands it, whether it's a list of strings, an enormous JSON 20 levels deep or something else. For example, configurable questions for a trivia or a survey style app could belong in config.json
