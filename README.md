@@ -14,7 +14,7 @@ That said, you can use:
 * [React](https://reactjs.org/)
 * [Angular](https://angular.io/)
 * [Vue](https://vuejs.org/)
-* [VanillaJS](http://vanilla-js.com/) - as in, no libraries, if you'd prefer not using any
+* [VanillaJS](http://vanilla-js.com/) - as in no libraries, if you'd prefer not using any
 * and any other technology used to develop web applications
 
 ### Do I need to worry about browser support?
