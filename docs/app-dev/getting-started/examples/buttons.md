@@ -16,7 +16,7 @@ const callback = () => {
 
 // Minimum necessary
 lampixDOM.buttons.generate(x - 100, y, callback)
-  .then((registeredWatcher) => console.log('Button ready to be used'));
+  .then((firstButton) => console.log('Button ready to be used'));
 
 // A little configuration goes a long way
 const options = {
@@ -27,7 +27,7 @@ const options = {
 };
 
 lampixDOM.buttons.generate(x + 100, y, callback, options)
-  .then(() => console.log('Another button ready to be used'));
+  .then((secondButton) => console.log('Another button ready to be used'));
 ```
 
 ## Hooking up your own button
@@ -37,21 +37,25 @@ lampixDOM.buttons.generate(x + 100, y, callback, options)
 ```js
 import lampix from '@lampix/core';
 
-const x = window.innerWidth / 2;
-const y = window.innerHeight / 2;
+// Assuming there is an element with an ID of 'superb-btn`
+const btn = document.getElementById('superb-btn');
+const btnBounds = btn.getBoundingClientRect();
+const x = btnBounds.left;
+const y = btnBounds.top;
 const callback = () => {
   console.log('Button activated!');
 };
 
 // Use the button preset  
 // This automatically takes care of creating the proper watcher data structure for you  
-// It also specifies the correct watcher to load and the correct neural network to use with it  
+// It also specifies the correct watcher to load and the correct neural network to use with it
 const buttonWatcher = lampix.presets.button(x, y, callback);
 
 // Remember: .watchers.add always returns an array of registered watchers
 // of the same length as the number of arguments passed to it
 lampix.watchers.add(buttonWatcher)
-  .then((registeredWatchers) => {
+  .then((listOfButtons) => {
     console.log('Button ready to be used');
+    console.log(listOfButtons[0]);
   });
 ```
