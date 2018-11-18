@@ -1,5 +1,5 @@
 # Getting Started
 
-* [Boilerplates](./boilerplate.md)
+* [Boilerplates](./boilerplates.md)
 * [Examples](./examples/README.md)
   * [Generating a button](./examples/buttons.md)
