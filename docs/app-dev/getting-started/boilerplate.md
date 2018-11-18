@@ -1,4 +1,4 @@
-# Boilerplates
+# Boilerplate
 
 Any modern JavaScript boilerplate (aka "template", "starter", "seed") is fine, and one can develop Lampix applications without any boilerplate.  
 The following are all equally fine:
