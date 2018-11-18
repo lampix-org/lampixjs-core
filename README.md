@@ -9,7 +9,7 @@ To integrate with Lampix, use the [lampixjs](https://www.npmjs.com/package/@lamp
 
 ### What web technologies can I use?
 
-You can create your application any way you seem fit, provided the end result respects what is outlined in the [application structure](./docs/lampixjs/application-structure.md).  
+You can create your application any way you seem fit, provided the end result respects what is outlined in the [application structure](./docs/app-dev/lampixjs/application-structure.md).  
 That said, you can use:
 * [React](https://reactjs.org/)
 * [Angular](https://angular.io/)
