@@ -3,6 +3,7 @@
 The code below is available in the [minimal sample](https://github.com/lampix-org/minimal-sample) on our GitHub, that is based on our [boilerplate](../boilerplate.md).
 
 ```js
+import lampix from '@lampix/core';
 import lampixDOM from '@lampix/dom';
 
 import './styles.css';
@@ -21,11 +22,18 @@ const updateCounterElement = () => {
 };
 
 const initialize = async () => {
-  const buttonOptions = {
+  const counterButtonOptions = {
     label: 'Increase count',
     labelPosition: 'top',
     scaleFactor: 1.2,
     animationDuration: 250
+  };
+
+  const closeButtonOptions = {
+    label: 'Close App',
+    labelPosition: 'top',
+    scaleFactor: 1.2,
+    animationDuration: 500
   };
 
   const callback = () => {
@@ -33,12 +41,22 @@ const initialize = async () => {
     updateCounterElement();
   };
 
-  await lampixDOM.buttons.generate(
+  const counterButtonPromise = lampixDOM.buttons.generate(
     window.innerWidth / 2,
-    window.innerHeight - 200,
+    window.innerHeight - 120,
     callback,
-    buttonOptions
+    counterButtonOptions
   );
+
+  const closeAppButtonPromise = lampixDOM.buttons.generate(
+    100,
+    100,
+    lampix.exit,
+    closeButtonOptions
+  );
+
+  await counterButtonPromise;
+  await closeAppButtonPromise;
 
   updateCounterElement();
 };
