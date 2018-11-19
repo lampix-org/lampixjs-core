@@ -8,12 +8,12 @@
 
 ## NeuralNetworkClassifier
 
-*Uses a convolutional neural network to classify objects in the area watched by this classifier.  
-The area is defined by the dimension of the neural network and the center of the bounding box of the contour registered from JS.*
+Uses a convolutional neural network to classify objects in the area watched by this classifier.  
+The area is defined by the dimension of the neural network and the center of the bounding box of the contour registered from JS.
 
 ### Parameters
 
-```
+```js
 {
   neural_network_classifier: string // required
 }
@@ -21,7 +21,7 @@ The area is defined by the dimension of the neural network and the center of the
 
 ### Usage:
 
-```
+```js
 {
   type: 'classifier',
   name: 'NeuralNetworkClassifier',
@@ -41,7 +41,7 @@ MovementBasedSegmenter can detect (i.e locate and classify) multiple objects at 
 
 ### Parameters
 
-```
+```js
 {
   neural_network_classifier: string, // required
 
@@ -74,7 +74,7 @@ MovementBasedSegmenter can detect (i.e locate and classify) multiple objects at 
 
 ### Usage:
 
-```
+```js
 {
   type: 'segmenter',
   name: 'MovementBasedSegmenter',
@@ -92,11 +92,12 @@ Detects any object on or above the surface defined by the watcher's shape, retur
 
 ### Usage:
 
-```
+```js
 {
   type: 'segmenter',
-  name: 'DepthClassifier'
+  name: 'DepthClassifier',
+  params: {
+    frames_until_stable: int // currently experimental
+  }
 }
 ```
-
-***

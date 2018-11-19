@@ -77,10 +77,13 @@ const callback = () => {
 const buttonWatcher = {
   name: 'NeuralNetworkClassifier',
   shape: {
-    posX: x,
-    posY: y,
-    width: 50,
-    height: 50
+    type: 'rectangle',
+    data: {
+      posX: x,
+      posY: y,
+      width: 50,
+      height: 50
+    }
   },
   onClassification: callback,
   params: {
