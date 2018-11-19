@@ -16,7 +16,7 @@ We provide a boilerplate of our own that is meant to facilitate development, but
 * minimal infrastructure only - no non-vanilla technology is assumed
 * HMR
 * build step includes archive creation for my.lampix.com, along with versioned build folders (based on package.json version)
-* build scripts to automatically increase patch, minor or major versions before building, along the "just build" script
+* build scripts to automatically increase patch, minor or major versions before building, alongside the "just build" script
 * respects the requirements of the [production application structure](../application-structure.md)
 
 The boilerplate can be found on our [GitHub](https://github.com/lampix-org/app-boilerplate).
