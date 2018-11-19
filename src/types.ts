@@ -310,6 +310,10 @@ export interface RegisteredWatcher {
   updateShape(shape: PublicAPI.Shape): Promise<void>;
   onClassification: Function;
   onLocation?: Function;
+  /**
+   * UI Related logic, should there be a need to associate visual components with a watcher directly
+   */
+  ui?: object;
 }
 
 /**
