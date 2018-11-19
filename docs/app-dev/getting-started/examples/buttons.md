@@ -7,7 +7,7 @@
 ```js
 import lampixDOM from '@lampix/dom';
 
-// Behind the scenes, this will draw a button with a scaling
+// Behind the scenes, this will draw a button with a scaling animation
 const x = window.innerWidth / 2;
 const y = window.innerHeight / 2;
 const callback = () => {
