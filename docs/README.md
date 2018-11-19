@@ -3,7 +3,7 @@
 ## Application Development
 
 * [Getting Started](./app-dev/getting-started/README.md)
-  * [Up and Running](./up-and-running.md)
+  * [Up and Running](./app-dev/getting-started/up-and-running.md)
   * [Boilerplate](./app-dev/getting-started/boilerplate.md)
   * [Examples](./app-dev/getting-started/examples/README.md)
     * [Generating a button](./app-dev/getting-started/examples/buttons.md)
