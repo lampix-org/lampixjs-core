@@ -313,7 +313,7 @@ export interface RegisteredWatcher {
   /**
    * UI Related logic, should there be a need to associate visual components with a watcher directly
    */
-  ui?: object;
+  ui?: any;
 }
 
 /**
