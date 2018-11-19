@@ -1,6 +1,6 @@
 # Counter App
 
-The code below is available in this [minimal sample](https://github.com/lampix-org/minimal-sample), that is based on our [boilerplate](../boilerplate.md)
+The code below is available in the [minimal sample](https://github.com/lampix-org/minimal-sample) on our GitHub, that is based on our [boilerplate](../boilerplate.md).
 
 ```js
 import lampixDOM from '@lampix/dom';
