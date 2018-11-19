@@ -1,24 +1,19 @@
 # Up and Running
 
+The purpose of this guide is to offer a quick introduction into running apps inside the simulator.
+
 ## Prerequisites
 
 - Node.js and NPM (via [installer](https://nodejs.org/en/), recommended for Windows, or via [node version manager](https://github.com/creationix/nvm), recommended for Linux and macOS)
 
-## Downloading and installing the simulator
+## Download
 
-### Windows
+* [Windows](https://s3.amazonaws.com/simulator.lampix.com/lampix-simulator-master.exe)
+* [macOS](https://s3.amazonaws.com/simulator.lampix.com/lampix-simulator-master.dmg)
+* [Linux](https://s3.amazonaws.com/simulator.lampix.com/lampix-simulator-master.AppImage)
 
-* [Download](https://s3.amazonaws.com/simulator.lampix.com/lampix-simulator-master.exe)
-* Install
+### Linux only
 
-### macOS
-
-* [Download](https://s3.amazonaws.com/simulator.lampix.com/lampix-simulator-master.dmg)
-* Install
-
-### Linux
-
-* [Download](https://s3.amazonaws.com/simulator.lampix.com/lampix-simulator-master.AppImage)
 * `chmod +x <path-to-AppImage>`
 * Run
 
