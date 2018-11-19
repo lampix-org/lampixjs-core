@@ -32,3 +32,5 @@ const watcher = {
 lampix.watchers.add(watcher)
   .then((listOfWatchers) => console.log(listOfWatchers[0]));
 ```
+
+See [standard watchers](../../standard-watchers.md) for more information MBS.
