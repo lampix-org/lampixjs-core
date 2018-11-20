@@ -20,7 +20,7 @@ The purpose of this guide is to offer a quick introduction into running apps ins
 ## Using the sample app
 
 ```sh
-git clone git@github.com:lampix-org/minimal-sample.git  
+git clone https://github.com/lampix-org/minimal-sample.git
 cd minimal-sample
 npm install
 npm start
