@@ -17,7 +17,7 @@
   * [API Reference](./app-dev/lampixjs/api/README.md)
     * [Watcher](./app-dev/lampixjs/api/watcher.md)
     * [RegisteredWatcher](./app-dev/lampixjs/api/registered-watcher.md)
-    * [watchers.add](./app-dev/lampixjs/api/watchers.add.md)
+    * [.watchers.add](./app-dev/lampixjs/api/watchers.add.md)
   * [Examples](./app-dev/lampixjs/examples/README.md)
     * [NeuralNetworkClassifier: buttons](./app-dev/lampixjs/examples/buttons.md)
     * [MovementBasedSegmenter](./app-dev/lampixjs/examples/movement-based-segmenter.md)

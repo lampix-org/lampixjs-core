@@ -4,12 +4,12 @@ Registers one or more areas to watch with Lampix.
 
 #### Arguments
 
-1. `...watchers` _(Watchers[])_ Comma separated [Watchers](./watcher.md) objects
+1. `...watchers` ([`Watcher[]`](./watcher.md)) Comma separated Watcher objects
 
 
 #### Returns
 
-([_`Promise<RegisteredWatcher[]>`_](./registered-watchers.md)): A promise that fulfills with a list of [`RegisteredWatcher`](./registered-watcher.md) objects, equal in length to the number of arguments provided to the function
+([`Promise<RegisteredWatcher[]>`](./registered-watcher.md)): A promise that fulfills with a list of [`RegisteredWatcher`](./registered-watcher.md) objects, equal in length to the number of arguments provided to the function
 
 #### Example
 
