@@ -58,9 +58,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
     },
     remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined),
     updateShape: (shape: PublicAPI.Shape) => wm.updateWatcherShape(state._id, shape).then(() => {
-      if (shape.type === Watcher.Shape.Type.Rectangle) {
-        registeredWatcher.source.shape = shape;
-      }
+      registeredWatcher.source.shape = shape;
     })
   };
 
