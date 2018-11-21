@@ -23,7 +23,6 @@ The area is defined by the dimension of the neural network and the center of the
 
 ```js
 {
-  type: 'classifier',
   name: 'NeuralNetworkClassifier',
   params: {
     neural_network_name: <some_NN_name> // e.g 'fin_all_small'
@@ -76,7 +75,6 @@ MovementBasedSegmenter can detect (i.e locate and classify) multiple objects at 
 
 ```js
 {
-  type: 'segmenter',
   name: 'MovementBasedSegmenter',
   params: {
     ...
@@ -94,7 +92,6 @@ Detects any object on or above the surface defined by the watcher's shape, retur
 
 ```js
 {
-  type: 'segmenter',
   name: 'DepthClassifier',
   params: {
     frames_until_stable: int // currently experimental

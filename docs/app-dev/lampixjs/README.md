@@ -1,5 +1,9 @@
 # LampixJS
 
+* [API Reference](./api/README.md)
+  * [Watcher](./api/watcher.md)
+  * [RegisteredWatcher](./api/registered-watcher.md)
+  * [watchers.add](./api/watchers.add.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)
