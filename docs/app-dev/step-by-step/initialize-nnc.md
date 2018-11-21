@@ -1,6 +1,6 @@
 # Initialize NNC
 
-Time to make the `NeuralNetworkClassifier` watcher to classify `fruits`.
+Time to make `NeuralNetworkClassifier` watcher classify `fruits`.
 
 Let's create an initialization function for the NNC watcher.
 
