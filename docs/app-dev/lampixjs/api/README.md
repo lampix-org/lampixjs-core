@@ -8,3 +8,4 @@
 ### Methods
 * [.watchers.add](./watchers.add.md)
 * [.watchers.remove](./watchers.remove.md)
+* [.watchers.pauseAll](./watchers.pauseAll.md)
