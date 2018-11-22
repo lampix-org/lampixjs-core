@@ -7,3 +7,4 @@
 
 ### Methods
 * [.watchers.add](./watchers.add.md)
+* [.watchers.remove](./watchers.remove.md)

@@ -4,6 +4,7 @@
   * [Watcher](./api/watcher.md)
   * [RegisteredWatcher](./api/registered-watcher.md)
   * [.watchers.add](./api/watchers.add.md)
+  * [.watchers.remove](./api/watchers.remove.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)
