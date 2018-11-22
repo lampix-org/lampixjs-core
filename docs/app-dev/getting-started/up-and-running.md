@@ -1,6 +1,6 @@
 # Up and Running
 
-The purpose of this guide is to offer a quick introduction into running apps inside the simulator.
+This guide is a short introduction into running an application inside the simulator. For a more detailed overview on how to create an application for Lampix, see the [step by step application](../step-by-step/README.md) guide.
 
 ## Prerequisites
 
