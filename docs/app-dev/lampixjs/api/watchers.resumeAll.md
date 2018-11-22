@@ -52,3 +52,7 @@ lampix.watchers.add(watcher1, watcher2)
     console.log(registeredWatchers[1].state.active); // true
   });
 ```
+
+#### Notes
+
+You can resume a single registered watcher by using its [`.resume()`](./registered-watcher.md#resume) method as well.

@@ -5,7 +5,7 @@ Pauses all the currently registered watchers.
 
 #### Returns
 
-(`Promise<void>`): A promise that fulfills when all of the registered watchers have been paused.
+(`Promise<void>`): A promise that fulfills when all of the registered watchers have been paused. If a registered watcher is already paused, it will simply resolve automatically, bypassing Lampix.
 
 #### Example
 
@@ -46,3 +46,7 @@ lampix.watchers.add(watcher1, watcher2)
     console.log(registeredWatchers[1].state.active); // false
   });
 ```
+
+#### Notes
+
+You can pause a single registered watcher by using its [`.pause()`](./registered-watcher.md#pause) method as well.
