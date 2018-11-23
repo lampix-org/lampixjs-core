@@ -1,6 +1,6 @@
 # `.transformRectCoords(...rectCoords)`
 
-Convert coordinates from a rectangle descriptor using camera (or projector) coordinates to project coordinates (or camera).
+Convert coordinates from a rectangle descriptor using camera coordinates to projector coordinates (or vice versa).
 
 #### Returns
 
@@ -17,7 +17,9 @@ lampix.transformRectCoords({
   width: 30,
   height: 100,
   camera: true
-}).then(console.log); // fictitious values: { posX: 200, posY: 400, width: 60, height: 200 }
+}).then((transformCoordinates) => {
+  console.log(transformCoordinates[0]); // fictitious values: { posX: 200, posY: 400, width: 60, height: 200 }
+});
 ```
 
 #### Notes
