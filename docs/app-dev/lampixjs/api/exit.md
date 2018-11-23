@@ -1,6 +1,6 @@
 # `.exit()`
 
-Switch back to the default app or the app specified in the `switch-back-to` query param specified in [`switchBackTo()`](./switchBackTo.md).
+Switch back to the default app or the value of the `switch-back-to` query param specified via [`switchBackTo()`](./switchBackTo.md).
 
 (`Promise<void>`): A promise that fulfills without arguments.
 
