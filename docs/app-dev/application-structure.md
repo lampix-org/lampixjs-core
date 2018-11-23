@@ -52,7 +52,7 @@ The fields that are most relevant to Lampix, my.lampix.com and / or the App Swit
 
 **NOTE**: You don't need to keep track of two `package.json` files if your app already uses one. You can use the one NPM uses, and Lampix will only use the fields specified above. **It is important to know** that the `getApps()` function returns a list of all the available apps with *ALL* the metadata in `package.json` (at least for now).
 
-## config.json and schema.json
+## <a id='config-and-schema'></a>[config.json and schema.json](#config-and-schema)
 
 `config.json` contains arbitrary information, as the application demands it, whether it's a list of strings, an enormous JSON 20 levels deep or something else. For example, configurable questions for a trivia or a survey style app could belong in config.json
 
@@ -60,4 +60,4 @@ The fields that are most relevant to Lampix, my.lampix.com and / or the App Swit
 
 **IMPORTANT**: Should the data structure change, that means the application itself will no longer work with the new structure, so the application, config.json and schema.json all need to be updated and the application redeployed.
 
-`getAppConfig()` is the method used to retrieve the data found in config.json. As is tradition, this will be an asynchronous request and the data will be available on the success function of the promise returned.
+[`getAppConfig()`](./lampixjs/api/getAppConfig.md) is the method used to retrieve the data found in config.json. As is tradition, this will be an asynchronous request and the data will be available on the success function of the promise returned.

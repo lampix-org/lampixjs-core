@@ -15,3 +15,4 @@
 * [switchToApp](./switchToApp.md)
 * [exit](./exit.md)
 * [getApps](./getApps.md)
+* [getAppConfig](./getAppConfig.md)

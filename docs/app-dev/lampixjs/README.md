@@ -11,6 +11,7 @@
   * [switchToApp](./api/switchToApp.md)
   * [exit](./api/exit.md)
   * [getApps](./api/getApps.md)
+  * [getAppConfig](./api/getAppConfig.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)
