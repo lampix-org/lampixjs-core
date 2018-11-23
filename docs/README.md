@@ -28,6 +28,7 @@
     * [getAppConfig](./app-dev/lampixjs/api/getAppConfig.md)
     * [writeJsonToFile](./app-dev/lampixjs/api/writeJsonToFile.md)
     * [readJsonFromFile](./app-dev/lampixjs/api/readJsonFromFile.md)
+    * [transformRectCoords](./app-dev/lampixjs/api/transformRectCoords.md)
   * [Examples](./app-dev/lampixjs/examples/README.md)
     * [NeuralNetworkClassifier: buttons](./app-dev/lampixjs/examples/buttons.md)
     * [MovementBasedSegmenter](./app-dev/lampixjs/examples/movement-based-segmenter.md)

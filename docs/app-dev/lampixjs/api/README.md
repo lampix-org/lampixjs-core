@@ -18,3 +18,4 @@
 * [getAppConfig](./getAppConfig.md)
 * [writeJsonToFile](./writeJsonToFile.md)
 * [readJsonFromFile](./readJsonFromFile.md)
+* [transformRectCoords](./transformRectCoords.md)

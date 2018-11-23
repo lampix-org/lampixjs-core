@@ -14,6 +14,7 @@
   * [getAppConfig](./api/getAppConfig.md)
   * [writeJsonToFile](./api/writeJsonToFile.md)
   * [readJsonFromFile](./api/readJsonFromFile.md)
+  * [transformRectCoords](./api/transformRectCoords.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)
