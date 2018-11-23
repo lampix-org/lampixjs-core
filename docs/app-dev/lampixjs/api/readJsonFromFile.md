@@ -1,6 +1,6 @@
 # `.readJsonFromFile(filename)`
 
-Read JSON data from a file written with [`writeJsonFromFile`](./writeJsonFromFile.md).
+Read JSON data from a file written with [`writeJsonToFile`](./writeJsonToFile.md).
 
 #### Returns
 
