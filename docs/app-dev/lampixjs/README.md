@@ -12,6 +12,8 @@
   * [exit](./api/exit.md)
   * [getApps](./api/getApps.md)
   * [getAppConfig](./api/getAppConfig.md)
+  * [writeJsonToFile](./api/writeJsonToFile.md)
+  * [readJsonFromFile](./api/readJsonFromFile.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)

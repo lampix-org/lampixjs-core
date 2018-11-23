@@ -26,6 +26,8 @@
     * [exit](./app-dev/lampixjs/api/exit.md)
     * [getApps](./app-dev/lampixjs/api/getApps.md)
     * [getAppConfig](./app-dev/lampixjs/api/getAppConfig.md)
+    * [writeJsonToFile](./app-dev/lampixjs/api/writeJsonToFile.md)
+    * [readJsonFromFile](./app-dev/lampixjs/api/readJsonFromFile.md)
   * [Examples](./app-dev/lampixjs/examples/README.md)
     * [NeuralNetworkClassifier: buttons](./app-dev/lampixjs/examples/buttons.md)
     * [MovementBasedSegmenter](./app-dev/lampixjs/examples/movement-based-segmenter.md)
