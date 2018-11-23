@@ -13,3 +13,4 @@
 * [.watchers.resumeAll](./watchers.resumeAll.md)
 * [getLampixInfo](./getLampixInfo.md)
 * [switchToApp](./switchToApp.md)
+* [exit](./exit.md)
