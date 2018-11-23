@@ -10,6 +10,7 @@
   * [getLampixInfo](./api/getLampixInfo.md)
   * [switchToApp](./api/switchToApp.md)
   * [exit](./api/exit.md)
+  * [getApps](./api/getApps.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)

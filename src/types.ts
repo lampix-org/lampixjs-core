@@ -216,7 +216,8 @@ export interface ObjectsLocatedCallback {
 }
 
 export interface AppInfo {
-  [name: string]: string;
+  name: string;
+  package_data: object;
 }
 
 export interface GetAppsCallback {

@@ -14,3 +14,4 @@
 * [getLampixInfo](./getLampixInfo.md)
 * [switchToApp](./switchToApp.md)
 * [exit](./exit.md)
+* [getApps](./getApps.md)
