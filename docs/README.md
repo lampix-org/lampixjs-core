@@ -22,6 +22,7 @@
     * [.watchers.pauseAll](./app-dev/lampixjs/api/watchers.pauseAll.md)
     * [.watchers.resumeAll](./app-dev/lampixjs/api/watchers.resumeAll.md)
     * [getLampixInfo](./app-dev/lampixjs/api/getLampixInfo.md)
+    * [switchToApp](./app-dev/lampixjs/api/switchToApp.md)
   * [Examples](./app-dev/lampixjs/examples/README.md)
     * [NeuralNetworkClassifier: buttons](./app-dev/lampixjs/examples/buttons.md)
     * [MovementBasedSegmenter](./app-dev/lampixjs/examples/movement-based-segmenter.md)

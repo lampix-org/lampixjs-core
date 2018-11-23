@@ -8,6 +8,7 @@
   * [.watchers.pauseAll](./api/watchers.pauseAll.md)
   * [.watchers.resumeAll](./api/watchers.resumeAll.md)
   * [getLampixInfo](./api/getLampixInfo.md)
+  * [switchToApp](./api/switchToApp.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)

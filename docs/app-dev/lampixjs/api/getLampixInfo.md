@@ -4,7 +4,7 @@ Retrieve environment (Lampix or simulator) information.
 
 #### Returns
 
-(`Promise<void>`): A promise that fulfills with a plain descriptor object with the following properties:
+(`Promise<LampixInfo>`): A promise that fulfills with a plain descriptor object with the following properties:
 
 * `id` (_string_): Unique ID for Lampix or simulation
 * `version` (_string_): Current version of Lampix or the simulator
