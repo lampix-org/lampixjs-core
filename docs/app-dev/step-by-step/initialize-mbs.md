@@ -18,7 +18,7 @@ const initializeMBS = () => {
 ```
 
 Just like `NeuralNetworkClassifier` (and all watchers, for that matter), **MBS** also has its classification trigger on the `onClassification` callback.  
-However, `MovementBasedSegmenter` has a secondary callback, triggered prior to `onClassification`, named `onLocation`. This is because MBS first determines the location of an object and the it classifies it. `onLocation` is generally used to create a loading animation for a located, not yet classified object.
+However, `MovementBasedSegmenter` has a secondary callback, triggered prior to `onClassification`, named `onLocation`. This is because MBS first determines the location of an object and then it classifies it. `onLocation` is generally used to create a loading animation for a located, not yet classified object.
 
 For the sake of simplicity, we will focus on `onClassification` in this guide.
 
