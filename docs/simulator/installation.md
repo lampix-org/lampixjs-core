@@ -15,6 +15,6 @@ Make the .AppImage file executable.
 
 ### Considerations
 
-* auto updates are enabled on all platforms (this is only available for signed and trusted applications)
 * **Windows** and **macOS** versions are signed (Linux does not require this)
 * **Windows** version may still warn against running the app, in spite of being signed, due to the nature of the certificate used. In short, there are two certificate types for Windows, one of which can be used with a cloud based CI/CD platform and builds trust over time.
+* auto updates are enabled on all platforms
