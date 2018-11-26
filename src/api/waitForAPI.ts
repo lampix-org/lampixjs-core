@@ -20,6 +20,7 @@ const interval = setInterval(
 const waitForAPI = () => new Promise((resolve) => {
   if (apiReady) {
     resolve();
+    return;
   }
 
   pool.push(resolve);
