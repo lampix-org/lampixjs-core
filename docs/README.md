@@ -6,6 +6,7 @@
   * [Up and Running](./app-dev/getting-started/up-and-running.md)
   * [Boilerplate](./app-dev/getting-started/boilerplate.md)
 * [Step by step app](./app-dev/step-by-step/README.md)
+  * [What we'll build](./app-dev/step-by-step/end-result.md)
   * [Environment Setup](./app-dev/step-by-step/environment-setup.md)
   * [Styling](./app-dev/step-by-step/styling.md)
   * [HTML Structure](./app-dev/step-by-step/html-structure.md)
