@@ -1,6 +1,6 @@
 # Initialize MBS
 
-`MovementBasedSegmenter`'s turn to locate and detect `fruits`.
+`MovementBasedSegmenter`'s turn to locate and classify `fruits`.
 
 Let's create an initialization function for the MBS watcher.
 
