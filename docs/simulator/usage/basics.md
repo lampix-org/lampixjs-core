@@ -20,8 +20,8 @@ Since `localStorage` data is isolated on a per origin basis AND the origin of al
 
 #### Example
 
-`file:///home/username/project/super-app/index.html`
-`file:///d:/super-app/index.html`
+`file:///home/username/project/super-app/index.html`  
+`file:///d:/super-app/index.html`  
 
 ### <a id='http'></a>[`http(s):`](#http)
 
@@ -31,8 +31,8 @@ Since `localStorage` data is isolated on a per origin basis AND the origin of al
 
 #### Example
 
-`http://localhost:3000`
-`https://super.remote.app`
+`http://localhost:3000`  
+`https://super.remote.app`  
 
 ### <a id='simulator'></a>[`simulator://` (experimental)](#simulator)
 
@@ -47,12 +47,12 @@ Though `simulator:` URLs resemble [`file:`](#file) URLs, these do benefit from s
 
 #### Examples
 
-`simulator://super-app`
-`simulator://super-duper-app`
+`simulator://super-app`  
+`simulator://super-duper-app`  
 
 ## Selecting watchers and the recognized class
 
-* in the simulator, open the expansion panel in the middle that says `Simulator <your-url>`
-* select the watcher name
-* select the recognized class
-* in the simulation, click inside the area of a matching registered watcher
+1. In the simulator, open the expansion panel in the middle that says `Simulator <your-url>`
+2. Select the watcher name
+3. Select the recognized class
+4. In the simulation, click inside the area of a matching registered watcher
