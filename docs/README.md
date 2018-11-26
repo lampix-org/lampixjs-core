@@ -42,3 +42,5 @@
 ## Lampix Simulator
 
 * [Installation](./simulator/installation.md)
+* [Usage](./simulator/usage/README.md)
+  * [Basics](./simulator/usage/basics.md)
