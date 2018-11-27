@@ -34,7 +34,7 @@ Since `localStorage` data is isolated on a per origin basis AND the origin of al
 `http://localhost:3000`  
 `https://super.remote.app`  
 
-### <a id='simulator'></a>[`simulator://` (experimental)](#simulator)
+### <a id='simulator'></a>[`simulator:` (experimental)](#simulator)
 
 * serves applications in the `webapps` folder found in the [`user data`](https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname) directory
 * `writeJsonToFile` writes in the [`user data`](https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname) directory, in a folder called `webapps-data`
