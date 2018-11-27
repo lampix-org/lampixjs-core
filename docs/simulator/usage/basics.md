@@ -41,8 +41,6 @@ Since `localStorage` data is isolated on a per origin basis AND the origin of al
 
 #### Notes
 
-It is recommended to use the traditional `file:` and `http(s):` protocols (for now, at least) due to hard caching that not even force reloading can break. 
-
 Though `simulator:` URLs resemble [`file:`](#file) URLs, these do benefit from separation of `localStorage` data (as the origin is determined to be `simulator://app-name`).
 
 #### Examples
