@@ -411,3 +411,12 @@ export interface Settler {
 export interface QueryParamsObject {
   [key: string]: string;
 }
+
+export interface ButtonPreset {
+  (
+    x: number,
+    y: number,
+    onClassification: Function,
+    opts?: { width: number, height: number }
+  ): void;
+}

@@ -3,21 +3,24 @@ import noop from 'lodash/noop';
 
 import {
   Watcher,
-  StandardNeuralNetworks
+  StandardNeuralNetworks,
+  ButtonPreset
 } from '../../types';
 
-const button = (
-  x: number,
-  y: number,
-  onClassification: Function = noop,
-  { width = 50, height = 50 }: { width: number, height: number }
-) => ({
-  onClassification,
-  shape: rectangle(x, y, width, height),
-  name: Watcher.Names.NNClassifier,
-  params: {
-    neural_network_name: StandardNeuralNetworks.Fingers
-  }
-});
+const button: ButtonPreset = (
+  x,
+  y,
+  onClassification = noop,
+  { width = 50, height = 50 }
+) => {
+  return {
+    onClassification,
+    shape: rectangle(x, y, width, height),
+    name: Watcher.Names.NNClassifier,
+    params: {
+      neural_network_name: StandardNeuralNetworks.Fingers
+    }
+  };
+};
 
 export { button };
