@@ -1,3 +1,10 @@
+## 1.0.0-beta.6
+##### *Dec 5, 2018*
+
+Highlights:
+
+- added optional `{ width, height }` parameter in `.presets.buttons`, making the signature `(x, y, callback, opts?)`
+
 ## 1.0.0-beta.5
 ##### *Nov 26, 2018*
 

@@ -6,19 +6,12 @@ import {
   StandardNeuralNetworks
 } from '../../types';
 
-const button = ({
-  x,
-  y,
-  width = 50,
-  height = 50,
-  onClassification = noop
-}: {
+const button = (
   x: number,
   y: number,
-  width: number,
-  height: number,
-  onClassification: Function
-}) => ({
+  onClassification: Function = noop,
+  { width = 50, height = 50 }: { width: number, height: number }
+) => ({
   onClassification,
   shape: rectangle(x, y, width, height),
   name: Watcher.Names.NNClassifier,
