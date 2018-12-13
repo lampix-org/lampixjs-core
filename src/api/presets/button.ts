@@ -11,7 +11,7 @@ const button: ButtonPreset = (
   x,
   y,
   onClassification = noop,
-  { width = 50, height = 50 }
+  { width, height } = { width: 50, height: 50 }
 ) => {
   return {
     onClassification,
