@@ -2,7 +2,7 @@
 
 ## The easiest way
 
-`npm install @lampix/core@next @lampix/dom@next`
+`npm install @lampix/core @lampix/dom`
 
 ```js
 import lampixDOM from '@lampix/dom';
@@ -32,7 +32,7 @@ lampixDOM.buttons.generate(x + 100, y, callback, options)
 
 ## Hooking up your own button using the button preset
 
-`npm install @lampix/core@next`
+`npm install @lampix/core`
 
 ```js
 import lampix from '@lampix/core';
