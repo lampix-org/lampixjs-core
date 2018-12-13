@@ -20,3 +20,4 @@
 * [writeJsonToFile](./writeJsonToFile.md)
 * [readJsonFromFile](./readJsonFromFile.md)
 * [transformRectCoords](./transformRectCoords.md)
+* [constants](./constants.md)

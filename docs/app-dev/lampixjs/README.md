@@ -16,6 +16,7 @@
   * [writeJsonToFile](./api/writeJsonToFile.md)
   * [readJsonFromFile](./api/readJsonFromFile.md)
   * [transformRectCoords](./api/transformRectCoords.md)
+  * [constants](./api/constants.md)
 * [Examples](./examples/README.md)
   * [NeuralNetworkClassifier: buttons](./examples/buttons.md)
   * [MovementBasedSegmenter](./examples/movement-based-segmenter.md)
