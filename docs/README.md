@@ -22,6 +22,7 @@
     * [.watchers.remove](./app-dev/lampixjs/api/watchers.remove.md)
     * [.watchers.pauseAll](./app-dev/lampixjs/api/watchers.pauseAll.md)
     * [.watchers.resumeAll](./app-dev/lampixjs/api/watchers.resumeAll.md)
+    * [.presets.button](./app-dev/lampixjs/api/presets.button.md)
     * [getLampixInfo](./app-dev/lampixjs/api/getLampixInfo.md)
     * [switchToApp](./app-dev/lampixjs/api/switchToApp.md)
     * [exit](./app-dev/lampixjs/api/exit.md)

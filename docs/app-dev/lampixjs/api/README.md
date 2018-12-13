@@ -11,6 +11,7 @@
 * [.watchers.remove](./watchers.remove.md)
 * [.watchers.pauseAll](./watchers.pauseAll.md)
 * [.watchers.resumeAll](./watchers.resumeAll.md)
+* [.presets.button](./presets.button.md)
 * [getLampixInfo](./getLampixInfo.md)
 * [switchToApp](./switchToApp.md)
 * [exit](./exit.md)
