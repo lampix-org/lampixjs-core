@@ -1,3 +1,10 @@
+## 1.0.0
+##### *Dec 13, 2018*
+
+Highlights:
+
+- `.presets.button` accepts optional `{ width, height }` object to allow changing the size of the button from the default of 50x50
+
 ## 1.0.0-beta.6
 ##### *Dec 5, 2018*
 
