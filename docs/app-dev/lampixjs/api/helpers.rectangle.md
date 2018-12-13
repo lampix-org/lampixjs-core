@@ -31,7 +31,7 @@ const callback = ([recognizedObject]) => {
   }
 };
 
-const doingThingsTheHardWay = {
+const watcher = {
   name: 'NeuralNetworkClassifier',
   shape: lampix.helpers.rectangle(50, 50, 50, 50),
   onClassification: callback,
