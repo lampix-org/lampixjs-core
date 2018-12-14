@@ -3,6 +3,7 @@ import { switchToApp } from './api/switchToApp';
 import { exit } from './api/exit';
 import { getApps } from './api/getApps';
 import { getAppConfig } from './api/getAppConfig';
+import { getAppMetadata } from './api/getAppMetadata';
 import { writeJsonToFile } from './api/writeJsonToFile';
 import { readJsonFromFile } from './api/readJsonFromFile';
 import { transformRectCoords } from './api/transformRectCoords';
@@ -69,6 +70,7 @@ class LampixBridge implements ILampixBridge {
    * Retrieve application specific data from config.json if available
    */
   public getAppConfig: () => Promise<object> = getAppConfig();
+  public getAppMetadata: () => Promise<object> = getAppMetadata();
   public writeJsonToFile: (filename: string, data: object) => Promise<void> = writeJsonToFile();
   public readJsonFromFile: (filename: string) => Promise<object> = readJsonFromFile();
   public transformRectCoords: (...rectCoords: RectCoords[]) => Promise<RectCoords[]> = transformRectCoords();
