@@ -1,3 +1,10 @@
+## 1.1.0
+##### *Dec 14, 2018*
+
+Highlights:
+
+- added `.getAppMetadata()` method to retrieve contents of `package.json` dynamically
+
 ## 1.0.0
 ##### *Dec 13, 2018*
 
