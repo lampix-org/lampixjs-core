@@ -14,6 +14,7 @@
   * [exit](./api/exit.md)
   * [getApps](./api/getApps.md)
   * [getAppConfig](./api/getAppConfig.md)
+  * [getAppMetadata](./api/getAppMetadata.md)
   * [writeJsonToFile](./api/writeJsonToFile.md)
   * [readJsonFromFile](./api/readJsonFromFile.md)
   * [transformRectCoords](./api/transformRectCoords.md)

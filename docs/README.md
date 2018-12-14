@@ -29,6 +29,7 @@
     * [exit](./app-dev/lampixjs/api/exit.md)
     * [getApps](./app-dev/lampixjs/api/getApps.md)
     * [getAppConfig](./app-dev/lampixjs/api/getAppConfig.md)
+    * [getAppMetadata](./app-dev/lampixjs/api/getAppMetadata.md)
     * [writeJsonToFile](./app-dev/lampixjs/api/writeJsonToFile.md)
     * [readJsonFromFile](./app-dev/lampixjs/api/readJsonFromFile.md)
     * [transformRectCoords](./app-dev/lampixjs/api/transformRectCoords.md)

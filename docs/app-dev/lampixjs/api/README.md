@@ -18,6 +18,7 @@
 * [exit](./exit.md)
 * [getApps](./getApps.md)
 * [getAppConfig](./getAppConfig.md)
+* [getAppMetadata](./getAppMetadata.md)
 * [writeJsonToFile](./writeJsonToFile.md)
 * [readJsonFromFile](./readJsonFromFile.md)
 * [transformRectCoords](./transformRectCoords.md)
