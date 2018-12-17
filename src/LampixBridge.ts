@@ -26,7 +26,8 @@ import {
   AppInfo,
   QueryParamsObject,
   RectCoords,
-  Watcher
+  Watcher,
+  RegisteredWatcher
 } from './types';
 
 bindEvents();
@@ -97,7 +98,19 @@ class LampixBridge implements ILampixBridge {
 
       return wm.addWatchers(watchersToSend);
     },
-    remove: (...registeredWatchers) => wm.removeWatchers(registeredWatchers),
+    remove: (...registeredWatchers) => {
+      let rwListToRemove: RegisteredWatcher[] = [];
+
+      registeredWatchers.forEach((rw) => {
+        if (Array.isArray(rw)) {
+          rwListToRemove = [...rwListToRemove, ...rw];
+        } else {
+          rwListToRemove.push(rw);
+        }
+      });
+
+      return wm.removeWatchers(rwListToRemove);
+    },
     pauseAll: () => wm.pauseAllWatchers(),
     resumeAll: () => wm.resumeAllWatchers()
   };
