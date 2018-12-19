@@ -40,7 +40,9 @@
     * [Counter app](./app-dev/lampixjs/examples/counter-app.md)
   * [Migrating from v0.x.x to v1.0.0-beta.x](./app-dev/lampixjs/migration-guide.md)
   * [Ecosystem](./app-dev/lampixjs/ecosystem.md)
-* [Application Structure (production)](./app-dev/application-structure.md)
+* [Deploying](./app-dev/deploying/README.md)
+  * [Application Structure (production)](./app-dev/deploying/application-structure.md)
+  * [Local](./app-dev/deploying/local-upload.md)
 * [Standard watchers](./app-dev/standard-watchers.md)
 
 ## Lampix Simulator

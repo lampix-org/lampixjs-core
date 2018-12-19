@@ -23,4 +23,4 @@ lampix.getAppConfig()
 
 #### Notes
 
-See [`config.json`](../../application-structure.md#config-and-schema) of the [production application structure](../../application-structure.md) for details on what `config.json` is used for.
+See [`config.json`](../../deploying/application-structure.md#config-and-schema) of the [production application structure](../../deploying/application-structure.md) for details on what `config.json` is used for.
