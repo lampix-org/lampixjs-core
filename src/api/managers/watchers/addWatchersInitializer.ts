@@ -11,8 +11,8 @@ import { LampixEvents } from '../../../events';
 import { listen } from '../communication/settler';
 
 const watcherData = (w: RegisteredWatcher) => ({
+  ...w.source,
   id: w.state._id,
-  ...w.source
 });
 
 /**
