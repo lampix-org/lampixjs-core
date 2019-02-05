@@ -35,6 +35,7 @@ export interface LampixResponse<T extends object> {
 }
 
 export namespace ResponsePayloads {
+  export interface XHRPayload { response: object; }
   export interface AppsPayload { apps: AppInfo[]; }
   export interface LampixInfoPayload { info: LampixInfo; }
   export interface FileReadPayload { data: object; }
@@ -72,6 +73,7 @@ export type LampixInternal = {
   switch_to_app: InternalAPI.RequestFn;
   get_lampix_info: InternalAPI.RequestFn;
   get_apps: InternalAPI.RequestFn;
+  http_request: InternalAPI.RequestFn;
   get_config_data: InternalAPI.RequestFn;
   write_file: InternalAPI.RequestFn,
   read_file: InternalAPI.RequestFn,
@@ -90,6 +92,7 @@ declare global {
     onWatcherUpdated: WatcherUpdatedCallback;
     onLampixInfo: LampixInfoCallback;
     onGetApps: GetAppsCallback;
+    onHttpRequest: httpRequestCallback;
     onTransformCoordinates: TransformCoordsCallback;
     onAppConfig: AppConfigCallback;
     onFileWritten: FileWrittenCallback;
@@ -218,6 +221,10 @@ export interface ObjectsLocatedCallback {
 export interface AppInfo {
   name: string;
   package_data: object;
+}
+
+export interface httpRequestCallback {
+  (r: LampixResponse<ResponsePayloads.XHRPayload>): void;
 }
 
 export interface GetAppsCallback {
