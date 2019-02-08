@@ -418,5 +418,5 @@ export interface ButtonPreset {
     y: number,
     onClassification: Function,
     opts?: { width: number, height: number }
-  ): void;
+  ): Watcher.Watcher;
 }
