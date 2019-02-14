@@ -96,6 +96,7 @@ declare global {
     onAppConfig: AppConfigCallback;
     onFileWritten: FileWrittenCallback;
     onFileRead: FileReadCallback;
+    onWatcherChannelUpdated: WatcherChannelUpdatedCallback;
   }
 }
 
@@ -252,6 +253,10 @@ export interface FileWrittenCallback {
 
 export interface FileReadCallback {
   (r: LampixResponse<ResponsePayloads.FileReadPayload>): void;
+}
+
+export interface WatcherChannelUpdatedCallback {
+  (r: LampixResponse<ResponsePayloads.WatcherChannelUpdated>): void;
 }
 
 /**

@@ -82,6 +82,10 @@ let bindEvents = () => {
   window.onFileRead = (response) => {
     publisher.publish(LampixEvents.FileRead, response);
   };
+
+  window.onWatcherChannelUpdated = (response) => {
+    publisher.publish(LampixEvents.WatcherChannelUpdated, response);
+  };
 };
 
 export { bindEvents };
