@@ -11,6 +11,7 @@ import {
 } from '../../../types';
 
 import { generateId } from '../../../utils/generateId';
+import { registeredWatcherChannel } from './registeredWatcherChannel';
 
 /**
  * @param w - Actual data sent to Lampix device
@@ -34,6 +35,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
   const registeredWatcher: RegisteredWatcher = {
     state,
     source: w,
+    channel: registeredWatcherChannel(state._id),
     onClassification: w.onClassification || noop,
     onLocation: w.onLocation || noop,
     resume() {
@@ -59,7 +61,7 @@ export const createRegisteredWatcher = (w: Watcher.Watcher, wm: Managers.Watcher
     remove: (): Promise<void> => wm.removeWatchers([registeredWatcher]).then(() => undefined),
     updateShape: (shape: PublicAPI.Shape) => wm.updateWatcherShape(state._id, shape).then(() => {
       registeredWatcher.source.shape = shape;
-    })
+    }),
   };
 
   return registeredWatcher;

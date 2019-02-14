@@ -45,6 +45,7 @@ export namespace ResponsePayloads {
   export interface WatchersUpdated {}
   export interface WatchersPaused {}
   export interface WatchersResumed {}
+  export interface WatcherChannelUpdated {}
   export interface RectCoordsTransformed { rectangles: RectCoords[]; }
 }
 
@@ -75,7 +76,8 @@ export type LampixInternal = {
   get_config_data: InternalAPI.RequestFn;
   write_file: InternalAPI.RequestFn,
   read_file: InternalAPI.RequestFn,
-  transform_coordinates: InternalAPI.RequestFn
+  transform_coordinates: InternalAPI.RequestFn,
+  watcher_channel_update: InternalAPI.RequestFn
 };
 
 declare global {
@@ -283,6 +285,10 @@ export interface RegisteredWatcherState {
   active: boolean;
 }
 
+export interface RegisteredWatcherChannel {
+  send(): void;
+}
+
 /**
  * @public
  */
@@ -291,6 +297,7 @@ export interface RegisteredWatcher {
     _id: string,
     active: boolean
   };
+  channel: RegisteredWatcherChannel;
   source: Watcher.Watcher;
   /**
    *  Removes area from list of watched areas.
