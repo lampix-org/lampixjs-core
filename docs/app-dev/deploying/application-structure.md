@@ -17,17 +17,17 @@ This is the entry point of an application, and must exist in order for an app to
 Each application must have a package.json metadata file that describes the app.
 The fields that are most relevant to Lampix, my.lampix.com and / or the App Switcher are:
 
-* **name** (e.g "app-switcher", "trivia", "restaurant", "game-changing-app-nine-thousand" etc.)
+* **name**, _required_ (e.g "app-switcher", "trivia", "restaurant", "game-changing-app-nine-thousand" etc.)
   * the name must not start with a dot or an underscore
   * new packages must not have uppercase letters in the name
   * only letters found in the English alphabet are allowed
   * no special characters other than "-" can be used
-* **version**, following [semver rules](https://semver.org/)
-* **description**, a short introduction for the app that will be displayed in the App Switcher
+* **version**, , _required_ following [semver rules](https://semver.org/)
+* **description**, _required_ a short introduction for the app that will be displayed in the App Switcher
 * **icon**, relative path to an icon to use as the app logo in the App Switcher
-* **author**, an object with the required *name* and *email* fields, and an optional *url* field to point to the author's site
+* **author**, _required_ an object with the required *name* and *email* fields, and an optional *url* field to point to the author's site
 * **displayName**, used to set a different name than in the **name** to be used in the App Switcher (can be any valid string)
-* **lampixConfig**, an object providing information strictly related to the app's behavior on a Lampix
+* **lampixConfig**, _required_ an object providing information strictly related to the app's behavior on a Lampix
   * **lampixVersion**, specifies a range of versions the app is compatible with (e.g "2.0.0", ">= 2.0.0 <= 10.5.1" etc. - as seen on [NPM semver's package](https://docs.npmjs.com/misc/semver#ranges)). The current version is "2.1.0"
   * **showInAppSwitcher**, used to prevent or force its showing in the App Switcher (true, by default)
 
