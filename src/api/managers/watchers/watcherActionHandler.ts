@@ -28,7 +28,8 @@ function watcherActionHandler(
     if (!rw) {
       // TODO: Handle case where watcher doesn't exist
       // Use specific error
-      throw new Error(`RegisteredWatcher ${watcher_id} does not exist.`);
+      console.warn(`RegisteredWatcher ${watcher_id} does not exist. Aborting action ${action}.`);
+      return;
     }
 
     rw[action].call(rw[action], objects);
