@@ -44,6 +44,7 @@
   * [Application Structure (production)](./app-dev/deploying/application-structure.md)
   * [Local Deploy](./app-dev/deploying/local-upload.md)
 * [Standard Watchers](./app-dev/standard-watchers.md)
+* [Custom Watchers](./LampixCustomWatchers/README.md)
 
 ## Lampix Simulator
 
