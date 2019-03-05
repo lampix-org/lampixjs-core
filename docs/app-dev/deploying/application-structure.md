@@ -60,4 +60,4 @@ The fields that are most relevant to Lampix, my.lampix.com and / or the App Swit
 
 **IMPORTANT**: Should the data structure change, that means the application itself will no longer work with the new structure, so the application, config.json and schema.json all need to be updated and the application redeployed.
 
-[`getAppConfig()`](./lampixjs/api/getAppConfig.md) is the method used to retrieve the data found in config.json. As is tradition, this will be an asynchronous request and the data will be available on the success function of the promise returned.
+[`getAppConfig()`](../lampixjs/api/getAppConfig.md) is the method used to retrieve the data found in config.json. As is tradition, this will be an asynchronous request and the data will be available on the success function of the promise returned.
