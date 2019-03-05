@@ -45,11 +45,11 @@
   * [Local Deploy](./app-dev/deploying/local-upload.md)
 * [Standard Watchers](./app-dev/standard-watchers.md)
 * [Custom Watchers](./LampixCustomWatchers/README.md)
-  * [Description](./LampixCustomWatchers/lampix-custom-watchers.md)
+  * [Description](./LampixCustomWatchers/description.md)
   * [Environment Setup](./LampixCustomWatchers/environment-setup.md)
   * [Directory Structure](./LampixCustomWatchers/directory-structure.md)
   * [End result](./LampixCustomWatchers/end-result.md)
-  * [QRCodeDetector implementation](./LampixCustomWatchers/QRCodeDetector.md)
+  * [QRCodeDetector implementation](./LampixCustomWatchers/QRCodeDetector-implementation.md)
 
 ## Lampix Simulator
 
