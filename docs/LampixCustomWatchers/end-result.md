@@ -27,7 +27,7 @@ class QRCodeDetector(Watcher):
     def get_vision_trigger(self):
         return TriggerType.TRIGGER_RGB
 
-    def on_movement(self, movement, depth, frame, grey_frame, color_frame, seg_frame):
+    def on_movement(self, depth_frame, grey_frame, color_frame, movement_mask):
         # Code that will be executed when an object is placed on the projection surface, 
         # exactly where the watcher was registered
         logger.info('The QRCodeDetector Watcher was triggered')
