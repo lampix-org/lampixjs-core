@@ -11,11 +11,11 @@ Each watcher can be thought of as behavior for the device that is translated int
 The device is capable of triggering the Watchers by using an RGB trigger 
 (it detects the changes in a specific zone, defined by the Watcher) or a DEPTH trigger.
 
-The [Lampix Watchers](https://api.lampix.co/application-development/standard-watchers) are actively used 
+The [Lampix Watchers](../app-dev/standard-watchers.md) are actively used 
 for detecting button presses, object movement, object height and object shape.
 
 A Custom Watcher brings the possibility of adding completely new behavior for Lampix 
-(e.g., by implementing a [QRCodeClassifier](./QRCodeDetector.md), 
+(e.g., by implementing a [QRCodeClassifier](./QRCodeDetector-implementation.md), 
 we will be able to detect QR Codes and pass the encoded information to the web application).
 
 </div>

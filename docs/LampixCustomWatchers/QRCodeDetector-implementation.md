@@ -113,7 +113,7 @@ qr_code_data = qr_code.data
 ## Report data to JavaScript
 <div style="text-align: justify">
 
-By extending the [Watcher base class](#the-watcher-base-class), the method `self.report_to_js(object)` is inherited.
+By extending [the Watcher base class](#the-watcher-base-class), the method `self.report_to_js(object)` is inherited.
 This method will be used to report a list of formatted objects, containing the data that is needed in the web 
 application.
 
@@ -177,6 +177,7 @@ To be successfully used, the `self.needs_deferred_processing` member has to be s
 __IMPORTANT:__ there is no method of synchronizing the `on_movement()` method call and the call of
 the `self.deferred_processing()` method. Although, a mechanism based on events can be implemented and used
 as means of inter-thread communication.
+
 
 #### Example:
 
