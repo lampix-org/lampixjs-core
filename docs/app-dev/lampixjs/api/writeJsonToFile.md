@@ -15,7 +15,7 @@ const data = {
   answerToLife: 42
 };
 
-lampix.writeToFile('answers.json', data)
+lampix.writeJsonToFile('answers.json', data)
   .then(() => console.log('Successfully saved all answers.'));
 ```
 
