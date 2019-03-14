@@ -50,6 +50,7 @@
   * [Directory Structure](./LampixCustomWatchers/directory-structure.md)
   * [End result](./LampixCustomWatchers/end-result.md)
   * [QRCodeDetector implementation](./LampixCustomWatchers/QRCodeDetector-implementation.md)
+* [Community](./community.md)
 
 ## Lampix Simulator
 
