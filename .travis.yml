@@ -1,8 +1,11 @@
 language: node_js
 node_js: '10'
+notifications:
+  email:
+    - toma@lmapix.co
 deploy:
   provider: npm
-  email: toma@lampix.co
+  email: dbalaban@lampix.co
   api_key:
     secure: MkFpf9/zqCYs/JUGYc1uUy9ndViX5Pzq825PMkTfmSOPhO76jppvzs1xPi4VZUuNmQZrCzO73SzuIlWDBHWV8gpLzAi51asvbjCXGRZ/Sg4VUSIs3r4DLo2r/dApF/x384B095BrcAYNltp9ehqeVJYH/sI84HNoxsXQvtScYxqwntn4qjmSnrs3sBQooFWpBQtRGjGSeds59ZxGnTwyTs7TSzvL1i2ItlmnMZZTLKj5Lm4yJ1Q4bAvVlntqGAM3wnTMerBxDtWB6NVs4pNIUQNo6Bz/IKjmYu6+lRyLsSsal9wvILFoWcAiLhYAthcrQ/XjC8/GXqR7/0GDPJ1K0wFcTx4HZwCd9B12lcimxYo1+PF703pfsBp2+dsTg2lD4C9ri332+PIvKsUaM4e9oAkykr1T+LdDlnhSChySVK5vDuwHKi9WpmoWYIVeWTUfKnW3rpsccCdmbsay+xV2lbzZkh1CTQ1w/K3GySXbY55FvXRyJGsnJ1ieho4WNGyWFji7hzVPM91u0fU+JISmjJ0NvmBeCZuVoDx+2/z6ypVCOdmSGvSZvIIAOhPQKC69VM7L8vt98MaZMwtcpicdomYVomcm7cShzY1LA+w1B1i+FFxTYKAb/NdpkiksQIbDIVAhwQnaa/XH8OGRLbWor6KuFPlhYvfQzdaQVsDIpqw=
   skip_cleanup: true
