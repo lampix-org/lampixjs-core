@@ -2,6 +2,7 @@ import { getLampixInfo } from './api/getLampixInfo';
 import { switchToApp } from './api/switchToApp';
 import { exit } from './api/exit';
 import { getApps } from './api/getApps';
+import { httpRequest } from './api/httpRequest';
 import { getAppConfig } from './api/getAppConfig';
 import { getAppMetadata } from './api/getAppMetadata';
 import { writeJsonToFile } from './api/writeJsonToFile';
@@ -66,6 +67,11 @@ class LampixBridge implements ILampixBridge {
    * Retrieve a list of available apps to switch to
    */
   public getApps: () => Promise<AppInfo[]> = getApps();
+
+  /**
+   * send an http request to lampix to perform in order to avoid CORS issues
+   * */
+  public httpRequest: (requestOptions: object) => Promise<object> = httpRequest();
 
   /**
    * Retrieve application specific data from config.json if available

@@ -60,6 +60,10 @@ let bindEvents = () => {
     publisher.publish(LampixEvents.LampixInfo, response);
   };
 
+  window.onHttpRequest = (response) => {
+    publisher.publish(LampixEvents.HttpRequest, response);
+  };
+
   window.onGetApps = (response) => {
     publisher.publish(LampixEvents.GetApps, response);
   };
