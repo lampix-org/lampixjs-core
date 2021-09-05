@@ -19,5 +19,6 @@ That said, you can use:
 
 ### Do I need to worry about browser support?
 
+
 You only need to worry about Chromium v66. Search this [compatibility table](https://caniuse.com/#compare=chrome+66) for the functionality you need.  
 Chromium v66 is quite advanced, and includes features such as the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) and [web animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) out of the box (the latter, for instance, is an experimental technology whose `animation.finished` promises show issues, but can easily be mitigated with the properly working `animation.onfinish` callbacks).
